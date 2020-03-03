@@ -1,92 +1,107 @@
 <template>
-  <v-layout
-    column
-    justify-center
-    align-center
+  <v-card
+    class="mx-auto"
   >
-    <v-flex
-      xs12
-      sm8
-      md6
-    >
-      <div class="text-center">
-        <logo />
-        <vuetify-logo />
-      </div>
-      <v-card>
-        <v-card-title class="headline">
-          Welcome to the Vuetify + Nuxt.js template
-        </v-card-title>
-        <v-card-text>
-          <p>Vuetify is a progressive Material Design component framework for Vue.js. It was designed to empower developers to create amazing applications.</p>
-          <p>
-            For more information on Vuetify, check out the <a
-              href="https://vuetifyjs.com"
-              target="_blank"
+    <v-container>
+      <v-row dense>
+
+        <v-col
+          v-for="(item, i) in items"
+          :key="i"
+          cols="12"
+        > 
+           <v-hover v-slot:default="{ hover }" value>
+
+            <v-card
+              :elevation="hover ? 12 : 2"
+              :color="hover ? 'rgba(140,251,229, 0.6)':'rgba(255, 255, 255, 1)'"
             >
-              documentation
-            </a>.
-          </p>
-          <p>
-            If you have questions, please join the official <a
-              href="https://chat.vuetifyjs.com/"
-              target="_blank"
-              title="chat"
-            >
-              discord
-            </a>.
-          </p>
-          <p>
-            Find a bug? Report it on the github <a
-              href="https://github.com/vuetifyjs/vuetify/issues"
-              target="_blank"
-              title="contribute"
-            >
-              issue board
-            </a>.
-          </p>
-          <p>Thank you for developing with Vuetify and I look forward to bringing more exciting features in the future.</p>
-          <div class="text-xs-right">
-            <em><small>&mdash; John Leider</small></em>
-          </div>
-          <hr class="my-3">
-          <a
-            href="https://nuxtjs.org/"
-            target="_blank"
-          >
-            Nuxt Documentation
-          </a>
-          <br>
-          <a
-            href="https://github.com/nuxt/nuxt.js"
-            target="_blank"
-          >
-            Nuxt GitHub
-          </a>
-        </v-card-text>
-        <v-card-actions>
-          <v-spacer />
-          <v-btn
-            color="primary"
-            nuxt
-            to="/inspire"
-          >
-            Continue
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-flex>
-  </v-layout>
+              <v-card-title class="headline">{{item.title}}</v-card-title>
+
+              <v-card-subtitle>
+                    <v-card-text class="post">
+                      <span class="post-time">
+                        <v-icon small>mdi-calendar-range</V-icon>
+                        发表于 <a>{{getLocalTime(item.createTime)}}</a>
+                      </span>
+                      <span class="post-time">
+                        <v-icon small>mdi-calendar-range</V-icon>
+                        更新于 <a>{{getLocalTime(item.updateTime)}}</a>
+                      </span>
+                      <span class="post-class">
+                        <v-icon small>mdi-folder-open</v-icon>
+                        分类于
+                        <a>{{item.type}}</a>
+                      </span>
+                    </v-card-text>
+                    <v-card-text class="content">{{item.description}}</v-card-text>
+              </v-card-subtitle>
+
+              <v-card-actions>
+                <v-btn text>Listen Now</v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-hover>
+        </v-col>
+        <v-col span="12">
+          <v-pagination
+            v-model="page"
+            :circle="true"
+            :page="page"
+            :disabled="false"
+            :length="total"
+            :total-visible="totalVisible"
+          ></v-pagination>
+        </v-col>
+      </v-row>
+    </v-container>
+  </v-card>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
-import VuetifyLogo from '~/components/VuetifyLogo.vue'
-
-export default {
-  components: {
-    Logo,
-    VuetifyLogo
+  export default {
+    name:'page_index',
+    data: () => ({
+      baseurl : '/api/article/',
+      total:1,
+      isloading:false,
+      totalVisible:3,
+      page:1,
+      pageSize:5,
+      items: [
+      ],
+    }),
+    created(){
+      this.refresh()
+    },
+    methods:{
+      show (index) {
+          let id = this.datas[index]._id
+          this.getArticleById(id).then(data=>{
+                  // 似乎只能通过name来传参数，用path不行，子组件名字默认是 父组件-子组件
+                  this.$router.push({name:'home-edit_article', params:{'article':data}})
+              })
+      },
+      getLocalTime(nS) {  
+          return new Date(parseInt(nS)).toLocaleString().replace(/:\d{1,2}$/,' ');  
+      },
+      refresh(){
+        this.isloading = true
+        var url = this.baseurl + 'total'
+        this.$axios.get(url).then(res => {
+            if(res.data.success){
+                this.total = Number(res.data.other.total)
+            }
+        })
+        var url = this.baseurl + 'pageSize='+this.pageSize +'&' + 'page=1'
+        this.$axios.get(url).then(res => {
+            if(res.data.success){
+                let articles = res.data.other.article
+                this.items = articles
+                this.isloading = false
+            }
+        })
+      },
+    }
   }
-}
 </script>
