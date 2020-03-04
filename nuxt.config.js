@@ -14,7 +14,13 @@ export default {
       { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      {rel:"stylesheet",href:"https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
+      ,integrity:"sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j",crossorigin:"anonymous"},
+      { rel:"stylesheet",  href:"http://cdn.bootcss.com/highlight.js/8.0/styles/monokai_sublime.min.css"}
+    ],
+    script:[
+      {src:"//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"}
     ]
   },
   /*
@@ -58,7 +64,7 @@ export default {
   ** https://github.com/nuxt-community/vuetify-module
   */
   vuetify: {
-    customVariables: ['~/assets/variables.scss'],
+    // customVariables: ['~/assets/variables.scss'],
     theme: {
       dark: false,
     //   themes: {

@@ -1,8 +1,8 @@
 const config = require("~/config.json")
+
 export default function ({store, redirect, app: { $axios }})  {
     // 数据访问前缀
     $axios.defaults.baseURL = config.base_url
-	console.log(process.env.NODE_ENV)
 	// request拦截器，我这里设置了一个token，当然你可以不要
     // http request 拦截器
     // $axios.interceptors.request.use(

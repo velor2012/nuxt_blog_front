@@ -1,8 +1,4 @@
 <template>
-  <v-card
-    class="mx-auto"
-  >
-    <v-container>
       <v-row dense>
 
         <v-col
@@ -10,11 +6,11 @@
           :key="i"
           cols="12"
         > 
-           <v-hover v-slot:default="{ hover }" value>
+           <v-hover v-slot:default="{ hover }">
 
             <v-card
               :elevation="hover ? 12 : 2"
-              :color="hover ? 'rgba(140,251,229, 0.6)':'rgba(255, 255, 255, 1)'"
+              :color="hover ? 'rgba(140,251,229, 0.6)':'rgba(255, 255, 255, 0.4)'"
             >
               <v-card-title class="headline">{{item.title}}</v-card-title>
 
@@ -34,11 +30,10 @@
                         <a>{{item.type}}</a>
                       </span>
                     </v-card-text>
-                    <v-card-text class="content">{{item.description}}</v-card-text>
               </v-card-subtitle>
 
               <v-card-actions>
-                <v-btn text>Listen Now</v-btn>
+                <v-btn light @click="show(item)" color="rgba(23, 199, 164, 0.6)">阅读文章</v-btn>
               </v-card-actions>
             </v-card>
           </v-hover>
@@ -50,22 +45,21 @@
             :page="page"
             :disabled="false"
             :length="total"
-            :total-visible="totalVisible"
+            @input="getCurrentPageArticles"
+            @next="getNextPageArticles"
           ></v-pagination>
         </v-col>
       </v-row>
-    </v-container>
-  </v-card>
 </template>
 
 <script>
+const {message} =require('./message')
   export default {
     name:'page_index',
     data: () => ({
       baseurl : '/api/article/',
       total:1,
       isloading:false,
-      totalVisible:3,
       page:1,
       pageSize:5,
       items: [
@@ -90,7 +84,7 @@
         var url = this.baseurl + 'total'
         this.$axios.get(url).then(res => {
             if(res.data.success){
-                this.total = Number(res.data.other.total)
+                this.total = Math.ceil(Number(res.data.other.total)/this.pageSize)
             }
         })
         var url = this.baseurl + 'pageSize='+this.pageSize +'&' + 'page=1'
@@ -102,6 +96,47 @@
             }
         })
       },
+      getCurrentPageArticles(pageIndex){
+          // console.log(pageIndex)
+          var url = this.baseurl + 'pageSize='+this.pageSize +'&' + 'page='+ pageIndex
+          this.$axios.get(url).then(res => {
+              if(res.data.success){
+                  let articles = res.data.other.article
+                  this.items = articles
+              }else{
+                message.error(this,true,'找不到文章',res.data.reason) 
+              }
+          })
+      },
+      getNextPageArticles(){
+        console.log(this.page)
+      },
+      show(article){
+        let id = article._id
+        this.getArticleById(id).then(data=>{
+                // 似乎只能通过name来传参数，用path不行，子组件名字默认是 父组件-子组件
+                this.$router.push({name:'detail', params:{'data':data}})
+            })
+      },
+      async getArticleById(id){
+        var url = this.baseurl + 'html/id='+id
+        let article = ''
+        let con = ''
+        await this.$axios.get(url).then(res => {
+            if(res.data.success){        
+                con = res.data.other.con
+                article = res.data.other.article
+            }else{
+                message.error(this,true,'找不到文章')
+            }
+        })
+        return {article,con}
+      },
     }
   }
 </script>
+<style lang="less">
+  .post{
+    padding:0
+  }
+</style>>
