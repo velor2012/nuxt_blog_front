@@ -15,12 +15,13 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      {rel:"stylesheet",href:"https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
-      ,integrity:"sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j",crossorigin:"anonymous"},
-      { rel:"stylesheet",  href:"http://cdn.bootcss.com/highlight.js/8.0/styles/monokai_sublime.min.css"}
+      // { rel:"stylesheet",  href:"https://cdnjs.cloudflare.com/ajax/libs/prism/1.19.0/themes/prism-funky.min.css"},
+      { rel:"stylesheet",  href:"https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css"},
+      
     ],
     script:[
-      {src:"//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"}
+      {src:"https://cdn.bootcss.com/marked/0.8.0/marked.js",type: 'text/javascript', charset: 'utf-8'},
+      {src:"https://cdnjs.cloudflare.com/ajax/libs/prism/1.19.0/prism.min.js",dataManual:true,type: 'text/javascript', charset: 'utf-8'} ,
     ]
   },
   /*
@@ -64,20 +65,10 @@ export default {
   ** https://github.com/nuxt-community/vuetify-module
   */
   vuetify: {
-    // customVariables: ['~/assets/variables.scss'],
+    customVariables: ['~/assets/variables.scss'],
+    treeShake:false,
     theme: {
       dark: false,
-    //   themes: {
-    //     dark: {
-    //       primary: colors.blue.darken2,
-    //       accent: colors.grey.darken3,
-    //       secondary: colors.amber.darken3,
-    //       info: colors.teal.lighten1,
-    //       warning: colors.amber.base,
-    //       error: colors.deepOrange.accent4,
-    //       success: colors.green.accent3
-    //     }
-    //   }
     },
   },
   /*

@@ -1,0 +1,78 @@
+<template>
+  <v-row justify="center" align="center">
+      <v-col cols="12" class="text-center">
+        <v-avatar class="avatar" color="orange" size="150">
+            <v-img :src="authorInfo.avatar"></v-img>
+        </v-avatar>
+      </v-col>
+        <v-col class="py-0">
+          <v-list-item>
+            <v-list-item-content>
+              <v-list-item-title class="title text-center">名不显时心不朽，再挑灯火看文章</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </v-col>
+      <v-col cols="12">
+        <v-divider></v-divider>
+      </v-col>
+      <v-col cols="10">
+        <v-date-picker v-model="picker" @click:month="onSelectMonth" full-width type="month"></v-date-picker>
+      </v-col>
+      <v-col cols="12">
+        <v-divider></v-divider>
+      </v-col>
+      <v-col cols="12">
+        <ColorfulChip v-bind:typeInfo="typeInfo"/>
+      </v-col>      
+  </v-row>
+</template>
+<script>
+import ColorfulChip from '~/components/ColorfulChip.vue'
+import Bus from '~/pages/util'
+export default {
+    name:'TypeAndDate',
+    props:['typeInfo'],
+    data(){
+        return {
+            picker:'',
+            colors:[],
+            total:0,
+        }
+    },
+    components:{
+      ColorfulChip
+    },
+    methods: {
+      onSelectMonth(value){
+          Bus.$emit('onSelectMonth',{value:value,picker:this.picker})
+      },
+    },
+    computed:{
+        authorInfo(){
+          return this.$store.getters.getAuthorInfo
+        }
+    }
+}
+</script>
+<style lang="less">
+    .v-divider:hover{
+        cursor: pointer;
+    }
+    .avatar{
+        animation: changes 5s 0.2s ease-out infinite alternate;
+    }
+    @keyframes changes {
+        0% {
+            opacity: 1;
+            transform: scale(1);
+        }
+        50% {
+            opacity: 0.8;
+            transform: scale(1.2);
+        }
+        100% {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+</style>
