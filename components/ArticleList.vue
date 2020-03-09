@@ -7,10 +7,10 @@
               class="animated fadeInLeft"
               v-if="!Data.reloading"
             > 
-              <v-hover v-slot:default="{ hover }">
+              <v-hover :disabled="ismobile" v-slot:default="{ hover }">
                   <v-card
                     :elevation="hover ? 24 : 2"
-                    :color="hover?'rgba(255,255,255,0.5)':'white'"
+                    :color=" hover?'rgba(255,255,255,0.5)':'white'"
                   >
                     <v-card-title class="headline">{{item.title}}</v-card-title>
 
@@ -18,11 +18,11 @@
                           <v-card-text class="post">
                             <span class="post-time">
                               <v-icon small>mdi-calendar-range</V-icon>
-                              发表于 <a>{{getLocalTime(item.createTime)}}</a>
+                              发表于 <a>{{item.createTime}}</a>
                             </span>
                             <span class="post-time">
                               <v-icon small>mdi-calendar-range</V-icon>
-                              更新于 <a>{{getLocalTime(item.updateTime)}}</a>
+                              更新于 <a>{{item.updateTime}}</a>
                             </span>
                             <span class="post-class">
                               <v-icon small>mdi-folder-open</v-icon>
@@ -82,8 +82,11 @@ import TypeAndDate from '~/components/TypeAndDate.vue'
     computed:{
       needLoadData(){
         return this.Data.total-this.Data.items.length
+      },
+      ismobile(){
+        return this.$store.getters.getIsMobile
       }
-    }
+    },
   }
 </script>
 <style lang="less">

@@ -13,7 +13,8 @@
                 </v-col>       
                 <v-col v-show="!ismobile&&done_created" cols="4" class="date_picker" style="padding-left:1em;padding-top:2em">
                     <TypeAndDate 
-                    :typeInfo="typeInfo" 
+                    :typeInfo="typeInfo"
+                    class = "animated fadeInRight"
                     />
                 </v-col>
             </v-row>
@@ -24,7 +25,6 @@
 <script>
 import ArticleList from '~/components/ArticleList.vue'
 import TypeAndDate from '~/components/TypeAndDate.vue'
-import Search from '~/components/Search.Vue'
 import ColorfulChip from '~/components/ColorfulChip.vue'
 import msg from '~/components/message.vue'
 import Bus from '~/pages/util'
@@ -59,30 +59,50 @@ export default {
     components:{
         ArticleList,
         TypeAndDate,
-        Search,
         msg,
         ColorfulChip
     },
     created(){
-        this.$store.commit('setShowFilter',true)
         //注册事件
         Bus.$on('onClickChip',this.searchByType)
         Bus.$on('getNextPageArticles',this.getNextPageArticles)
         Bus.$on('onSelectMonth',this.onSelectMonth)
         Bus.$on('showFilter',this.showFilter).stop
-        //获取文章信息
-        this.$store.commit('setIsLoading',true)
-        this.ArticleListData.loading = true
-        var url = this.ArticleListData.baseurl + 'total'
-        this.$axios.get(url).then(res => {
-            if(res.data.success){
-                this.ArticleListData.total = Number(res.data.other.total)
-            }
-        })
-        this.getNextPageArticles()
-        this.getTypesInfo()
+        Bus.$on('search',this.search)
+        Bus.$on('refreshArticleList',this.refresh)
+        this.refresh()
+    },
+    activated(){
+        this.$store.commit('setShowFilter',true)
+        if(this.$route.params.refresh){
+            this.refresh()
+        }
     },
     methods:{
+        refresh(){
+            //重制
+            this.ArticleListData={
+                baseurl : '/api/article/',
+                complexquery_url:'/api/article/complex',
+                total:1,
+                page:0,
+                pageSize:10,
+                items: [],
+                loading: false,
+                reloading:false,
+            }
+            //获取文章信息
+            this.$store.commit('setIsLoading',true)
+            this.ArticleListData.loading = true
+            var url = this.ArticleListData.baseurl + 'total'
+            this.$axios.get(url).then(res => {
+                if(res.data.success){
+                    this.ArticleListData.total = Number(res.data.other.total)
+                }
+            })
+            this.getNextPageArticles()
+            this.getTypesInfo()
+        },
         getNextPageArticles(){
             this.ArticleListData.loading = true
             this.ArticleListData.page += 1
@@ -146,6 +166,14 @@ export default {
                     break
                 }
             }
+        },
+        search(keyword){
+            this.$axios.get(this.ArticleListData.complexquery_url,{params:{keyword:keyword,need_total:true,...this.pageFirstInfo}}).then(res=>{
+                this.ArticleListData.items = res.data.other.article
+                this.ArticleListData.total = res.data.other.total
+                this.ArticleListData.loading = false
+                this.ArticleListData.reloading = false
+            })
         }
     },
     computed:{

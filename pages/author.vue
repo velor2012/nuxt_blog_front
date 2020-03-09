@@ -23,7 +23,7 @@ import TOC from '~/components/toc.vue'
 import Bus from '~/pages/util'
 import {render} from '~/pages/util'
 export default {
-    name:'author    ',
+    name:'author',
     data(){
         return{
             article:{},

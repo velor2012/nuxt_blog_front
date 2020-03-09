@@ -17,7 +17,7 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       // { rel:"stylesheet",  href:"https://cdnjs.cloudflare.com/ajax/libs/prism/1.19.0/themes/prism-funky.min.css"},
       { rel:"stylesheet",  href:"https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css"},
-      
+      { rel:"stylesheet",  href:"https://cdnjs.cloudflare.com/ajax/libs/imagehover.css/2.0.0/css/imagehover.min.css"},
     ],
     script:[
       {src:"https://cdn.bootcss.com/marked/0.8.0/marked.js",type: 'text/javascript', charset: 'utf-8'},
@@ -38,6 +38,7 @@ export default {
   */
   plugins: [
     {src:'@/plugins/axios', ssr: true },
+    {src:'@/plugins/vue-preview', ssr: false },
   ],
   /*
   ** Nuxt.js dev-modules
