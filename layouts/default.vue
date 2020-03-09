@@ -369,10 +369,10 @@ export default {
   }
   @media screen and (min-width: 600px) {
     .overall-style {
-      background-image: url("https://document-1-1255829223.cos.ap-shanghai.myqcloud.com/blog/blogBg.jpg");
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-      background-position: top;
+      background-color: burlywood;
+      // background-repeat: no-repeat;
+      // background-attachment: fixed;
+      // background-position: top;
     }
   }
   @media screen and (max-width: 600px) {
@@ -395,18 +395,19 @@ export default {
   /* use for markdown */
 
 .v-application code {
-  all:unset
+  color:black;
+  background-color:rgb(245, 242, 240);
+  box-shadow:0 0 0 0 rgba(0, 0, 0, 0), 0 0 0 0 rgba(0, 0, 0, 0), 0 0 0 0 rgba(0, 0, 0, 0);
 }
-@import url("https://cdnjs.cloudflare.com/ajax/libs/prism/1.19.0/themes/prism.min.css");
 .markdown-body {
   box-sizing: border-box;
   min-width: 200px;
-  max-width: 980px;
+  max-width: 100%;
   margin: 0 auto;
   padding: 45px;
 }
 
-@media (max-width: 767px) {
+@media screen and  (max-width: 600px) {
 .markdown-body {
         padding: 15px;
     }
@@ -414,6 +415,10 @@ export default {
     font-size: 85%;
     box-shadow:none;
     }
+  .markdown .v-card__text{
+    letter-spacing: 0.0171428571em;
+    line-height:normal
+  }
 }
 @import '~/assets/markdown.css';
 .markdown img{
