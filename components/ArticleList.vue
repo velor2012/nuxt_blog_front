@@ -18,11 +18,11 @@
                           <v-card-text class="post">
                             <span class="post-time">
                               <v-icon small>mdi-calendar-range</V-icon>
-                              发表于 <a>{{item.createTime}}</a>
+                              发表于 <a>{{getLocalTime(item.createTime)}}</a>
                             </span>
                             <span class="post-time">
                               <v-icon small>mdi-calendar-range</V-icon>
-                              更新于 <a>{{item.updateTime}}</a>
+                              更新于 <a>{{getLocalTime(item.updateTime)}}</a>
                             </span>
                             <span class="post-class">
                               <v-icon small>mdi-folder-open</v-icon>
