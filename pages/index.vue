@@ -104,6 +104,7 @@ export default {
             this.getTypesInfo()
         },
         getNextPageArticles(){
+            // console.log('getNextPageArticles')
             this.ArticleListData.loading = true
             this.ArticleListData.page += 1
             let params = {type:this.searchType,params:this.pageInfo}

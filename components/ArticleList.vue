@@ -53,6 +53,7 @@
 </template>
 
 <script>
+import Bus from '~/pages/util'
 import TypeAndDate from '~/components/TypeAndDate.vue'
   export default {
     name:'ArticleList',
@@ -69,7 +70,7 @@ import TypeAndDate from '~/components/TypeAndDate.vue'
           return new Date(nS).toLocaleString()
       },
       getNextPageArticles(){
-        this.$emit('getNextPageArticles')
+        Bus.$emit('getNextPageArticles')
       },
       onsroll(e){
         // 距离底部200px时加载一次
