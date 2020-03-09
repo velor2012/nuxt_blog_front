@@ -377,10 +377,11 @@ export default {
   }
   @media screen and (max-width: 600px) {
     .overall-style {
-      background-image: url("https://s2.ax1x.com/2020/03/05/37BYGR.jpg");
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-      background-position: top;
+      background-color: burlywood;
+      // background-image: url("https://s2.ax1x.com/2020/03/05/37BYGR.jpg");
+      // background-repeat: no-repeat;
+      // background-attachment: fixed;
+      // background-position: top;
     } 
    }
   .container {

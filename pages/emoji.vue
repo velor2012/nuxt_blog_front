@@ -8,7 +8,7 @@
                 v-for="(item, i) in emojis"
                 :key="i"
               class="d-flex child-flex"
-              :cols="ismobile?4:6" 
+              :cols="ismobile?4:12" 
             >
               <v-card flat tile class="d-flex">
                 <v-img
