@@ -17,7 +17,8 @@
     "cross-env": "^5.2.0",
     "less": "^3.10.3",
     "less-loader": "^5.0.0",
-    "nuxt": "^2.0.0"
+    "nuxt": "^2.0.0",
+    "vue-directive-image-previewer": "^2.2.2"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^2.0.0",
@@ -25,6 +26,5 @@
     "babel-eslint": "^10.0.1",
     "eslint": "^6.1.0",
     "eslint-plugin-nuxt": ">=0.4.2",
-    "vue-directive-image-previewer": "^2.2.2"
   }
 }
