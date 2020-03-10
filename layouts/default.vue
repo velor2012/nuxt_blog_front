@@ -62,6 +62,7 @@
       fixed
       app
       dark
+      hide-on-scroll
       color="blue"
       id="header"
     >
@@ -179,10 +180,6 @@
                   <v-icon>mdi-chevron-up</v-icon>
               </v-btn>
           </v-fab-transition>
-          <!-- 加载提醒 -->
-          <v-overlay :absolute="true" :value="isLoading">
-              <v-progress-circular indeterminate size="64"></v-progress-circular>
-          </v-overlay>
       </v-container>
     </v-content>
   </v-app>
@@ -286,7 +283,7 @@ export default {
         return result + text
     },
     onResize(){
-        this.ismobile = window.innerWidth<600 
+        this.ismobile = window.innerWidth<930 
     },
     swipe(direction){
       switch(direction){
@@ -338,9 +335,6 @@ export default {
     this.getUserBaseInfo()
   },
   computed: {
-      isLoading(){
-        return this.$store.state.isLoading
-      },
       showFilter(){
         return this.$store.getters.getShowFilter
       },
@@ -356,7 +350,8 @@ export default {
 @import url('animate.css/animate.min.css');
   .app,.v-application .title,.markdown-body{
       font-family: "Microsoft YaHei" !important;
-      font-weight:400
+      font-weight:400;
+      max-width: 100%;
   }
   .search_input{
     max-width: 25em;
@@ -367,7 +362,7 @@ export default {
   .v-toolbar-title{
     font-weight: bold
   }
-  @media screen and (min-width: 600px) {
+  @media screen and (min-width: 930px) {
     .overall-style {
       background-color: burlywood;
       // background-repeat: no-repeat;
@@ -375,7 +370,7 @@ export default {
       // background-position: top;
     }
   }
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 930px) {
     .overall-style {
       background-color: burlywood;
     } 
@@ -391,27 +386,12 @@ export default {
   /* use for markdown */
 
 .v-application code {
+  max-width: 100%;
   color:black;
   background-color:rgb(245, 242, 240);
   box-shadow:0 0 0 0 rgba(0, 0, 0, 0), 0 0 0 0 rgba(0, 0, 0, 0), 0 0 0 0 rgba(0, 0, 0, 0);
 }
 
-@media screen and  (max-width: 600px) {
-.markdown-body {
-        padding: 15px;
-    }
-    .v-application code {
-    font-size: 85%;
-    box-shadow:none;
-    }
-  // .markdown .v-card__text{
-  //   letter-spacing: 0.0171428571em;
-  //   line-height:normal
-  // }
-}
-.markdown img{
-    max-width: 100%;
-}
 .toc{
     margin-left:1em;
     max-height: 20em;
@@ -420,17 +400,22 @@ export default {
     color: black;
 }
 @import url('github-markdown-css/github-markdown.css');
+
 	.markdown-body {
-		box-sizing: border-box !important;
-		min-width: 200px!important;
-		max-width: 980px!important;
-		margin: 0 auto!important;
-		padding: 45px!important;
+		box-sizing: border-box ;
+		min-width: 200px;
+		max-width: 980px;
+		margin: 0 auto;
+		padding: 45px;
 	}
 
-	@media (max-width: 767px) {
+	@media (max-width: 930px) {
 		.markdown-body {
-			padding: 15px;
-		}
+			padding: 15px 0 15px 0;
+    };
+    .v-application code {
+    font-size: 85%;
+    box-shadow:none;
+    }
 	}
 </style>

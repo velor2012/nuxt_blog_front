@@ -46,7 +46,7 @@ export default {
         TOC,
     },
     created(){
-        this.$store.commit('setIsLoading',true)
+        this.$store.commit('setIsLoading',false)
         this.loading = true
     },
     mounted(){
@@ -54,7 +54,7 @@ export default {
         const renderer = new marked.Renderer();
         //重写renderer,把id加上,注意id要换成anchor_开头,同时替换内部非法字符,防止因为非法字符引起的vuetify调用selector报错
         renderer.heading = function (text, level) {
-            const escapedText = text.replace(/\//g, '_');
+            const escapedText = text.replace(/[`~!@#$%^&*()_\-+=<>?:"{}|,.\/;'\\[\]·~！@#￥%……&*（）——\-+={}|《》？：“”【】、；‘'，。、]/g, '_');
             return `
                     <h${level} id="anchor_${escapedText}">
                         ${text}

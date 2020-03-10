@@ -1,24 +1,21 @@
 <template>
 <div>
-    <!-- <v-layout >
-        <v-flex > -->
-            <msg v-bind:message="message"/>
-            <v-dialog eager v-model="DialogOption.show" max-width="290">
-                <v-date-picker v-show="DialogOption.type=='日期'" v-model="picker" @click:month="SelectMonth" full-width type="month"></v-date-picker>
-                <ColorfulChip v-show="DialogOption.type=='分类'" :typeInfo="typeInfo"/>
-            </v-dialog>
-            <v-row class="row">
-                <v-col v-show="done_created" :cols="ismobile?12:8">
-                     <ArticleList :Data="{...ArticleListData,picker}"/>
-                </v-col>       
-                <v-col v-show="!ismobile&&done_created" cols="4" class="date_picker" style="padding-left:1em;padding-top:2em">
-                    <TypeAndDate 
-                    :typeInfo="typeInfo"
-                    />
-                </v-col>
-            </v-row>
-        <!-- </v-flex>
-    </v-layout> -->
+    <msg v-bind:message="message"/>
+    <v-dialog eager v-model="DialogOption.show" max-width="290">
+        <v-date-picker v-show="DialogOption.type=='日期'" v-model="picker" @click:month="SelectMonth" full-width type="month"></v-date-picker>
+        <ColorfulChip v-show="DialogOption.type=='分类'" :typeInfo="typeInfo"/>
+    </v-dialog>
+    <v-row class="row">
+        <v-col v-show="done_created" :cols="ismobile?12:8">
+                <ArticleList :Data="{...ArticleListData,picker}"/>
+        </v-col>       
+        <v-col v-show="!ismobile&&done_created" cols="4" class="date_picker" style="padding-left:1em;padding-top:2em">
+            <TypeAndDate 
+            :typeInfo="typeInfo"
+            class = "animated fadeInRight"
+            />
+        </v-col>
+    </v-row>
 </div>
 </template>
 <script>
@@ -39,7 +36,6 @@ export default {
                 page:0,
                 pageSize:10,
                 items: [],
-                loading: false,
                 reloading:false,
             },
             DialogOption:{
@@ -66,12 +62,12 @@ export default {
         Bus.$on('onClickChip',this.searchByType)
         Bus.$on('getNextPageArticles',this.getNextPageArticles)
         Bus.$on('onSelectMonth',this.onSelectMonth)
-        Bus.$on('showFilter',this.showFilter).stop
         Bus.$on('search',this.search)
         Bus.$on('refreshArticleList',this.refresh)
         this.refresh()
     },
     activated(){
+        Bus.$on('showFilter',this.showFilter)
         this.$store.commit('setShowFilter',true)
         if(this.$route.params.refresh){
             this.refresh()
@@ -93,7 +89,6 @@ export default {
                 date:null
             }
             //获取文章信息
-            this.$store.commit('setIsLoading',true)
             this.ArticleListData.loading = true
             var url = this.ArticleListData.baseurl + 'total'
             this.$axios.get(url).then(res => {
@@ -144,7 +139,6 @@ export default {
                 this.typeInfo = res.data.other.agg
                 if(creating){
                     this.done_created = true
-                    this.$store.commit('setIsLoading',false)
                 }
             })
         },

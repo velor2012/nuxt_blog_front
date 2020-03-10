@@ -1,20 +1,16 @@
 export const state = () => ({
-    isLoading:false,
     //是否需要加载数据,滚动加载
     needLoading:false,
     toc:[],
     searchArticleType:'total',
     isMobile:false,
-    showFilter:true,
+    showFilter:false,
     authorInfo:{
         info:'',
         avatar:''
     }
   })
 export const mutations = {
-    setIsLoading(state,isLoading){
-        state.isLoading = isLoading
-    },
     setToc(state,toc){
         state.toc=toc
     },
@@ -32,9 +28,6 @@ export const mutations = {
     }
 }
 export const getters = {
-    getIsLoading(state){
-        return state.isLoading
-    },
     getToc(state){
         return state.toc
     },
