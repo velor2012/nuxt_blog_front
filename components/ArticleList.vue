@@ -4,7 +4,7 @@
               v-for="(item, i) in Data.items"
               :key="i"
               cols="12"
-              class="animated fadeInLeft"
+              class="wow fadeInLeft"
               v-if="!Data.reloading"
             > 
               <v-hover :disabled="ismobile" v-slot:default="{ hover }">
@@ -89,7 +89,7 @@ import TypeAndDate from '~/components/TypeAndDate.vue'
     mounted(){
       this.$nextTick(()=>{
         this.oberserLoading()
-        // eruda.init();
+        this.$nextTick(()=>{new WOW().init();})
       })
     },
     computed:{

@@ -353,7 +353,7 @@ export default {
 }
 </script>
 <style lang="less">
-
+@import url('animate.css/animate.min.css');
   .app,.v-application .title,.markdown-body{
       font-family: "Microsoft YaHei" !important;
       font-weight:400

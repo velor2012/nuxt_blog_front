@@ -1,7 +1,7 @@
 <template>
-  <v-row class="animated fadeInUp">
+  <v-row >
     <v-col cols="12">
-      <v-card>
+      <v-card class="animated fadeInUp">
         <v-container fluid>
           <v-row>
             <v-col
@@ -61,6 +61,9 @@ export default {
             //     message.error(this,true,'获取表情失败',res.data.reason) 
             // }
         })
+    },
+    mounted(){
+      this.$nextTick(()=>{new WOW().init();})
     },
     methods:{
     },

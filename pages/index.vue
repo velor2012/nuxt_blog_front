@@ -14,7 +14,6 @@
                 <v-col v-show="!ismobile&&done_created" cols="4" class="date_picker" style="padding-left:1em;padding-top:2em">
                     <TypeAndDate 
                     :typeInfo="typeInfo"
-                    class = "animated fadeInRight"
                     />
                 </v-col>
             </v-row>

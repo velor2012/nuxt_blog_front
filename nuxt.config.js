@@ -15,13 +15,13 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel:"stylesheet",  href:"https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css"},
+      // { rel:"stylesheet",  href:"https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css"},
       { rel:"stylesheet",href:"https://cdnjs.cloudflare.com/ajax/libs/prism/1.19.0/themes/prism.min.css"}
     ],
     script:[
       {src:"https://cdn.bootcss.com/marked/0.8.0/marked.js",type: 'text/javascript', charset: 'utf-8'},
       {src:"https://cdnjs.cloudflare.com/ajax/libs/prism/1.19.0/prism.min.js",dataManual:true,type: 'text/javascript', charset: 'utf-8'} ,
-      // {src:"//cdn.jsdelivr.net/npm/eruda",type: 'text/javascript', charset: 'utf-8'}
+      {src:"https://cdn.bootcss.com/wow/1.1.2/wow.min.js",type: 'text/javascript', charset: 'utf-8'}
     ]
   },
   /*

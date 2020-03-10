@@ -14,12 +14,13 @@
   "dependencies": {
     "@nuxtjs/axios": "^5.3.6",
     "@nuxtjs/vuetify": "^1.11.0",
+    "animate.css": "^3.7.2",
     "cross-env": "^5.2.0",
     "github-markdown-css": "^4.0.0",
     "less": "^3.10.3",
     "less-loader": "^5.0.0",
     "nuxt": "^2.0.0",
-    "vue-directive-image-previewer": "^2.2.2"
+    "vue-directive-image-previewer": "^2.2.2",
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^2.0.0",
