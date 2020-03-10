@@ -15,9 +15,7 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      // { rel:"stylesheet",  href:"https://cdnjs.cloudflare.com/ajax/libs/prism/1.19.0/themes/prism-funky.min.css"},
       { rel:"stylesheet",  href:"https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css"},
-      // { rel:"stylesheet",  href:"https://cdnjs.cloudflare.com/ajax/libs/imagehover.css/2.0.0/css/imagehover.min.css"},
       { rel:"stylesheet",href:"https://cdnjs.cloudflare.com/ajax/libs/prism/1.19.0/themes/prism.min.css"}
     ],
     script:[

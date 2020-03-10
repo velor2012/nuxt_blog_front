@@ -378,10 +378,6 @@ export default {
   @media screen and (max-width: 600px) {
     .overall-style {
       background-color: burlywood;
-      // background-image: url("https://s2.ax1x.com/2020/03/05/37BYGR.jpg");
-      // background-repeat: no-repeat;
-      // background-attachment: fixed;
-      // background-position: top;
     } 
    }
   .container {
@@ -399,13 +395,6 @@ export default {
   background-color:rgb(245, 242, 240);
   box-shadow:0 0 0 0 rgba(0, 0, 0, 0), 0 0 0 0 rgba(0, 0, 0, 0), 0 0 0 0 rgba(0, 0, 0, 0);
 }
-.markdown-body {
-  box-sizing: border-box;
-  min-width: 200px;
-  max-width: 100%;
-  margin: 0 auto;
-  padding: 45px;
-}
 
 @media screen and  (max-width: 600px) {
 .markdown-body {
@@ -415,12 +404,11 @@ export default {
     font-size: 85%;
     box-shadow:none;
     }
-  .markdown .v-card__text{
-    letter-spacing: 0.0171428571em;
-    line-height:normal
-  }
+  // .markdown .v-card__text{
+  //   letter-spacing: 0.0171428571em;
+  //   line-height:normal
+  // }
 }
-@import '~/assets/markdown.css';
 .markdown img{
     max-width: 100%;
 }
@@ -431,16 +419,18 @@ export default {
 .markdown>.v-card > .v-card__text{
     color: black;
 }
-.markdown-body a:visited{
-    color: #6795b5;
-}
-.markdown-body a{
-    text-decoration:none;
-    font-size: 16px;
-}
-.markdown-body a:hover{
-    transform:scale(1.2);
-    color: red;
-    transition: all 0.5s ease-in-out;
-}
+@import url('github-markdown-css/github-markdown.css');
+	.markdown-body {
+		box-sizing: border-box !important;
+		min-width: 200px!important;
+		max-width: 980px!important;
+		margin: 0 auto!important;
+		padding: 45px!important;
+	}
+
+	@media (max-width: 767px) {
+		.markdown-body {
+			padding: 15px;
+		}
+	}
 </style>
