@@ -1,16 +1,6 @@
 # 前端博客介绍
 
-## 界面展示
-
-1. 电脑端
-![https://s2.ax1x.com/2020/03/10/8P2OV1.png](https://s2.ax1x.com/2020/03/10/8P2OV1.png)
-![https://s2.ax1x.com/2020/03/10/8P9PiV.png](https://s2.ax1x.com/2020/03/10/8P9PiV.png)
-2. 移动端
-![https://s2.ax1x.com/2020/03/10/8Pikz8.jpg](https://s2.ax1x.com/2020/03/10/8Pikz8.jpg)
-![https://s2.ax1x.com/2020/03/10/8PPJUI.jpg](https://s2.ax1x.com/2020/03/10/8PPJUI.jpg)
-![https://s2.ax1x.com/2020/03/10/8PPY5t.jpg](https://s2.ax1x.com/2020/03/10/8PPY5t.jpg)
-![https://s2.ax1x.com/2020/03/10/8PP1DH.jpg](https://s2.ax1x.com/2020/03/10/8PP1DH.jpg)
-![https://s2.ax1x.com/2020/03/10/8PP3bd.jpg](https://s2.ax1x.com/2020/03/10/8PP3bd.jpg)
+这是一个用nuxt以及vuetify开发的博客前端界面，pc端和手机端都能获得不错的体验
 
 ## 功能介绍
 
@@ -76,5 +66,17 @@ npm start //或者pm2部署
 4. 文档整理
 
 ***
+
+## 界面展示
+
+1. 电脑端
+![https://s2.ax1x.com/2020/03/10/8P2OV1.png](https://s2.ax1x.com/2020/03/10/8P2OV1.png)
+![https://s2.ax1x.com/2020/03/10/8P9PiV.png](https://s2.ax1x.com/2020/03/10/8P9PiV.png)
+2. 移动端
+![https://s2.ax1x.com/2020/03/10/8Pikz8.jpg](https://s2.ax1x.com/2020/03/10/8Pikz8.jpg)
+![https://s2.ax1x.com/2020/03/10/8PPJUI.jpg](https://s2.ax1x.com/2020/03/10/8PPJUI.jpg)
+![https://s2.ax1x.com/2020/03/10/8PPY5t.jpg](https://s2.ax1x.com/2020/03/10/8PPY5t.jpg)
+![https://s2.ax1x.com/2020/03/10/8PP1DH.jpg](https://s2.ax1x.com/2020/03/10/8PP1DH.jpg)
+![https://s2.ax1x.com/2020/03/10/8PP3bd.jpg](https://s2.ax1x.com/2020/03/10/8PP3bd.jpg)
 
 ## 感谢阅读
