@@ -34,11 +34,12 @@
 <script>
 import Bus from '~/pages/util'
 export default {
-    props:["keyword"],
+    props:[],
     name:"searchDialog",
     data(){
         return{
-            dialog:false
+            dialog:false,
+            keyword:''
         }
     },
     mounted(){
@@ -53,7 +54,7 @@ export default {
                 this.$router.push('/')
             }
             this.dialog = false
-            Buse.$emit('search',keyword)
+            Bus.$emit('search',this.keyword)
         }
     }
 }

@@ -37,7 +37,8 @@
                   </v-card>
               </v-hover>
             </v-col>
-            <v-col clos="12" style="text-align:center">
+            <!-- 重载数据(点击日期，类型)的时候要等新的数据加入进来才显示，否则会同时触发加载下一页和重载数据事件 -->
+            <v-col clos="12" style="text-align:center" v-show="!Data.reloading">
                   <div v-show="needLoadData==0">没有更多了</div>
                   <div class="text-center ma-12" v-show="needLoadData>0">
                     <v-progress-circular

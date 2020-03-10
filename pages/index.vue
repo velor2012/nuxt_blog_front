@@ -4,7 +4,7 @@
         <v-flex > -->
             <msg v-bind:message="message"/>
             <v-dialog eager v-model="DialogOption.show" max-width="290">
-                <v-date-picker v-show="DialogOption.type=='日期'" v-model="picker" @dblclick:month="onSelectMonth" full-width type="month"></v-date-picker>
+                <v-date-picker v-show="DialogOption.type=='日期'" v-model="picker" @click:month="SelectMonth" full-width type="month"></v-date-picker>
                 <ColorfulChip v-show="DialogOption.type=='分类'" :typeInfo="typeInfo"/>
             </v-dialog>
             <v-row class="row">
@@ -91,6 +91,7 @@ export default {
                 items: [],
                 loading: false,
                 reloading:false,
+                date:null
             }
             //获取文章信息
             this.$store.commit('setIsLoading',true)
@@ -105,11 +106,11 @@ export default {
             this.getTypesInfo()
         },
         getNextPageArticles(){
-            // console.log('getNextPageArticles')
+            console.log('getNextPageArticles')
             this.ArticleListData.loading = true
             this.ArticleListData.page += 1
             // console.log('params %O',{...this.pageInfo,type:this.searchType})
-            let params = {type:this.searchType,params:this.pageInfo}
+            let params = {date:null,type:this.searchType,params:this.pageInfo}
             // console.log('params %O',params)
             this.$axios.get(this.ArticleListData.complexquery_url,params).then(res => {
                 if(res.data.success){
@@ -121,15 +122,19 @@ export default {
                 this.ArticleListData.loading=false
             })
         },
+        SelectMonth(value){
+            Bus.$emit('onSelectMonth',{value:value,picker:this.picker})
+        },
         //日期查询
         onSelectMonth(value){
-            this.ArticleListData.loading = true
             this.ArticleListData.reloading = true
+            this.ArticleListData.loading = true
             this.picker = value.picker
             let params = {params:{date:value.value,need_total:true,...this.pageFirstInfo}}
             this.$axios.get(this.ArticleListData.complexquery_url,params).then(res=>{
-                    this.ArticleListData.items = res.data.other.article
+                    console.log('data select')
                     this.ArticleListData.total = res.data.other.total
+                    this.ArticleListData.items = res.data.other.article
                     this.ArticleListData.loading = false
                     this.ArticleListData.reloading = false
                 })
@@ -195,6 +200,8 @@ export default {
     },
     beforeRouteLeave (to, from, next) {
         this.$store.commit('setShowFilter',false)
+        this.date=null
+        this.$store.commit('setSearchArticleType','total')
         next()
     },
 }
