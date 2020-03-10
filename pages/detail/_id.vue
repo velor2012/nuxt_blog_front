@@ -46,7 +46,6 @@ export default {
         TOC,
     },
     created(){
-        this.$store.commit('setIsLoading',false)
         this.loading = true
     },
     mounted(){
@@ -111,7 +110,6 @@ export default {
                     this.message = {show:true,content:'找不到文章:'+res.data.reason,color:'false'}
                 }
                 this.loading = false
-                this.$store.commit('setIsLoading',false)
             })          
         }else{
 
