@@ -20,8 +20,7 @@
         <v-list-item
           v-for="(item, i) in items"
           :key="i"
-          nuxt
-          :to="item.to"
+          @click="goTo(item.to)"
           router
           exact
           class="v-list-item"
@@ -324,6 +323,7 @@ export default {
     goTo(path){
       if(path=='/'){
         if(this.$route.path=='/'){
+          this.$vuetify.goTo(0,this.scroll_option)
           Bus.$emit('refreshArticleList')
         }else{
           this.$router.push({'name':'index',params:{refresh:true}})

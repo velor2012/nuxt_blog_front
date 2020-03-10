@@ -142,10 +142,6 @@ export default {
                 io.observe(el);
             })
         },
-        //让toc向下滑动的时候粘在bar上
-        observeTOC(){
-
-        }
     },
     computed:{
         ismobile(){

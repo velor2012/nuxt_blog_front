@@ -37,9 +37,11 @@
                   </v-card>
               </v-hover>
             </v-col>
-            <v-col clos="12" v-scroll="onsroll" v-show="Data.loading" style="text-align:center">
-                  <div class="text-center ma-12">
+            <v-col clos="12" style="text-align:center">
+                  <div v-show="needLoadData==0">没有更多了</div>
+                  <div class="text-center ma-12" v-show="needLoadData>0">
                     <v-progress-circular
+                      id="circularLoading"
                       :indeterminate="true"
                       :rotate="0"
                       :size="32"
@@ -63,22 +65,31 @@ import TypeAndDate from '~/components/TypeAndDate.vue'
     components:{
       TypeAndDate
     },
-    created(){
-    },
     methods:{
       getLocalTime(nS) {  
           return new Date(nS).toLocaleString()
       },
-      getNextPageArticles(){
-        Bus.$emit('getNextPageArticles')
+      oberserLoading(){
+          var io = new IntersectionObserver((entries) => {
+              if(entries[0].isIntersecting){
+                  if(this.needLoadData>0){
+                    Bus.$emit('getNextPageArticles')
+                  }else{
+                    // io.unobserve(el);
+                  }
+              }
+          }, {
+              threshold: [0],
+          })
+          let el = document.getElementById("circularLoading")
+          io.observe(el);
       },
-      onsroll(e){
-        // 距离底部200px时加载一次
-        let bottomOfWindow = document.documentElement.offsetHeight - document.documentElement.scrollTop - window.innerHeight <= 100
-        if (bottomOfWindow && this.Data.loading == false && this.needLoadData>0) {
-          this.getNextPageArticles()
-        }
-      },
+    },
+    mounted(){
+      this.$nextTick(()=>{
+        this.oberserLoading()
+        // eruda.init();
+      })
     },
     computed:{
       needLoadData(){

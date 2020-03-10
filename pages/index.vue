@@ -80,6 +80,7 @@ export default {
     },
     methods:{
         refresh(){
+            // console.log('refresh')
             //重制
             this.ArticleListData={
                 baseurl : '/api/article/',
@@ -100,13 +101,14 @@ export default {
                     this.ArticleListData.total = Number(res.data.other.total)
                 }
             })
-            this.getNextPageArticles()
+            // this.getNextPageArticles()
             this.getTypesInfo()
         },
         getNextPageArticles(){
             // console.log('getNextPageArticles')
             this.ArticleListData.loading = true
             this.ArticleListData.page += 1
+            // console.log('params %O',{...this.pageInfo,type:this.searchType})
             let params = {type:this.searchType,params:this.pageInfo}
             // console.log('params %O',params)
             this.$axios.get(this.ArticleListData.complexquery_url,params).then(res => {

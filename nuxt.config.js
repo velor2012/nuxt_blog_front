@@ -23,6 +23,7 @@ export default {
     script:[
       {src:"https://cdn.bootcss.com/marked/0.8.0/marked.js",type: 'text/javascript', charset: 'utf-8'},
       {src:"https://cdnjs.cloudflare.com/ajax/libs/prism/1.19.0/prism.min.js",dataManual:true,type: 'text/javascript', charset: 'utf-8'} ,
+      {src:"//cdn.jsdelivr.net/npm/eruda",type: 'text/javascript', charset: 'utf-8'}
     ]
   },
   /*
@@ -82,13 +83,13 @@ export default {
     */
     extend (config, ctx) {
     },
-    analyze: true, 	
-    assetFilter: function(assetFilename) {	    		
-      return assetFilename.endsWith('.js');	    	
-    },
+    // analyze: true, 	
+    // assetFilter: function(assetFilename) {	    		
+    //   return assetFilename.endsWith('.js');	    	
+    // },
   },
   server:{
-    host:'0.0.0.0',
-    port:3111
+    host:'127.0.0.1',
+    port:3000
   },
 }
