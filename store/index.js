@@ -4,11 +4,12 @@ export const state = () => ({
     toc:[],
     searchArticleType:'total',
     isMobile:false,
-    showFilter:false,
     authorInfo:{
         info:'',
         avatar:''
-    }
+    },
+    io:'',
+    titles:'',
   })
 export const mutations = {
     setToc(state,toc){
@@ -20,11 +21,14 @@ export const mutations = {
     setIsMobile(state,isMobile){
         state.isMobile=isMobile
     },
-    setShowFilter(state,showFilter){
-        state.showFilter=showFilter
-    },
     setAuthorInfo(state,authorInfo){
         state.authorInfo=authorInfo
+    },
+    setIO(state,io){
+        state.IO = io
+    },
+    setTitles(state,titles){
+        state.titles = titles
     }
 }
 export const getters = {
@@ -37,10 +41,13 @@ export const getters = {
     getIsMobile(state){
         return state.isMobile
     },
-    getShowFilter(state){
-        return state.showFilter
-    },
     getAuthorInfo(state){
         return state.authorInfo
+    },
+    getIO(state){
+        return state.IO
+    },
+    getTitles(state){
+        return state.titles
     }
 }

@@ -6,7 +6,7 @@
         <v-list-item
             v-for="(item, i) in toc"
             :key="i"
-            @click="$vuetify.goTo(`#${item.text}`, scroll_option)"
+            @click="go(item.text)"
             router
             exact
             class="v-list-item"
@@ -40,6 +40,12 @@ export default {
         toc(){
             return this.$store.getters.getToc
         },
+        io(){
+            this.$store.getters.getIO
+        },
+        titles(){
+            this.$store.getters.getTitles
+        }
     },
     methods: {
         getTOCText(layer,text){
@@ -65,6 +71,27 @@ export default {
             }
             this.model = this.TOC_list.indexOf(item);
         },
+        go(path){
+            this.unobserve()
+            this.$vuetify.goTo(`#${path}`, this.scroll_option)
+            setTimeout(this.observe,this.scroll_option.duration)
+        },
+        unobserve(){
+            if(this.titles){
+                // console.log('unobserve')
+                this.titles.map(title=>{
+                    this.io.unobserve(title)
+                })
+            }
+        },
+        observe(){
+            if(this.titles){
+                // console.log('observe')
+                this.titles.map(title=>{
+                    this.io.observe(title)
+                })
+            }
+        }
     },
     created() {
         Bus.$on('changeTOCActvivateItem',this.changeItem)

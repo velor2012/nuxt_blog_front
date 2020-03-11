@@ -1,10 +1,5 @@
 <template>
-  <v-app dark v-resize="onResize" class="app"
-     v-touch="{
-      left: () => swipe('Left'),
-      right: () => swipe('Right'),
-    }"
-  >
+  <v-app dark v-resize="onResize" class="app">
     <msg v-bind:message="message"/>
     <!-- 左边抽屉 -->
     <v-navigation-drawer
@@ -62,7 +57,6 @@
       fixed
       app
       dark
-      hide-on-scroll
       color="blue"
       id="header"
     >
@@ -86,6 +80,10 @@
       <!-- 搜索按钮手机端 -->
       <v-btn icon v-if="ismobile">
         <v-icon @click.native="showSearchDialog">mdi-magnify</v-icon>
+      </v-btn>
+        <!-- 目录按钮手机端 -->
+      <v-btn icon v-if="ismobile&& /\/detail\/\w+/.test($route.path)">
+        <v-icon @click.native="open_right">mdi-book</v-icon>
       </v-btn>
       <!-- 其他功能，关于博客，作者信息 网页端 -->
       <v-btn 
@@ -132,7 +130,7 @@
       <v-menu
         left
         bottom
-        v-if="ismobile&&showFilter"
+        v-if="ismobile&& $route.path=='/'"
       >
         <template v-slot:activator="{ on }">
           <v-btn icon v-on="on">
@@ -173,7 +171,7 @@
   <searchDialog :keyword="keyword"/>
     <v-content class="overall-style">
       <v-container v-scroll="onScroll" >
-          <nuxt keep-alive :keep-alive-props="{ include: ['index'] }"/>
+          <nuxt keep-alive />
           <!-- 返回顶部按钮 -->
           <v-fab-transition>
               <v-btn fixed dark fab color="pink" bottom right v-show="show" @click="$vuetify.goTo(0,scroll_option)">
@@ -285,18 +283,18 @@ export default {
     onResize(){
         this.ismobile = window.innerWidth<930 
     },
-    swipe(direction){
-      switch(direction){
-          case "Left":
-            let reg = /\/detail\/\w+/
-            if(reg.test(this.$route.path))
-              Bus.$emit('showRightDrawer')
-              break
-          case "Right":
-            this.drawer = true
-          default:
-      }       
-    },
+    // swipe(direction){
+    //   switch(direction){
+    //       case "Left":
+    //         let reg = /\/detail\/\w+/
+    //         if(reg.test(this.$route.path))
+    //           Bus.$emit('showRightDrawer')
+    //           break
+    //       case "Right":
+    //         this.drawer = true
+    //       default:
+    //   }       
+    // },
     filter(item){
       Bus.$emit('showFilter',item)
     },
@@ -320,7 +318,7 @@ export default {
     goTo(path){
       if(path=='/'){
         if(this.$route.path=='/'){
-          this.$vuetify.goTo(0,this.scroll_option)
+          // this.$vuetify.goTo(0,this.scroll_option)
           Bus.$emit('refreshArticleList')
         }else{
           this.$router.push({'name':'index',params:{refresh:true}})
@@ -333,11 +331,6 @@ export default {
   created() {
     Bus.$on('showRightDrawer',this.showRightDrawer)
     this.getUserBaseInfo()
-  },
-  computed: {
-      showFilter(){
-        return this.$store.getters.getShowFilter
-      },
   },
   watch:{
     ismobile(value){

@@ -68,7 +68,6 @@ export default {
     },
     activated(){
         Bus.$on('showFilter',this.showFilter)
-        this.$store.commit('setShowFilter',true)
         if(this.$route.params.refresh){
             this.refresh()
         }
@@ -84,12 +83,10 @@ export default {
                 page:0,
                 pageSize:10,
                 items: [],
-                loading: false,
                 reloading:false,
                 date:null
             }
             //获取文章信息
-            this.ArticleListData.loading = true
             var url = this.ArticleListData.baseurl + 'total'
             this.$axios.get(url).then(res => {
                 if(res.data.success){
@@ -100,8 +97,7 @@ export default {
             this.getTypesInfo()
         },
         getNextPageArticles(){
-            console.log('getNextPageArticles')
-            this.ArticleListData.loading = true
+            // console.log('getNextPageArticles')
             this.ArticleListData.page += 1
             // console.log('params %O',{...this.pageInfo,type:this.searchType})
             let params = {date:null,type:this.searchType,params:this.pageInfo}
@@ -113,7 +109,6 @@ export default {
                 }else{
                     this.message = {show:true,content:'找不到文章:'+res.data.reason,color:'false'}
                 }
-                this.ArticleListData.loading=false
             })
         },
         SelectMonth(value){
@@ -122,14 +117,12 @@ export default {
         //日期查询
         onSelectMonth(value){
             this.ArticleListData.reloading = true
-            this.ArticleListData.loading = true
             this.picker = value.picker
             let params = {params:{date:value.value,need_total:true,...this.pageFirstInfo}}
             this.$axios.get(this.ArticleListData.complexquery_url,params).then(res=>{
                     console.log('data select')
                     this.ArticleListData.total = res.data.other.total
                     this.ArticleListData.items = res.data.other.article
-                    this.ArticleListData.loading = false
                     this.ArticleListData.reloading = false
                 })
         },
@@ -145,12 +138,10 @@ export default {
         //类型查询
         searchByType(item){
             this.ArticleListData.reloading = true
-            this.ArticleListData.loading = true
             this.ArticleListData.total = item.count
             this.$store.commit('setSearchArticleType',item._id)
             this.$axios.get(this.ArticleListData.complexquery_url,{params:{type:item._id,...this.pageFirstInfo}}).then(res=>{
                 this.ArticleListData.items = res.data.other.article
-                this.ArticleListData.loading = false
                 this.ArticleListData.reloading = false
             })
         },
@@ -169,10 +160,10 @@ export default {
             }
         },
         search(keyword){
+            this.ArticleListData.reloading = true
             this.$axios.get(this.ArticleListData.complexquery_url,{params:{keyword:keyword,need_total:true,...this.pageFirstInfo}}).then(res=>{
                 this.ArticleListData.items = res.data.other.article
                 this.ArticleListData.total = res.data.other.total
-                this.ArticleListData.loading = false
                 this.ArticleListData.reloading = false
             })
         }
@@ -192,7 +183,6 @@ export default {
         }
     },
     beforeRouteLeave (to, from, next) {
-        this.$store.commit('setShowFilter',false)
         this.date=null
         this.$store.commit('setSearchArticleType','total')
         next()
