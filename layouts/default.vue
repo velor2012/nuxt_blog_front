@@ -15,7 +15,6 @@
         <v-list-item
           v-for="(item, i) in items"
           :key="i"
-          nuxt
           :to="item.to"
           router
           exact
@@ -80,7 +79,7 @@
       />
       <v-spacer />
       <!-- 搜索按钮手机端 -->
-      <v-btn icon v-if="ismobile&&$route.path=='/'">
+      <v-btn icon v-if="ismobile && $route.path=='/'">
         <v-icon @click.native="showSearchDialog">mdi-magnify</v-icon>
       </v-btn>
         <!-- 目录按钮手机端 -->
@@ -91,7 +90,6 @@
       <v-btn 
       v-for="(item, i) in items"
       :key="i"
-      nuxt
       :to="item.to"
        class="d-none d-sm-flex"
        text

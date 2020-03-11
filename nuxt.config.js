@@ -81,10 +81,10 @@ export default {
     */
     extend (config, ctx) {
     },
-    analyze: true, 	
-    assetFilter: function(assetFilename) {	    		
-      return assetFilename.endsWith('.js');	    	
-    },
+    // analyze: true, 	
+    // assetFilter: function(assetFilename) {	    		
+    //   return assetFilename.endsWith('.js');	    	
+    // },
   },
   server:{
     host:'0.0.0.0',
