@@ -37,6 +37,7 @@ export default {
             message:{show:false,content:'成功',color:'success'},
             loading:true,
             transition:'scale-transition',
+            timeouts:[],
             emoji_width:'100em',
         }
     },
@@ -125,22 +126,24 @@ export default {
         oberserTitle(){
             var io = new IntersectionObserver((entries) => {
                 if(entries[0].intersectionRatio>=1){
-                    // console.log('IntersectionObserver.takeRecords %O',io.takeRecords())
-                    //console.log(entries[0].target.id)
-                    Bus.$emit('changeTOCActvivateItem',entries[0].target.id)
+                    // console.log(entries[0].intersectionRatio)
+                    // console.log(entries[0].target.id)
+ 
+                    // this.timeouts.map(item=>{
+                    //     clearTimeout(item)
+                    // })
+                    clearTimeout(this.timeouts)
+                    this. timeouts = (setTimeout(()=>{ Bus.$emit('changeTOCActvivateItem',entries[0].target.id)},200))
+                   
                 }
             }, {
                 threshold: [1],
                 // root:document.getElementById("header")
             })
-            let titles=[]
-            this.$store.commit('setIO',io)
             this.toc.map(item=>{
                 let el = document.getElementById(item.text)
-                titles.push(el)
                 io.observe(el);
             })
-            this.$store.commit('setTitles',titles)
         },
     },
     computed:{

@@ -67,7 +67,7 @@ export default {
   */
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
-    treeShake:false,
+    treeShake:true,
     theme: {
       dark: false,
     },
@@ -81,13 +81,13 @@ export default {
     */
     extend (config, ctx) {
     },
-    // analyze: true, 	
-    // assetFilter: function(assetFilename) {	    		
-    //   return assetFilename.endsWith('.js');	    	
-    // },
+    analyze: true, 	
+    assetFilter: function(assetFilename) {	    		
+      return assetFilename.endsWith('.js');	    	
+    },
   },
   server:{
-    host:'127.0.0.1',
+    host:'0.0.0.0',
     port:3000
   },
 }

@@ -171,7 +171,7 @@
   <searchDialog :keyword="keyword"/>
     <v-content class="overall-style">
       <v-container v-scroll="onScroll" >
-          <nuxt keep-alive />
+          <nuxt />
           <!-- 返回顶部按钮 -->
           <v-fab-transition>
               <v-btn fixed dark fab color="pink" bottom right v-show="show" @click="$vuetify.goTo(0,scroll_option)">

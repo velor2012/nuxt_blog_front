@@ -7,9 +7,7 @@ export const state = () => ({
     authorInfo:{
         info:'',
         avatar:''
-    },
-    io:'',
-    titles:'',
+    }
   })
 export const mutations = {
     setToc(state,toc){
@@ -23,12 +21,6 @@ export const mutations = {
     },
     setAuthorInfo(state,authorInfo){
         state.authorInfo=authorInfo
-    },
-    setIO(state,io){
-        state.IO = io
-    },
-    setTitles(state,titles){
-        state.titles = titles
     }
 }
 export const getters = {
@@ -43,11 +35,5 @@ export const getters = {
     },
     getAuthorInfo(state){
         return state.authorInfo
-    },
-    getIO(state){
-        return state.IO
-    },
-    getTitles(state){
-        return state.titles
     }
 }
