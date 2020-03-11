@@ -64,38 +64,19 @@ export default {
         Bus.$on('onSelectMonth',this.onSelectMonth)
         Bus.$on('search',this.search)
         Bus.$on('refreshArticleList',this.refresh)
-        this.refresh()
-    },
-    activated(){
         Bus.$on('showFilter',this.showFilter)
-        if(this.$route.params.refresh){
-            this.refresh()
-        }
+        
+        //获取文章信息
+        var url = this.ArticleListData.baseurl + 'total'
+        this.$axios.get(url).then(res => {
+            if(res.data.success){
+                this.ArticleListData.total = Number(res.data.other.total)
+            }
+        })
+        // this.getNextPageArticles()
+        this.getTypesInfo()
     },
     methods:{
-        refresh(){
-            // console.log('refresh')
-            //重制
-            this.ArticleListData={
-                baseurl : '/api/article/',
-                complexquery_url:'/api/article/complex',
-                total:1,
-                page:0,
-                pageSize:10,
-                items: [],
-                reloading:false,
-                date:null
-            }
-            //获取文章信息
-            var url = this.ArticleListData.baseurl + 'total'
-            this.$axios.get(url).then(res => {
-                if(res.data.success){
-                    this.ArticleListData.total = Number(res.data.other.total)
-                }
-            })
-            // this.getNextPageArticles()
-            this.getTypesInfo()
-        },
         getNextPageArticles(){
             // console.log('getNextPageArticles')
             this.ArticleListData.page += 1

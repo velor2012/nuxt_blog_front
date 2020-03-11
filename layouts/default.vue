@@ -15,7 +15,8 @@
         <v-list-item
           v-for="(item, i) in items"
           :key="i"
-          @click="goTo(item.to)"
+          nuxt
+          :to="item.to"
           router
           exact
           class="v-list-item"
@@ -75,10 +76,11 @@
         rounded
         v-model="keyword"
         @keyup.native.enter="search"
+        v-show="$route.path=='/'"
       />
       <v-spacer />
       <!-- 搜索按钮手机端 -->
-      <v-btn icon v-if="ismobile">
+      <v-btn icon v-if="ismobile&&$route.path=='/'">
         <v-icon @click.native="showSearchDialog">mdi-magnify</v-icon>
       </v-btn>
         <!-- 目录按钮手机端 -->
@@ -89,7 +91,8 @@
       <v-btn 
       v-for="(item, i) in items"
       :key="i"
-      @click="goTo(item.to)"
+      nuxt
+      :to="item.to"
        class="d-none d-sm-flex"
        text
        v-if="!ismobile" 
@@ -310,23 +313,8 @@ export default {
       Bus.$emit('showDialog')
     },
     search(){
-      if(this.$route.path!='/'){
-        this.$router.push('/')
-      }
       Bus.$emit('search',this.keyword)
     },
-    goTo(path){
-      if(path=='/'){
-        if(this.$route.path=='/'){
-          // this.$vuetify.goTo(0,this.scroll_option)
-          Bus.$emit('refreshArticleList')
-        }else{
-          this.$router.push({'name':'index',params:{refresh:true}})
-        }
-      }else{
-        this.$router.push(path)
-      }
-    }
   },
   created() {
     Bus.$on('showRightDrawer',this.showRightDrawer)
@@ -379,18 +367,15 @@ export default {
   /* use for markdown */
 
 .v-application code {
-  max-width: 100%;
-  color:black;
-  background-color:rgb(245, 242, 240);
-  box-shadow:0 0 0 0 rgba(0, 0, 0, 0), 0 0 0 0 rgba(0, 0, 0, 0), 0 0 0 0 rgba(0, 0, 0, 0);
+  max-width: 100%!important;
+  color:black!important;
+  // background-color:rgb(245, 242, 240)!important;
+  box-shadow:0 0 0 0 rgba(0, 0, 0, 0), 0 0 0 0 rgba(0, 0, 0, 0), 0 0 0 0 rgba(0, 0, 0, 0)!important;
 }
 
 .toc{
     margin-left:1em;
     max-height: 20em;
-}
-.markdown>.v-card > .v-card__text{
-    color: black;
 }
 @import url('github-markdown-css/github-markdown.css');
 
