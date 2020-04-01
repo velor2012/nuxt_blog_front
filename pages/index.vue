@@ -121,6 +121,7 @@ export default {
         .get(this.ArticleListData.complexquery_url, params)
         .then(res => {
           // console.log("data select");
+          this.ArticleListData.page = 1
           this.ArticleListData.total = res.data.other.total;
           this.ArticleListData.items = res.data.other.article;
           this.ArticleListData.reloading = false;
@@ -145,6 +146,7 @@ export default {
           params: { type: item._id, ...this.pageFirstInfo }
         })
         .then(res => {
+          this.ArticleListData.page = 1
           this.ArticleListData.items = res.data.other.article;
           this.ArticleListData.reloading = false;
         });
@@ -170,6 +172,7 @@ export default {
           params: { keyword: keyword, need_total: true, ...this.pageFirstInfo }
         })
         .then(res => {
+          this.ArticleListData.page = 1
           this.ArticleListData.items = res.data.other.article;
           this.ArticleListData.total = res.data.other.total;
           this.ArticleListData.reloading = false;

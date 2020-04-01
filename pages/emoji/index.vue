@@ -66,9 +66,6 @@ export default {
     });
   },
   mounted() {
-    this.$nextTick(() => {
-      new WOW().init();
-    });
   },
   methods: {},
   computed: {
