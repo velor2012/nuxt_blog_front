@@ -1,5 +1,5 @@
 <template>
-  <div id="sticky-nav">
+  <div id="sticky-nav" v-scroll="onScroll">
     <v-list rounded dense>
         <v-subheader>目录</v-subheader>
         <v-list-item-group v-model="model" mandatory color="primary">
@@ -33,7 +33,13 @@ export default {
                 offset: 0,
                 easing: 'easeInOutCubic',
             },
-            TOC_list:[]
+            TOC_list:[],
+            activate_list:[],
+            scroll_top:0,
+            interval_id:NaN,
+            anchor_offset:NaN,
+            bias:300,
+            timer:NaN
         }
     },
     computed:{
@@ -57,18 +63,59 @@ export default {
         getTOCList(){
             this.toc.map(item=>{
                 this.TOC_list.push(item.text)
+                this.activate_list.push(false)
             })
         },
-        changeItem(item){
-            if(this.TOC_list.indexOf(item<0)){
-                this.getTOCList()
+        /**
+         * 拿到所有toc到顶部的距离
+         * */
+        getFloorDistance(){
+            clearInterval(this.interval_id)
+            this.anchor_offset=[]
+            for(let i = 0 ; i < this.toc.length; i++){
+                let offset = document.getElementById(this.toc[i].text).offsetTop;
+                this.anchor_offset.push(offset)
             }
-            this.model = this.TOC_list.indexOf(item);
         },
+        onScroll(){
+            this.scroll_top=document.documentElement.scrollTop||document.body.scrollTop;
+        }
     },
-    created() {
-        Bus.$on('changeTOCActvivateItem',this.changeItem)
+    mounted(){
+        this.$nextTick(() => {
+            let _this=this
+            this.interval_id = setInterval(()=>{
+                _this.getFloorDistance()
+            },500)
+        })
     },
+    watch:{
+        activate_list:{
+            handler(newValue, oldValue) {
+                console.log('inhandels')
+                for(let i = 0 ; i < newValue.length; i++){
+                    if(newValue[i]){
+                        this.model = i
+                        break;
+                    }
+                }
+            },
+            deep: true
+        },
+        scroll_top(newValue){
+            let _this = this
+            if(this.timer){
+                clearTimeout(this.timer)
+            }
+            this.timer = setTimeout(()=>{
+                for(let i = 0; i<_this.anchor_offset.length; i++){
+                    if(_this.anchor_offset[i]<newValue+_this.bias && _this.anchor_offset[i+1]>newValue+_this.bias){
+                        _this.model=i
+                    }
+                }
+            },200)
+        }
+    }
 }
 </script>
 <style lang="less">

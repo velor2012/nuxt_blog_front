@@ -4,36 +4,90 @@
               v-for="(item, i) in Data.items"
               :key="i"
               cols="12"
-              class="wow fadeInLeft"
+              class=""
+              data-trigger
               v-if="!Data.reloading"
             > 
               <v-hover :disabled="ismobile" v-slot:default="{ hover }">
                   <v-card
                     :elevation="hover ? 24 : 2"
                     :color=" hover?'rgba(255,255,255,0.5)':'white'"
+                    nuxt :to="`/detail/${item._id}`"
                   >
-                    <v-card-title class="headline">{{item.title}}</v-card-title>
+                    <v-row class="article_card"
+                      align="center"
+                    >
+                    
+                    <v-col :cols="ismobile?12:8" style="padding:0" class="outer-card">
+                      <v-card-title v-if="!ismobile" class="headline font-weight-bold">{{item.title}}</v-card-title>
+                        <v-img v-if="ismobile" class="white--text align-end" :src="item.cover" >
 
-                    <v-card-subtitle>
-                          <v-card-text class="post">
-                            <span class="post-time">
-                              <v-icon small>mdi-calendar-range</V-icon>
-                              发表于 <a>{{getLocalTime(item.createTime)}}</a>
-                            </span>
-                            <span class="post-time">
-                              <v-icon small>mdi-calendar-range</V-icon>
-                              更新于 <a>{{getLocalTime(item.updateTime)}}</a>
-                            </span>
-                            <span class="post-class">
-                              <v-icon small>mdi-folder-open</v-icon>
-                              分类于
-                              <a>{{item.type}}</a>
-                            </span>
-                          </v-card-text>
+                            <template v-slot:placeholder>
+                              <v-row
+                                class="fill-height ma-0"
+                                align="center"
+                                justify="center"
+                              >
+                                <v-progress-circular indeterminate color="black"></v-progress-circular>
+                              </v-row>
+                            </template>
+                          <v-card-title class="headline font-weight-bold">{{item.title}}</v-card-title>
+                        </v-img>
+                    <v-card-subtitle class="font-weight-bold">
+                        <span class="post-time">
+                          <v-icon small>mdi-calendar-range</V-icon>
+                          发表于 <a>{{getLocalTime(item.createTime)}}</a>
+                        </span>
+                        <span class="post-time">
+                          <v-icon small>mdi-calendar-range</V-icon>
+                          更新于 <a>{{getLocalTime(item.updateTime)}}</a>
+                        </span>
                     </v-card-subtitle>
-                    <v-card-actions>
-                      <v-btn nuxt :to="`/detail/${item._id}`" dark color="blue">阅读文章</v-btn>
-                    </v-card-actions>
+                    <v-card-text class="font-weight-bold">
+                      {{item.resume}}
+                    </v-card-text>
+                    </v-col>
+                    <v-col cols="4" class="pc-arcticle-cover" v-if="!ismobile">
+                      <v-img :src="item.cover">
+                              <template v-slot:placeholder>
+                                <v-row
+                                  class="fill-height ma-0"
+                                  align="center"
+                                  justify="center"
+                                >
+                                  <v-progress-circular indeterminate color="black"></v-progress-circular>
+                                </v-row>
+                              </template>
+
+                      </v-img>
+                    </v-col>
+                  </v-row>
+                  <v-divider/>
+                  <v-row>
+                    <v-card-text class="chips-rows">
+                      <v-row
+                      align="center"
+                      justify="space-between"
+                      >
+                        <div>
+                          <v-chip-group
+                              column
+                              active-class="primary--text"
+                            >
+                              <v-chip class="chips" color="#F8CE5E" v-for="_tag in resovleTag(item.tag)" :key="_tag">
+                                {{ _tag }}
+                              </v-chip>
+                            </v-chip-group>
+                        </div>
+                        <div>
+                            <v-icon >mdi-bookmark</v-icon>
+                            <span class="article-info">{{item.type}}</span>
+                            <v-icon >mdi-eye-outline</v-icon>
+                            <span class="article-info">未实现</span>
+                        </div>
+                      </v-row>
+                    </v-card-text>
+                  </v-row>
                   </v-card>
               </v-hover>
             </v-col>
@@ -56,17 +110,25 @@
 </template>
 
 <script>
+import ScrollOut from "scroll-out";
+
 import Bus from '~/pages/util'
+import {resovleTag} from '~/pages/util'
 import TypeAndDate from '~/components/TypeAndDate.vue'
   export default {
     name:'ArticleList',
     props:['Data'],
     data: () => ({
+      scroll:NaN
     }),
     components:{
       TypeAndDate
     },
     methods:{
+      resovleTag(tag){
+        // console.log(tag)
+        return resovleTag(tag)
+      },
       getLocalTime(nS) {  
           return new Date(nS).toLocaleString()
       },
@@ -89,7 +151,6 @@ import TypeAndDate from '~/components/TypeAndDate.vue'
     mounted(){
       this.$nextTick(()=>{
         this.oberserLoading()
-        this.$nextTick(()=>{new WOW().init();})
       })
     },
     computed:{
@@ -100,10 +161,54 @@ import TypeAndDate from '~/components/TypeAndDate.vue'
         return this.$store.getters.getIsMobile
       }
     },
+    watch:{
+      Data:{
+        handler(newValue){
+          let _this = this
+          this.$nextTick(()=>{
+            let trigger = new _this.$sr(
+              {
+                trigger:{
+                  toggle:{
+                    class:{
+                      in:["zoomIn",'animated']
+                    }
+                  }
+                }
+
+              }
+            )
+            trigger.add('[data-trigger]')
+          })
+        },
+        deep:true
+      }
+    }
   }
 </script>
 <style lang="less">
-  .post{
-    padding:0
+  .pc-arcticle-cover{
+    padding-top: 1em;
   }
+  .chips{
+    font-weight: bold;
+  }
+  .chips-rows{
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  .article-info{
+    font-size:16px;
+    font-weight:bold;
+  }
+  .chips-rows .v-chip{
+    color: white;
+  }
+  .visible, .invisible {
+  opacity: 0.0;
+  transition: opacity 0.5s ease;
+}
+.visible {
+  opacity: 1.0;
+}
 </style>>

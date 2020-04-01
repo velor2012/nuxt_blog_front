@@ -21,7 +21,8 @@ export default {
     script:[
       {src:"https://cdn.bootcss.com/marked/0.8.0/marked.js",type: 'text/javascript', charset: 'utf-8'},
       {src:"https://cdnjs.cloudflare.com/ajax/libs/prism/1.19.0/prism.min.js",dataManual:true,type: 'text/javascript', charset: 'utf-8'} ,
-      {src:"https://cdn.bootcss.com/wow/1.1.2/wow.min.js",type: 'text/javascript', charset: 'utf-8'}
+      // {src:"https://cdn.bootcss.com/wow/1.1.2/wow.min.js",type: 'text/javascript', charset: 'utf-8'},
+      {src:"https://unpkg.com/scrollreveal",dataManual:true,type: 'text/javascript', charset: 'utf-8'} ,
     ]
   },
   /*
