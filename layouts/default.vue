@@ -11,41 +11,55 @@
       class="v-navigation-drawer"
       :disable-resize-watcher="true"
     >
-      <v-list>
-        <v-list-item
-          v-for="(item, i) in items"
-          :key="i"
-          :to="item.to"
-          router
-          exact
-          class="v-list-item"
-        >
-          <v-list-item-action>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title v-text="item.title" />
+    <template v-slot:prepend>
+        <v-list-item two-line>
+          <v-list-item-avatar size=70>
+            <img :src="authorInfo.avatar">
+          </v-list-item-avatar>
+
+          <v-list-item-content class="text-center">
+                  <v-list-item-title style="color:white;" class="text-center">
+                      不知道写啥
+                    </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-        <v-list-group>
-          <template v-slot:activator>
+    </template>
+
+        <v-list>
+          <v-list-item
+            v-for="(item, i) in items"
+            :key="i"
+            :to="item.to"
+            router
+            exact
+            class="v-list-item"
+          >
             <v-list-item-action>
-              <v-icon>mdi-hammer-screwdriver</v-icon>
+              <v-icon>{{ item.icon }}</v-icon>
             </v-list-item-action>
-            <v-list-item-title>
-              其它
-            </v-list-item-title>
-          </template>
-          <v-list-item v-for="(item, n) in other" :key="n" :to="item.to">
-            <v-list-item-title>
-              <v-list-item-icon>
-                <v-icon light>{{ item.icon }}</v-icon>
-              </v-list-item-icon>
-              {{ item.title }}
-            </v-list-item-title>
+            <v-list-item-content>
+              <v-list-item-title v-text="item.title" />
+            </v-list-item-content>
           </v-list-item>
-        </v-list-group>
-      </v-list>
+          <v-list-group>
+            <template v-slot:activator>
+              <v-list-item-action>
+                <v-icon>mdi-hammer-screwdriver</v-icon>
+              </v-list-item-action>
+              <v-list-item-title>
+                其它
+              </v-list-item-title>
+            </template>
+            <v-list-item v-for="(item, n) in other" :key="n" :to="item.to">
+              <v-list-item-title>
+                <v-list-item-icon>
+                  <v-icon light>{{ item.icon }}</v-icon>
+                </v-list-item-icon>
+                {{ item.title }}
+              </v-list-item-title>
+            </v-list-item>
+          </v-list-group>
+        </v-list>
     </v-navigation-drawer>
     <!-- bar栏 -->
     <v-app-bar :clipped-left="clipped" fixed app dark color="blue" id="header" v-show="doneWelcome">
@@ -89,7 +103,7 @@
       </v-btn>
       <!-- <v-app-bar-nav-icon @click.stop="open_right" class="d-none d-sm-flex"/> -->
       <!-- other设置，网页端显示 -->
-      <v-menu bottom v-if="!ismobile">
+      <v-menu :offset-y="true" bottom v-if="!ismobile">
         <template v-slot:activator="{ on }">
           <v-btn v-on="on" text>
             <v-icon>mdi-hammer-screwdriver</v-icon>
@@ -174,6 +188,7 @@
 </template>
 
 <script>
+import Motto from '~/components/Motto.vue'
 import msg from "~/components/message.vue";
 import TOC from "~/components/toc.vue";
 import searchDialog from "~/components/searchDialog.vue";
@@ -244,7 +259,8 @@ export default {
     msg,
     TOC,
     searchDialog,
-    welcome
+    welcome,
+    Motto
   },
   methods: {
     onScroll(e) {
@@ -322,6 +338,11 @@ export default {
     ismobile(value) {
       this.$store.commit("setIsMobile", value);
     }
+  },
+  computed:{
+      authorInfo(){
+        return this.$store.getters.getAuthorInfo
+      }
   }
 };
 </script>
