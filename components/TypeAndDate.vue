@@ -8,7 +8,7 @@
         <v-col class="py-0">
           <v-list-item>
             <v-list-item-content>
-              <v-list-item-title class="title text-center">名不显时心不朽，再挑灯火看文章</v-list-item-title>
+              <v-list-item-title class="title text-center"><Motto/></v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-col>
@@ -28,6 +28,7 @@
 </template>
 <script>
 import ColorfulChip from '~/components/ColorfulChip.vue'
+import Motto from '~/components/Motto.vue'
 import Bus from '~/pages/util'
 export default {
     name:'TypeAndDate',
@@ -40,7 +41,8 @@ export default {
         }
     },
     components:{
-      ColorfulChip
+      ColorfulChip,
+      Motto
     },
     methods: {
       onSelectMonth(value){

@@ -21,16 +21,15 @@
                     <v-col :cols="ismobile?12:8" style="padding:0" class="outer-card">
                       <v-card-title v-if="!ismobile" class="headline font-weight-bold">{{item.title}}</v-card-title>
                         <v-img v-if="ismobile" class="white--text align-end" :src="item.cover" >
-
-                            <template v-slot:placeholder>
-                              <v-row
-                                class="fill-height ma-0"
-                                align="center"
-                                justify="center"
-                              >
-                                <v-progress-circular indeterminate color="black"></v-progress-circular>
-                              </v-row>
-                            </template>
+                              <template v-slot:placeholder>
+                                <v-row
+                                  class="fill-height ma-0"
+                                  align="center"
+                                  justify="center"
+                                >
+                                  <v-progress-circular indeterminate color="black"></v-progress-circular>
+                                </v-row>
+                              </template>
                           <v-card-title class="headline font-weight-bold">{{item.title}}</v-card-title>
                         </v-img>
                     <v-card-subtitle class="font-weight-bold">
@@ -49,16 +48,15 @@
                     </v-col>
                     <v-col cols="4" class="pc-arcticle-cover" v-if="!ismobile">
                       <v-img :src="item.cover">
-                              <template v-slot:placeholder>
-                                <v-row
-                                  class="fill-height ma-0"
-                                  align="center"
-                                  justify="center"
-                                >
-                                  <v-progress-circular indeterminate color="black"></v-progress-circular>
-                                </v-row>
-                              </template>
-
+                        <template v-slot:placeholder>
+                          <v-row
+                            class="fill-height ma-0"
+                            align="center"
+                            justify="center"
+                          >
+                            <v-progress-circular indeterminate color="black"></v-progress-circular>
+                          </v-row>
+                        </template>
                       </v-img>
                     </v-col>
                   </v-row>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+        <style type="text/css">
+            body{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                min-height: 100vh;
+                background-color: black;
+            }
+            h1 {
+                position: relative;
+                color: white;
+            }
+            h1::before{
+                content: '';
+                position: absolute;
+                left: 120%;
+                width: 120%; 
+                height: 100%;
+                background: linear-gradient(90deg,transparent 0%,#000 20%,#000 100%);
+                animation: dust 5.5s linear forwards
+            }
+            @keyframes dust {
+                0%{
+                    left: 120%;
+                }
+                100%{
+                    left: -20%;
+                }
+            }
+        </style>
+</head>
+<body>
+    <h1>
+        测试粒子消散
+    </h1>
+</body>
+</html>
+<style

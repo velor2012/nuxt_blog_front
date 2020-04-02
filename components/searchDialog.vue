@@ -1,8 +1,8 @@
 <template>
     <v-dialog v-model="dialog">
-      <template v-slot:activator="{ on }">
+      <!-- <template v-slot:activator="{ on }">
         <v-btn color="primary" dark v-on="on">Open Dialog</v-btn>
-      </template>
+      </template> -->
       <v-card>
             <v-card-title>
             <v-icon

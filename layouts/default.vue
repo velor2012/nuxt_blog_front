@@ -48,7 +48,7 @@
       </v-list>
     </v-navigation-drawer>
     <!-- bar栏 -->
-    <v-app-bar :clipped-left="clipped" fixed app dark color="blue" id="header">
+    <v-app-bar :clipped-left="clipped" fixed app dark color="blue" id="header" v-show="doneWelcome">
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" v-if="ismobile" />
       <v-toolbar-title v-text="title" class="v-toolbar-title" />
       <v-spacer />
@@ -149,8 +149,9 @@
     <!-- 搜索对话框 -->
     <searchDialog :keyword="keyword" />
 
-    <v-content class="overall-style">
-      <v-container v-scroll="onScroll">
+    <welcome/>
+    <v-content class="overall-style" id="content">
+      <v-container v-show="doneWelcome" v-scroll="onScroll">
         <nuxt />
         <!-- 返回顶部按钮 -->
         <v-fab-transition>
@@ -176,6 +177,7 @@
 import msg from "~/components/message.vue";
 import TOC from "~/components/toc.vue";
 import searchDialog from "~/components/searchDialog.vue";
+import welcome from "~/components/welcome.vue";
 import Bus from "~/pages/util";
 export default {
   data() {
@@ -185,6 +187,7 @@ export default {
       fixed: false,
       ismobile: false,
       right_drawer: false,
+      doneWelcome:false,
       keyword: "",
       user_base_info_url: "/api/user/base_info/id=5e81dd95f6811d12805644df",
       items: [
@@ -203,11 +206,6 @@ export default {
           title: "关于作者",
           to: "/author"
         }
-        // {
-        //   icon: 'mdi-hammer-screwdriver',
-        //   title: '其他',
-        //   to: '/other'
-        // }
       ],
       other: [
         {
@@ -245,7 +243,8 @@ export default {
   components: {
     msg,
     TOC,
-    searchDialog
+    searchDialog,
+    welcome
   },
   methods: {
     onScroll(e) {
@@ -276,11 +275,16 @@ export default {
     onResize() {
       this.ismobile = window.innerWidth < 930;
     },
+    onDoneWelcome(){
+      this.doneWelcome = true
+      document.getElementById("header").classList.add("animated","fadeIn")
+    },
     filter(item) {
       Bus.$emit("showFilter", item);
     },
     showRightDrawer() {
       this.right_drawer = true;
+      document.getElementById
     },
     getUserBaseInfo() {
       this.$axios.get(this.user_base_info_url).then(res => {
@@ -296,6 +300,7 @@ export default {
   },
   created() {
     Bus.$on("showRightDrawer", this.showRightDrawer);
+    Bus.$on("onDoneWelcome", this.onDoneWelcome);
     this.getUserBaseInfo();
   },
     mounted(){
@@ -337,6 +342,7 @@ export default {
   transition: 0.3s;
   max-width: 15em;
 }
+//end
 
 .v-list-item {
   font-weight: bold;
@@ -346,7 +352,9 @@ export default {
 }
 @media screen and (min-width: 930px) {
   .overall-style {
-    background-color: burlywood;
+    background-attachment: fixed;
+    background: linear-gradient(90deg,#e74c3c,#f1c40f);
+    // background-color: burlywood;
     // background-repeat: no-repeat;
     // background-attachment: fixed;
     // background-position: top;
@@ -354,7 +362,8 @@ export default {
 }
 @media screen and (max-width: 930px) {
   .overall-style {
-    background-color: burlywood;
+    background-attachment: fixed;
+    background: linear-gradient(90deg,#e74c3c,#f1c40f);
   }
 }
 
