@@ -51,7 +51,6 @@ export default {
         show: false
       },
       all_type_info_url: "/api/article/all_type",
-      user_base_info_url: "/api/user/base_info/id=5e65235b2716a4485c4cb931",
       typeInfo: [],
       picker: "",
       message: { show: false, content: "成功", color: "success" },

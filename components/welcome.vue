@@ -1,12 +1,15 @@
 <template>
     <v-img
       id="welcome"
-      src="http://d.hiphotos.baidu.com/zhidao/pic/item/6a63f6246b600c334c3e91cb1e4c510fd9f9a16a.jpg"
-      lazy-src="http://d.hiphotos.baidu.com/zhidao/pic/item/6a63f6246b600c334c3e91cb1e4c510fd9f9a16a.jpg"
+      :src="backgroundImg"
+      :lazy-src="backgroundImg"
     >
+    <v-row style="padding-top:5em" justify="center" align="center">
+        <h1 style="color:white;font-size:bold">欢迎来到CWY的博客</h1>
+    </v-row>
       <v-row id="welcome" justify="center" align="center" align-content="center">
             <v-avatar class="avatar" color="orange" size="150">
-                <v-img src="http://b-ssl.duitang.com/uploads/item/201511/21/20151121171107_zMZcy.jpeg"></v-img>
+                <v-img :src="authorInfo.avatar"></v-img>
             </v-avatar>
 
               <v-list-item>
@@ -29,7 +32,8 @@ export default {
     name:"welcome",
     data(){
         return{
-            hide:false
+            hide:false,
+            backgroundImg:"https://s1.ax1x.com/2020/04/02/GJ89ds.jpg"
         }
     },
     components:{
@@ -40,6 +44,11 @@ export default {
             let el = document.getElementById("welcome")
             el.classList.add(["doneWelcome"])
             Bus.$emit("onDoneWelcome")
+        }
+    },
+    computed:{
+        authorInfo(){
+          return this.$store.getters.getAuthorInfo
         }
     }
 }
