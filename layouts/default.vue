@@ -1,19 +1,19 @@
 <template>
-  <v-app dark v-resize="onResize" class="app">
+  <v-app v-resize="onResize" class="app">
+
     <msg v-bind:message="message" />
     <!-- 左边抽屉 -->
     <v-navigation-drawer
       v-model="drawer"
       fixed
       app
-      dark
-      color="blue"
+      color="blue lighten-4"
       class="v-navigation-drawer"
       :disable-resize-watcher="true"
     >
     <template v-slot:prepend>
         <v-list-item two-line>
-          <v-list-item-avatar size=70>
+          <v-list-item-avatar color="blue lighten-4" light size=70>
             <img :src="authorInfo.avatar">
           </v-list-item-avatar>
 
@@ -62,14 +62,13 @@
         </v-list>
     </v-navigation-drawer>
     <!-- bar栏 -->
-    <v-app-bar :clipped-left="clipped" fixed app dark color="blue" id="header" v-show="doneWelcome">
+    <v-app-bar :clipped-left="clipped" fixed app light color="blue lighten-4" id="header" v-show="doneWelcome">
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" v-if="ismobile" />
       <v-toolbar-title v-text="title" class="v-toolbar-title" />
       <v-spacer />
       <!-- 搜索输入框 网页端 -->
       <v-text-field
         flat
-        solo-inverted
         hide-details
         prepend-inner-icon="mdi-magnify"
         label="Search"
@@ -152,8 +151,7 @@
       v-model="right_drawer"
       fixed
       app
-      dark
-      color="blue"
+      color="blue lighten-4"
       class="v-navigation-drawer"
       :disable-resize-watcher="true"
       :right="true"
@@ -165,15 +163,16 @@
 
     <welcome/>
     <v-content class="overall-style" id="content">
+      <!-- 气泡渲染
+      <Bubble/> -->
       <v-container v-show="doneWelcome" v-scroll="onScroll">
         <nuxt />
         <!-- 返回顶部按钮 -->
         <v-fab-transition>
           <v-btn
             fixed
-            dark
             fab
-            color="pink"
+            color="red lighten-2"
             bottom
             right
             v-show="show"
@@ -189,6 +188,7 @@
 
 <script>
 import Motto from '~/components/Motto.vue'
+import Bubble from '~/components/Bubble.vue'
 import msg from "~/components/message.vue";
 import TOC from "~/components/toc.vue";
 import searchDialog from "~/components/searchDialog.vue";
@@ -201,6 +201,7 @@ export default {
       drawer: false,
       fixed: false,
       ismobile: false,
+      height:0,
       right_drawer: false,
       doneWelcome:false,
       keyword: "",
@@ -260,7 +261,8 @@ export default {
     TOC,
     searchDialog,
     welcome,
-    Motto
+    Motto,
+    Bubble
   },
   methods: {
     onScroll(e) {
@@ -290,6 +292,7 @@ export default {
     },
     onResize() {
       this.ismobile = window.innerWidth < 930;
+      this.height = window.innerHeight;
     },
     onDoneWelcome(){
       this.doneWelcome = true
@@ -337,6 +340,10 @@ export default {
   watch: {
     ismobile(value) {
       this.$store.commit("setIsMobile", value);
+    },
+    height(value){
+      let _this = this
+      this.$store.commit("setHeight", value);
     }
   },
   computed:{
@@ -374,7 +381,7 @@ export default {
 @media screen and (min-width: 930px) {
   .overall-style {
     background-attachment: fixed;
-    background: linear-gradient(90deg,#e74c3c,#f1c40f);
+    background: rgb(241,233,175);
     // background-color: burlywood;
     // background-repeat: no-repeat;
     // background-attachment: fixed;
@@ -384,7 +391,7 @@ export default {
 @media screen and (max-width: 930px) {
   .overall-style {
     background-attachment: fixed;
-    background: linear-gradient(90deg,#e74c3c,#f1c40f);
+    background: rgb(241,233,175);
   }
 }
 

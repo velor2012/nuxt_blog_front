@@ -1,8 +1,8 @@
 <template>
   <v-row justify="center" align="center">
       <v-col cols="12" class="text-center">
-        <v-avatar class="avatar" color="orange" size="150">
-            <v-img :src="authorInfo.avatar"></v-img>
+        <v-avatar class="avatar" light color="blue-grey lighten-3" size="150">
+            <v-img :src="authorInfo.avatar" :lazy-src="_getThumb(authorInfo.avatar)"></v-img>
         </v-avatar>
       </v-col>
         <v-col class="py-0">
@@ -16,7 +16,7 @@
         <v-divider></v-divider>
       </v-col>
       <v-col cols="10">
-        <v-date-picker v-model="picker" @click:month="onSelectMonth" full-width type="month"></v-date-picker>
+        <v-date-picker color="red lighten-2" light v-model="picker" @click:month="onSelectMonth" full-width type="month"></v-date-picker>
       </v-col>
       <v-col cols="12">
         <v-divider></v-divider>
@@ -29,7 +29,7 @@
 <script>
 import ColorfulChip from '~/components/ColorfulChip.vue'
 import Motto from '~/components/Motto.vue'
-import Bus from '~/pages/util'
+import Bus,{getThumb} from '~/pages/util'
 export default {
     name:'TypeAndDate',
     props:['typeInfo'],
@@ -48,6 +48,9 @@ export default {
       onSelectMonth(value){
           Bus.$emit('onSelectMonth',{value:value,picker:this.picker})
       },
+      _getThumb(src){
+        return getThumb(src)
+      }
     },
     computed:{
         authorInfo(){

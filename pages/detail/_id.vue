@@ -5,7 +5,10 @@
       <v-col :cols="ismobile ? 12 : 10" class="markdown">
         <v-card color="white" class="animated fadeInLeft" v-show="!loading">
           <v-card-text>
-            <div class="markdown-body" v-html="markdown_html" />
+            <client-only>
+              <mark-down-temp class="markdown-body" :html="markdown_html"/>
+            </client-only>
+
           </v-card-text>
         </v-card>
       </v-col>
@@ -19,9 +22,12 @@
   </div>
 </template>
 <script>
+import MarkDownTemp from "~/components/MarkDownTemp";
+import Vue from "vue";
+import Vuetify, { VImg,VResponsive } from 'vuetify/lib'
 import TOC from "~/components/toc.vue";
 import msg from "~/components/message.vue";
-import Bus from "~/pages/util";
+import Bus,{render} from "~/pages/util";
 export default {
   name: "detail",
   data() {
@@ -37,82 +43,37 @@ export default {
       loading: true,
       transition: "scale-transition",
       timeouts: [],
-      emoji_width: "100em"
+      emoji_width: "100em",
     };
   },
   components: {
     msg,
-    TOC
+    TOC,
+    MarkDownTemp,
   },
   created() {
     this.loading = true;
+    
   },
   mounted() {
-    //基本配置与代码高亮配置
-    const renderer = new marked.Renderer();
-    //重写renderer,把id加上,注意id要换成anchor_开头,同时替换内部非法字符,防止因为非法字符引起的vuetify调用selector报错
-    renderer.heading = function(text, level) {
-      const escapedText = text.replace(
-        /[`~!@#$%^&*()_\-+=<>?:"{}|,.\/;'\\[\]·~！@#￥%……&*（）——\-+={}|《》？：“”【】、；‘'，。、]/g,
-        "_"
-      );
-      return `
-                    <h${level} id="anchor_${escapedText}">
-                        ${text}
-                    </h${level}>`;
-    };
-    let width = this.emoji_width;
-    renderer.image = function(href, title, text) {
-      let token = href.split("/");
-      let name = token[token.length - 1];
-      let reg = /emoji-/;
-      if (reg.test(name)) {
-        return `<img src="${href}" width=${width} >`;
-      } else {
-        return `
-                    <img src="${href}" width="100%">
-                    `;
-      }
-    };
-    marked.setOptions({
-      renderer: renderer,
-      pedantic: false,
-      gfm: true,
-      tables: true,
-      breaks: false,
-      sanitize: false,
-      smartLists: true,
-      smartypants: false,
-      xhtml: false,
-      highlight: function(code) {
-        return code;
-      }
-    });
     if (this.$route.params.id) {
       this.id = this.$route.params.id;
       var url = this.baseurl + "id=" + this.id;
+      let _this = this
       this.$axios.get(url).then(res => {
         if (res.data.success) {
           this.article = res.data.other.article;
-          // this.$axios.post('https://api.github.com/markdown',{text:this.article.content,mode:"markdown",context:"github/gollum"}).then(res=>{
-          //     this.markdown_html = res.data
-          // })
-          this.markdown_html = marked(this.article.content);
-          this.$nextTick(() => {
-            Prism.highlightAll();
-          });
-          this.getTOC(this.markdown_html);
-          this.$store.commit("setToc", this.toc);
+          render(this,this.article.content)
           this.message = {
             show: true,
             content: "成功找到文章",
-            color: "success"
+            color: "green accent-3"
           };
         } else {
           this.message = {
             show: true,
             content: "找不到文章:" + res.data.reason,
-            color: "false"
+            color: "red accent-2"
           };
         }
         this.loading = false;

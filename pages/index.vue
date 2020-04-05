@@ -7,6 +7,8 @@
         v-model="picker"
         @click:month="SelectMonth"
         full-width
+        light
+        color=""
         type="month"
       ></v-date-picker>
       <ColorfulChip v-show="DialogOption.type == '分类'" :typeInfo="typeInfo" />

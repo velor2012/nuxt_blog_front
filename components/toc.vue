@@ -1,6 +1,6 @@
 <template>
   <div id="sticky-nav" v-scroll="onScroll">
-    <v-list rounded dense>
+    <v-list light rounded dense>
         <v-subheader>目录</v-subheader>
         <v-list-item-group v-model="model" mandatory color="primary">
         <v-list-item
@@ -38,7 +38,7 @@ export default {
             scroll_top:0,
             interval_id:NaN,
             anchor_offset:NaN,
-            bias:300,
+            bias:400,
             timer:NaN
         }
     },
@@ -46,6 +46,9 @@ export default {
         toc(){
             return this.$store.getters.getToc
         },
+        height(){
+            return this.$store.getters.getHeight
+        }
     },
     methods: {
         getTOCText(layer,text){
@@ -70,9 +73,11 @@ export default {
          * 拿到所有toc到顶部的距离
          * */
         getFloorDistance(){
-            clearInterval(this.interval_id)
+            // clearInterval(this.interval_id)
             this.anchor_offset=[]
             for(let i = 0 ; i < this.toc.length; i++){
+                let el = document.getElementById(this.toc[i].text)
+                if(!el) return
                 let offset = document.getElementById(this.toc[i].text).offsetTop;
                 this.anchor_offset.push(offset)
             }
@@ -90,9 +95,11 @@ export default {
         })
     },
     watch:{
+        height(value){
+            this.bias = value/2
+        },
         activate_list:{
             handler(newValue, oldValue) {
-                console.log('inhandels')
                 for(let i = 0 ; i < newValue.length; i++){
                     if(newValue[i]){
                         this.model = i

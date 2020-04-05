@@ -5,7 +5,7 @@
         <v-col :cols="ismobile?12:10" class="markdown">
             <v-card color='white' class="animated fadeInLeft">
                 <v-card-text>
-                    <div class="markdown-body" v-html="markdown_html" />
+                    <mark-down-temp class="markdown-body" :html="markdown_html"/>
                 </v-card-text>
             </v-card>
         </v-col>
@@ -19,6 +19,7 @@
   </div>
 </template>
 <script>
+import MarkDownTemp from "~/components/MarkDownTemp";
 import TOC from '~/components/toc.vue'
 import Bus from '~/pages/util'
 import {render} from '~/pages/util'
@@ -39,6 +40,7 @@ import {render} from '~/pages/util'
     },
     components:{
       TOC,
+      MarkDownTemp
     },
     mounted(){
       let a = this.readFile('README.md')
@@ -67,22 +69,6 @@ import {render} from '~/pages/util'
           while (res = patt.exec(markdown_html)) {
               this.toc.push({layer:res[1],text:res[2]});
           }
-      },
-      //监视标题的位置来改变目录激活状态
-      oberserTitle(){
-          var io = new IntersectionObserver((entries) => {
-              if(entries[0].intersectionRatio>=1){
-                  console.log(entries[0].target.id)
-                  Bus.$emit('changeTOCActvivateItem',entries[0].target.id)
-              }
-          }, {
-              threshold: [1],
-              // root:document.getElementById("header")
-          })
-          this.toc.map(item=>{
-              let el = document.getElementById(item.text)
-              io.observe(el);
-          })
       },
     },
     computed:{

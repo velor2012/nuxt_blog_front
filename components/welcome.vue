@@ -2,13 +2,13 @@
     <v-img
       id="welcome"
       :src="backgroundImg"
-      :lazy-src="backgroundImg"
+      :lazy-src="backgroundImgThumb"
     >
     <v-row style="padding-top:5em" justify="center" align="center">
         <h1 style="color:white;font-size:bold">欢迎来到CWY的博客</h1>
     </v-row>
       <v-row id="welcome" justify="center" align="center" align-content="center">
-            <v-avatar class="avatar" color="orange" size="150">
+            <v-avatar class="avatar" color="blue-grey lighten-3" light size="150">
                 <v-img :src="authorInfo.avatar"></v-img>
             </v-avatar>
 
@@ -33,7 +33,8 @@ export default {
     data(){
         return{
             hide:false,
-            backgroundImg:"https://s1.ax1x.com/2020/04/02/GJ89ds.jpg"
+            backgroundImg:"https://s1.ax1x.com/2020/04/02/GJ89ds.jpg",
+            backgroundImgThumb:"https://s1.ax1x.com/2020/04/02/GJ89ds.th.jpg"
         }
     },
     components:{

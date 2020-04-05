@@ -1,6 +1,5 @@
-import colors from 'vuetify/es5/util/colors'
-
-export default {
+module.exports =  {
+  runtimeCompiler: true,
   mode: 'universal',
   /*
   ** Headers of the page
@@ -23,6 +22,7 @@ export default {
       {src:"https://cdnjs.cloudflare.com/ajax/libs/prism/1.19.0/prism.min.js",dataManual:true,type: 'text/javascript', charset: 'utf-8'} ,
       // {src:"https://cdn.bootcss.com/wow/1.1.2/wow.min.js",type: 'text/javascript', charset: 'utf-8'},
       {src:"https://unpkg.com/scrollreveal",dataManual:true,type: 'text/javascript', charset: 'utf-8'} ,
+      
     ]
   },
   /*
@@ -71,6 +71,15 @@ export default {
     treeShake:true,
     theme: {
       dark: false,
+      light:{
+        primary:'#81D4FA',
+        secondary: '#81D4FA',
+        accent: '#81D4FA',
+        error: '#81D4FA',
+        info: '#2196F3',
+        success: '#81D4FA',
+        warning: '#81D4FA',
+      }
     },
   },
   /*
@@ -81,6 +90,9 @@ export default {
     ** You can extend webpack config here
     */
     extend (config, ctx) {
+      //使用支持运行时编译的vue，否则不能重新编译markdown的html
+      config.resolve.alias['vue'] = 'vue/dist/vue.common'
+      // config.resolve.alias["vue$"] = "vue/dist/vue.esm.js"
     },
     // analyze: true, 	
     // assetFilter: function(assetFilename) {	    		
@@ -88,7 +100,7 @@ export default {
     // },
   },
   server:{
-    host:'0.0.0.0',
+    host:'127.0.0.1',
     port:3000
   },
 }

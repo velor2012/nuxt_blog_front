@@ -61,7 +61,6 @@
                     </v-col>
                   </v-row>
                   <v-divider/>
-                  <v-row>
                     <v-card-text class="chips-rows">
                       <v-row
                       align="center"
@@ -72,20 +71,33 @@
                               column
                               active-class="primary--text"
                             >
-                              <v-chip class="chips" color="#F8CE5E" v-for="_tag in resovleTag(item.tag)" :key="_tag">
+                              <v-chip class="chips" color="amber lighten-2" light v-for="_tag in resovleTag(item.tag)" :key="_tag">
                                 {{ _tag }}
                               </v-chip>
                             </v-chip-group>
                         </div>
-                        <div>
+                        <div v-if="!ismobile">
                             <v-icon >mdi-bookmark</v-icon>
                             <span class="article-info">{{item.type}}</span>
                             <v-icon >mdi-eye-outline</v-icon>
                             <span class="article-info">未实现</span>
                         </div>
                       </v-row>
+                      </v-card-text>
+                      <v-divider v-if="ismobile"/>
+                      <v-card-text v-if="ismobile" class="other-rows">
+                       <v-row
+                      align="center"
+                      justify="space-between"
+                      >
+                        <div>
+                            <v-icon >mdi-bookmark</v-icon>
+                            <span class="article-info">{{item.type}}</span>
+                            <v-icon >mdi-eye-outline</v-icon>
+                            <span class="article-info">未实现</span>
+                        </div>
+                       </v-row>
                     </v-card-text>
-                  </v-row>
                   </v-card>
               </v-hover>
             </v-col>
@@ -191,7 +203,7 @@ import TypeAndDate from '~/components/TypeAndDate.vue'
   .chips{
     font-weight: bold;
   }
-  .chips-rows{
+  .other-rows,.chips-rows{
     padding-top: 0;
     padding-bottom: 0;
   }
@@ -200,7 +212,7 @@ import TypeAndDate from '~/components/TypeAndDate.vue'
     font-weight:bold;
   }
   .chips-rows .v-chip{
-    color: white;
+    color: black;
   }
   .visible, .invisible {
   opacity: 0.0;

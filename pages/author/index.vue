@@ -4,7 +4,7 @@
       <v-col :cols="ismobile ? 12 : 10" class="markdown">
         <v-card color="white" class="animated fadeInLeft">
           <v-card-text>
-            <div class="markdown-body" v-html="markdown_html" />
+             <mark-down-temp class="markdown-body" :html="markdown_html"/>
           </v-card-text>
         </v-card>
       </v-col>
@@ -21,6 +21,7 @@
 import TOC from "~/components/toc.vue";
 import Bus from "~/pages/util";
 import { render } from "~/pages/util";
+import MarkDownTemp from "~/components/MarkDownTemp";
 export default {
   name: "author",
   data() {
@@ -37,7 +38,8 @@ export default {
     };
   },
   components: {
-    TOC
+    TOC,
+    MarkDownTemp
   },
   mounted() {
     if (this.authorInfo && this.authorInfo != "") this.md_render();
@@ -50,25 +52,6 @@ export default {
       while ((res = patt.exec(markdown_html))) {
         this.toc.push({ layer: res[1], text: res[2] });
       }
-    },
-    //监视标题的位置来改变目录激活状态
-    oberserTitle() {
-      var io = new IntersectionObserver(
-        entries => {
-          if (entries[0].intersectionRatio >= 1) {
-            console.log(entries[0].target.id);
-            Bus.$emit("changeTOCActvivateItem", entries[0].target.id);
-          }
-        },
-        {
-          threshold: [1]
-          // root:document.getElementById("header")
-        }
-      );
-      this.toc.map(item => {
-        let el = document.getElementById(item.text);
-        io.observe(el);
-      });
     },
     md_render() {
       render(this, this.authorInfo.info);

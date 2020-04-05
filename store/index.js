@@ -4,6 +4,7 @@ export const state = () => ({
   toc: [],
   searchArticleType: "total",
   isMobile: false,
+  height:0,
   authorInfo: {
     info: "",
     avatar: ""
@@ -21,6 +22,9 @@ export const mutations = {
   },
   setAuthorInfo(state, authorInfo) {
     state.authorInfo = authorInfo;
+  },
+  setHeight(state, height) {
+    state.height = height;
   }
 };
 export const getters = {
@@ -35,5 +39,8 @@ export const getters = {
   },
   getAuthorInfo(state) {
     return state.authorInfo;
+  },
+  getHeight(state){
+    return state.height
   }
 };
