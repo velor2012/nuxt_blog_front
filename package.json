@@ -22,13 +22,15 @@
     "less-loader": "^5.0.0",
     "nuxt": "^2.0.0",
     "scroll-out": "^2.2.8",
-    "vue-directive-image-previewer": "^2.2.2"
+    "vue-directive-image-previewer": "^2.2.2",
+    "express":"^4.17.1"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^2.0.0",
     "@nuxtjs/eslint-module": "^1.0.0",
     "babel-eslint": "^10.0.1",
     "eslint": "^6.1.0",
-    "eslint-plugin-nuxt": ">=0.4.2"
+    "eslint-plugin-nuxt": ">=0.4.2",
+    "nodemon":"2.0.2"
   }
 }
