@@ -9,7 +9,7 @@
     </v-row>
       <v-row id="welcome" justify="center" align="center" align-content="center">
             <v-avatar class="avatar" color="blue-grey lighten-3" light size="150">
-                <v-img :src="authorInfo.avatar"></v-img>
+                <v-img :src="authorInfo.avatar" :lazy-src="_getThumb(authorInfo.avatar)"></v-img>
             </v-avatar>
 
               <v-list-item>
@@ -26,7 +26,7 @@
     </v-img>
 </template>
 <script>
-import Bus from "~/pages/util";
+import Bus,{getThumb} from "~/pages/util";
 import Motto from '~/components/Motto.vue'
 export default {
     name:"welcome",
@@ -45,6 +45,9 @@ export default {
             let el = document.getElementById("welcome")
             el.classList.add(["doneWelcome"])
             Bus.$emit("onDoneWelcome")
+        },
+        _getThumb(src){
+            return getThumb(src)
         }
     },
     computed:{

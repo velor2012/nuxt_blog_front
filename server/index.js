@@ -33,8 +33,8 @@ async function start() {
 //   key: fs.readFileSync('localhost+2-key.pem')
 // }
 const options = {
-    cert: fs.readFileSync('plugins/cert/3715899_www.velor2012.xyz.key'),
-    key: fs.readFileSync('plugins/cert/3715899_www.velor2012.xyz.pem')
+    cert: fs.readFileSync('plugins/cert/3715899_www.velor2012.xyz.pem'),
+    key: fs.readFileSync('plugins/cert/3715899_www.velor2012.xyz.key')
   }
 https
 .createServer(options, app)

@@ -47,10 +47,30 @@ const render = (app, markdown) => {
       let reg = /emoji-/;
       let thumb_href = getThumb(href)
       if (reg.test(name)) {
-        return `<v-img src="${href}" lazy-src="${thumb_href}" width=${width} ></v-img>`;
+        return `<v-img src="${href}" lazy-src="${thumb_href}" width=${width} >
+          <template v-slot:placeholder>
+          <v-row
+            class="fill-height ma-0"
+            align="center"
+            justify="center"
+          >
+            <v-progress-circular indeterminate color="black"></v-progress-circular>
+          </v-row>
+        </template>
+        </v-img>`;
       } else {
         return `
-                    <v-img  src="${href}" lazy-src="${thumb_href}" width="100%"></v-img>
+                    <v-img  src="${href}" lazy-src="${thumb_href}" width="100%">
+                    <template v-slot:placeholder>
+                    <v-row
+                      class="fill-height ma-0"
+                      align="center"
+                      justify="center"
+                    >
+                      <v-progress-circular indeterminate color="black"></v-progress-circular>
+                    </v-row>
+                  </template>
+                    </v-img>
                     `;
       }
     };
