@@ -28,14 +28,14 @@ async function start() {
   // Give nuxt middleware to express
   app.use(nuxt.render);
 // HTTPS Server
-// const options = {
-//   cert: fs.readFileSync('localhost+2.pem'),
-//   key: fs.readFileSync('localhost+2-key.pem')
-// }
 const options = {
-    cert: fs.readFileSync('plugins/cert/3715899_www.velor2012.xyz.pem'),
-    key: fs.readFileSync('plugins/cert/3715899_www.velor2012.xyz.key')
-  }
+  cert: fs.readFileSync('localhost+2.pem'),
+  key: fs.readFileSync('localhost+2-key.pem')
+}
+// const options = {
+//     cert: fs.readFileSync('plugins/cert/3715899_www.velor2012.xyz.pem'),
+//     key: fs.readFileSync('plugins/cert/3715899_www.velor2012.xyz.key')
+//   }
 https
 .createServer(options, app)
 .listen(port,host)

@@ -1,9 +1,12 @@
 <script>
 import Vue from "vue";
-import Vuetify, { VImg,VResponsive,VBtn } from 'vuetify/lib'
+import Vuetify, { VImg,VResponsive,VBtn,VProgressCircular,VRow } from 'vuetify/lib'
 
 // Vue.component('VBtn', VBtn)
 Vue.component('VImg', VImg)
+// Vue  
+Vue.component('VProgressCircular', VProgressCircular)
+Vue.component('VRow', VRow)
 export default {
   props: {
     html: {
