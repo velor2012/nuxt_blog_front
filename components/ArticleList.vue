@@ -1,5 +1,5 @@
 <template>
-      <v-row dense>
+      <v-row dense class="article-list">
             <v-col
               v-for="(item, i) in Data.items"
               :key="i"

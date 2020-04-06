@@ -400,6 +400,9 @@ export default {
 }
 .v-card{
   border-radius: 1em!important;
+  // overflow: hidden
+}
+.article-list .v-card{
   overflow: hidden
 }
 .row {
