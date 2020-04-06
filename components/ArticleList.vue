@@ -20,7 +20,7 @@
                     
                     <v-col :cols="ismobile?12:8" style="padding:0" class="outer-card">
                       <v-card-title v-if="!ismobile" class="headline font-weight-bold">{{item.title}}</v-card-title>
-                        <v-img v-if="ismobile" class="white--text align-end" :src="item.cover" >
+                        <v-img v-if="ismobile" class="white--text align-end" :src="item.cover" :lazy-src="_getThumb(item.cover)">
                               <template v-slot:placeholder>
                                 <v-row
                                   class="fill-height ma-0"
@@ -47,7 +47,7 @@
                     </v-card-text>
                     </v-col>
                     <v-col cols="4" class="pc-arcticle-cover" v-if="!ismobile">
-                      <v-img :src="item.cover">
+                      <v-img :src="item.cover" :lazy-src="_getThumb(item.cover)">
                         <template v-slot:placeholder>
                           <v-row
                             class="fill-height ma-0"
@@ -71,7 +71,7 @@
                               column
                               active-class="primary--text"
                             >
-                              <v-chip class="chips" color="amber lighten-2" light v-for="_tag in resovleTag(item.tag)" :key="_tag">
+                              <v-chip :small="ismobile" class="chips" color="amber lighten-2" light v-for="_tag in resovleTag(item.tag)" :key="_tag">
                                 {{ _tag }}
                               </v-chip>
                             </v-chip-group>
@@ -122,7 +122,7 @@
 <script>
 import ScrollOut from "scroll-out";
 
-import Bus from '~/pages/util'
+import Bus,{getThumb} from '~/pages/util'
 import {resovleTag} from '~/pages/util'
 import TypeAndDate from '~/components/TypeAndDate.vue'
   export default {
@@ -157,6 +157,9 @@ import TypeAndDate from '~/components/TypeAndDate.vue'
           let el = document.getElementById("circularLoading")
           io.observe(el);
       },
+      _getThumb(src){
+        return getThumb(src)
+      }
     },
     mounted(){
       this.$nextTick(()=>{
@@ -203,6 +206,13 @@ import TypeAndDate from '~/components/TypeAndDate.vue'
   .chips{
     font-weight: bold;
   }
+@media screen and (max-width: 930px) {
+  .chips{
+    margin-top: 0!important;
+    margin-bottom: 0!important;
+    height: 3em;
+  }
+}
   .other-rows,.chips-rows{
     padding-top: 0;
     padding-bottom: 0;

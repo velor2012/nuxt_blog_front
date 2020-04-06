@@ -1,4 +1,15 @@
 
+
+//获取目录,有markdown文章的地方调用
+const getTOC = (markdown_html)=>{
+  let toc=[]
+  let res = ''
+  var patt = /<h(\d)?\s+id="(.*?)">/g;;
+  while (res = patt.exec(markdown_html)) {
+      toc.push({layer:res[1],text:res[2]});
+  }
+  return toc
+}
 //获取图片的缩略图
 const getThumb = (origin_href)=>{
   let findIndex = origin_href.search(/\/\w+-\w+(.+)?\.\w+/)
@@ -41,36 +52,19 @@ const render = (app, markdown) => {
                     </h${level}>`;
     };
     let width = app.emoji_width;
+    let index = -1
     renderer.image = function(href, title, text) {
       let token = href.split("/");
       let name = token[token.length - 1];
       let reg = /emoji-/;
       let thumb_href = getThumb(href)
+      index++
+      app.images.push(href)
       if (reg.test(name)) {
-        return `<v-img src="${href}" lazy-src="${thumb_href}" width=${width} >
-          <template v-slot:placeholder>
-          <v-row
-            class="fill-height ma-0"
-            align="center"
-            justify="center"
-          >
-            <v-progress-circular indeterminate color="black"></v-progress-circular>
-          </v-row>
-        </template>
-        </v-img>`;
+        return `<my-img src="${href}" :index=${index} lazySrc="${thumb_href}"></my-img>`;
       } else {
         return `
-                    <v-img  src="${href}" lazy-src="${thumb_href}" width="100%">
-                    <template v-slot:placeholder>
-                    <v-row
-                      class="fill-height ma-0"
-                      align="center"
-                      justify="center"
-                    >
-                      <v-progress-circular indeterminate color="black"></v-progress-circular>
-                    </v-row>
-                  </template>
-                    </v-img>
+              <my-img src="${href}" :index=${index} lazySrc="${thumb_href}"></my-img>
                     `;
       }
     };
@@ -93,10 +87,10 @@ const render = (app, markdown) => {
     app.$nextTick(() => {
       Prism.highlightAll();
     });
-    app.getTOC(app.markdown_html);
+    app.toc = getTOC(app.markdown_html);
     app.$store.commit("setToc", app.toc);
 
 };
 import Vue from "vue";
 export default new Vue();
-export { randomColor, render, resovleTag,getThumb };
+export { randomColor, render, resovleTag,getThumb,getTOC };

@@ -1,9 +1,10 @@
 <script>
 import Vue from "vue";
 import Vuetify, { VImg,VResponsive,VBtn,VProgressCircular,VRow } from 'vuetify/lib'
-
+import MyImg from "~/components/MyImg";
 // Vue.component('VBtn', VBtn)
 Vue.component('VImg', VImg)
+Vue.component('MyImg', MyImg)
 // Vue  
 Vue.component('VProgressCircular', VProgressCircular)
 Vue.component('VRow', VRow)
@@ -11,7 +12,8 @@ export default {
   props: {
     html: {
       type: String
-    }
+    },
+    images:{type:Array}
   },
   computed: {
     dynamicComponent() {

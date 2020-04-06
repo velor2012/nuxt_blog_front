@@ -227,7 +227,7 @@ export default {
         {
           icon: "mdi-emoticon-devil",
           title: "沙雕表情",
-          to: "emoji"
+          to: "/emoji"
         }
       ],
       filters: [
@@ -397,6 +397,10 @@ export default {
 
 .container {
   padding: 0;
+}
+.v-card{
+  border-radius: 1em!important;
+  overflow: hidden
 }
 .row {
   width: 100%;

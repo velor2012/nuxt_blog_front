@@ -39,7 +39,8 @@ module.exports =  {
   */
   plugins: [
     {src:'@/plugins/axios', ssr: true },
-    {src:'@/plugins/vue-preview', ssr: false },
+    {src:'@/plugins/scroller', ssr: false },
+    {src:'@/plugins/viewer', ssr: false },
   ],
   /*
   ** Nuxt.js dev-modules

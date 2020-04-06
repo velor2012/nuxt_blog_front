@@ -15,6 +15,9 @@
         </client-only>
       </v-col>
     </v-row>
+    <div class="images" v-show="showImage" v-viewer="{movable: true}">
+      <img v-show="false" v-for="src in images" :src="src" :key="src">
+    </div>
   </div>
 </template>
 <script>
@@ -32,6 +35,7 @@ export default {
       con_html: "",
       show: false,
       id: "",
+      images:[],
       transition: "scale-transition",
       selection: [],
       emoji_width: "100em"
@@ -40,6 +44,9 @@ export default {
   components: {
     TOC,
     MarkDownTemp
+  },
+  created(){
+     Bus.$on('showImage',this.showImage)
   },
   mounted() {
     if (this.authorInfo && this.authorInfo != "") this.md_render();
@@ -55,7 +62,12 @@ export default {
     },
     md_render() {
       render(this, this.authorInfo.info);
-    }
+    },
+      showImage(index){
+      const viewer = this.$el.querySelector('.images').$viewer
+      viewer.index = index
+      viewer.show()
+    } 
   },
   computed: {
     ismobile() {

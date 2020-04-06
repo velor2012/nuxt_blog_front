@@ -19,6 +19,9 @@
         </client-only>
       </v-col>
     </v-row>
+    <div class="images" v-show="showImage" v-viewer="{movable: true}">
+      <img v-show="false" v-for="src in images" :src="src" :key="src">
+    </div>
   </div>
 </template>
 <script>
@@ -38,6 +41,7 @@ export default {
       con_html: "",
       show: false,
       id: "",
+      images:[],
       baseurl: "/api/article/",
       message: { show: false, content: "成功", color: "success" },
       loading: true,
@@ -53,7 +57,7 @@ export default {
   },
   created() {
     this.loading = true;
-    
+    Bus.$on('showImage',this.showImage)
   },
   mounted() {
     if (this.$route.params.id) {
@@ -89,6 +93,11 @@ export default {
       while ((res = patt.exec(markdown_html))) {
         this.toc.push({ layer: res[1], text: res[2] });
       }
+    },
+    showImage(index){
+        const viewer = this.$el.querySelector('.images').$viewer
+        viewer.index = index
+        viewer.show()
     } 
   },
   computed: {

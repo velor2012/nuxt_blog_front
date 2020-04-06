@@ -16,6 +16,9 @@
             </client-only>
         </v-col>
     </v-row>
+    <div class="images" v-show="showImage" v-viewer="{movable: true}">
+      <img v-show="false" v-for="src in images" :src="src" :key="src">
+    </div>
   </div>
 </template>
 <script>
@@ -33,6 +36,7 @@ import {render} from '~/pages/util'
           con_html:'',
           show:false,
           id:'',
+          images:[],
           transition:'scale-transition',
           selection:[],
           emoji_width:'100em',
@@ -41,6 +45,9 @@ import {render} from '~/pages/util'
     components:{
       TOC,
       MarkDownTemp
+    },
+    created(){
+          Bus.$on('showImage',this.showImage)
     },
     mounted(){
       let a = this.readFile('README.md')
@@ -62,14 +69,11 @@ import {render} from '~/pages/util'
         xhr.send(null)
         return xhr.status === okStatus ? xhr.responseText : null
       },
-      getTOC(markdown_html){
-          this.toc=[]
-          let res = ''
-          var patt = /<h(\d)?\s+id="(.*?)">/g;;
-          while (res = patt.exec(markdown_html)) {
-              this.toc.push({layer:res[1],text:res[2]});
-          }
-      },
+      showImage(index){
+        const viewer = this.$el.querySelector('.images').$viewer
+        viewer.index = index
+        viewer.show()
+      } 
     },
     computed:{
         ismobile(){
