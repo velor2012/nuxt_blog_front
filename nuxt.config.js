@@ -39,7 +39,7 @@ module.exports =  {
   */
   plugins: [
     {src:'@/plugins/axios', ssr: true },
-    {src:'@/plugins/viewer', ssr: false },
+    // {src:'@/plugins/viewer', ssr: false },
     {src:'@/plugins/scroller', ssr: false },
   ],
   /*

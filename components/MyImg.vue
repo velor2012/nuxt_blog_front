@@ -4,7 +4,6 @@
     :lazy-src="lazySrc"
     max-width="100%"
     :max-height="height/2"
-    @click="showImage"
     contain
   >
     <template v-slot:placeholder>
@@ -29,9 +28,9 @@ export default {
     }
   },
   methods:{
-    showImage(){
-      Bus.$emit('showImage',this.index)
-    }
+    // showImage(){
+    //   Bus.$emit('showImage',this.index)
+    // }
   }
 };
 </script>
