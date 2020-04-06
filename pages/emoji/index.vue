@@ -18,9 +18,9 @@
         </v-container>
       </v-card>
     </v-col>
-    <div class="images" v-show="showImage" v-viewer="{movable: true}">
+    <!-- <div class="images" v-show="showImage" v-viewer="{movable: true}">
       <img v-show="false" v-for="src in emojis" :src="src" :key="src">
-    </div>
+    </div> -->
   </v-row>
 </template>
 <script>
@@ -54,11 +54,11 @@ export default {
   mounted() {
   },
   methods: {
-    showImage(index){
-      const viewer = this.$el.querySelector('.images').$viewer
-      viewer.index = index
-      viewer.show()
-    } 
+    // showImage(index){
+    //   const viewer = this.$el.querySelector('.images').$viewer
+    //   viewer.index = index
+    //   viewer.show()
+    // } 
   },
   components:{
     MyImg

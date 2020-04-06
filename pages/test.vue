@@ -1,39 +1,45 @@
 <template>
   <div id="app" class="d-flex align-center justify-center">
 
-    <div class="images" v-show="isShow" v-viewer="{movable: true}">
-      <img v-show="true" v-for="src in images" :src="src" :key="src">
+    <div >
+      <div class="_222 preview-img-item" @click="$refs.sd.open(0, images)" />
+      <div  class="_111 preview-img-item" @click="$refs.sd.open(1, images)"/>
     </div>
-     <!-- <div class="images"  v-viewer="{movable: true}">
-      <div v-show="true" class="_111"/>
-        <div v-show="true" class="_222"/>
-    </div> -->
-    <button type="button" @click="show">Show</button> 
-
+  <client-only><photoSwippe ref="sd"/></client-only>
   </div>
 </template>
 <script>
-  import 'viewerjs/dist/viewer.css'
-  import Viewer from 'v-viewer'
-  import Vue from 'vue'
-  Vue.use(Viewer)
+import photoSwippe from "~/components/photoSwippe";
   export default {
     data() {
       return{
           isShow:false,
-          images: ['https://s2.ax1x.com/2020/03/10/8ihfDe.png', 'https://s2.ax1x.com/2020/03/10/8ihs41.png']
+          images: [
+           {
+             src:'https://s2.ax1x.com/2020/03/10/8ihfDe.png', 
+             w:600,
+             h:500
+           },
+          {
+            src:'https://s2.ax1x.com/2020/03/10/8ihs41.png', 
+            w:500,
+            h:500
+          }
+            ]
       }
     },
     methods: {
-      show () {
-        const viewer = this.$el.querySelector('.images').$viewer
-        console.log(viewer)
-        viewer.index = 1
-        viewer.show()
+      open(){
+         console.log(this)
+        console.log(this.$refs.sd.open)
       }
+    },
+    components:{
+      photoSwippe
     }
   }
 </script>
+
 <style lang="less" scoped>
     ._111{
     width: 200px;

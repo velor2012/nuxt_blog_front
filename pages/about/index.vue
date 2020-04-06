@@ -16,9 +16,9 @@
             </client-only>
         </v-col>
     </v-row>
-    <div class="images" v-show="showImage" v-viewer="{movable: true}">
+    <!-- <div class="images" v-show="showImage" v-viewer="{movable: true}">
       <img v-show="false" v-for="src in images" :src="src" :key="src">
-    </div>
+    </div> -->
   </div>
 </template>
 <script>
@@ -47,7 +47,7 @@ import {render} from '~/pages/util'
       MarkDownTemp
     },
     created(){
-          Bus.$on('showImage',this.showImage)
+          // Bus.$on('showImage',this.showImage)
     },
     mounted(){
       let a = this.readFile('README.md')
@@ -69,11 +69,11 @@ import {render} from '~/pages/util'
         xhr.send(null)
         return xhr.status === okStatus ? xhr.responseText : null
       },
-      showImage(index){
-        const viewer = this.$el.querySelector('.images').$viewer
-        viewer.index = index
-        viewer.show()
-      } 
+      // showImage(index){
+      //   const viewer = this.$el.querySelector('.images').$viewer
+      //   viewer.index = index
+      //   viewer.show()
+      // } 
     },
     computed:{
         ismobile(){
