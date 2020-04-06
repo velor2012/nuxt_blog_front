@@ -398,10 +398,6 @@ export default {
 .container {
   padding: 0;
 }
-.v-card{
-  border-radius: 1em!important;
-  overflow: hidden
-}
 .row {
   width: 100%;
   margin: 0;
@@ -439,5 +435,9 @@ export default {
     font-size: 85%;
     box-shadow: none;
   }
+}
+.v-card{
+  border-radius: 1em!important;
+  overflow: hidden
 }
 </style>
