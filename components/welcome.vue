@@ -2,11 +2,11 @@
 <v-row class = "test" style="height:100vh" align-content="end">
     <v-row align-content ='center'>
         <v-col  cols="12" justify="center" align="center" class="animated jackInTheBox"  data-trigger1>
-            <h1 style="fontSize:10vh;font-size:bold">欢迎来到CWY的博客</h1>
+            <span id="blog-title">欢迎来到CWY的博客</span>
         </v-col>
-        <v-col data-trigger2 class="animated fadeInLeft" justify="center" align="center"  cols="12" >
+        <v-col justify="center" align="center"  cols="12" >
 
-                    <v-avatar color="blue-grey lighten-3" light size="150">
+                    <v-avatar data-trigger2 class="animated fadeInLeft"  color="blue-grey lighten-3" light size="150">
                         <v-img :src="authorInfo.avatar" :lazy-src="_getThumb(authorInfo.avatar)"></v-img>
                     </v-avatar>
                     <!-- <v-btn id="welcome-btn" rounded large @click.native="enter">
@@ -126,5 +126,14 @@ export default {
             opacity: 1;
             transform: scale(1) translateY(-20px);
         }
+}
+#blog-title{
+    font-size: 5vw;
+    font-weight: bold;
+}
+@media  screen and  (max-width: 600px){
+    #blog-title{
+        font-size: 8vw;
+    }
 }
 </style>

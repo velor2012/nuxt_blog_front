@@ -50,7 +50,8 @@ export default {
         page: 0,
         pageSize: 4,
         items: [],
-        reloading: false
+        reloading: false,
+        loading:false
       },
       DialogOption: {
         type: "分类",
@@ -87,12 +88,14 @@ export default {
         this.ArticleListData.total = Number(res.data.other.total);
       }
     });
-    // this.getNextPageArticles()
+    this.getNextPageArticles()
     this.getTypesInfo();
   },
   methods: {
       
     getNextPageArticles() {
+      if(this.loading) return false
+      this.loading = true
       // console.log('getNextPageArticles')
       this.ArticleListData.page += 1;
       // console.log('params %O',{...this.pageInfo,type:this.searchType})
@@ -104,6 +107,7 @@ export default {
           if (res.data.success) {
             let articles = res.data.other.article;
             this.ArticleListData.items.push(...articles);
+            this.loading=false
           } else {
             this.message = {
               show: true,

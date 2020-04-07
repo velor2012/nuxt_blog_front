@@ -63,7 +63,7 @@
     </v-navigation-drawer>
     <!-- bar栏 -->
     <v-app-bar :style="currentPath!='/'||resetAppBar?'':'boxShadow:none'" :clipped-left="clipped" fixed app light color="blue lighten-4" id="header" >
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" v-if="ismobile" />
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer" class="d-flex d-sm-none" />
       <v-toolbar-title v-text="title" class="v-toolbar-title" />
       <v-spacer />
       <!-- 搜索输入框 网页端 -->
@@ -72,7 +72,7 @@
         hide-details
         prepend-inner-icon="mdi-magnify"
         label="Search"
-        class="hidden-sm-and-down search_input"
+        class="d-none d-sm-flex search_input"
         solo
         rounded
         v-model="keyword"
@@ -81,11 +81,11 @@
       />
       <v-spacer />
       <!-- 搜索按钮手机端 -->
-      <v-btn icon v-if="ismobile && $route.path == '/'">
+      <v-btn icon class="d-flex d-sm-none" v-if="$route.path == '/'">
         <v-icon @click.native="showSearchDialog">mdi-magnify</v-icon>
       </v-btn>
       <!-- 目录按钮手机端 -->
-      <v-btn icon v-if="ismobile && /\/detail\/\w+/.test($route.path)">
+      <v-btn icon class="d-flex d-sm-none" v-if="/\/detail\/\w+/.test($route.path)">
         <v-icon @click.native="open_right">mdi-book</v-icon>
       </v-btn>
       <!-- 其他功能，关于博客，作者信息 网页端 -->
@@ -95,14 +95,14 @@
         :to="item.to"
         class="d-none d-sm-flex"
         text
-        v-if="!ismobile"
       >
         <v-icon>{{ item.icon }}</v-icon>
         {{ item.title }}
       </v-btn>
       <!-- <v-app-bar-nav-icon @click.stop="open_right" class="d-none d-sm-flex"/> -->
       <!-- other设置，网页端显示 -->
-      <v-menu :offset-y="true" bottom v-if="!ismobile">
+      <div class="d-none d-sm-flex">
+      <v-menu :offset-y="true" bottom >
         <template v-slot:activator="{ on }">
           <v-btn v-on="on" text>
             <v-icon>mdi-hammer-screwdriver</v-icon>
@@ -115,15 +115,17 @@
           <v-list-item v-for="(item, n) in other" :key="n" :to="item.to">
             <v-list-item-title>
               <v-list-item-icon>
-                <v-icon light>{{ item.icon }}</v-icon>
+                <v-icon light v-text="item.icon"> </v-icon>
               </v-list-item-icon>
               {{ item.title }}
             </v-list-item-title>
           </v-list-item>
         </v-list>
       </v-menu>
+      </div>
       <!-- 筛选菜单，手机端 -->
-      <v-menu left bottom v-if="ismobile && $route.path == '/'">
+      <div class="d-flex d-sm-none">
+      <v-menu left bottom v-if="$route.path == '/'">
         <template v-slot:activator="{ on }">
           <v-btn icon v-on="on">
             <v-icon>mdi-filter-menu</v-icon>
@@ -145,6 +147,7 @@
           </v-list-item>
         </v-list>
       </v-menu>
+      </div>
     </v-app-bar>
     <!-- 右边导航栏 -->
     <v-navigation-drawer
@@ -293,7 +296,7 @@ export default {
       return result + text;
     },
     onResize() {
-      this.ismobile = window.innerWidth < 930;
+      this.ismobile = window.innerWidth < 600;
       this.height = window.innerHeight;
     },
     onDoneWelcome(){

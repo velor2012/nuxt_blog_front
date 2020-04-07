@@ -3,7 +3,7 @@
     :src="src"
     :lazy-src="lazySrc"
     max-width="100%"
-    :max-height="height/2"
+    :max-height="nolimit?'':height/2"
     @click="showImage"
     contain
     data-trigger
@@ -19,7 +19,7 @@
 <script>
 import Bus from "~/pages/util";
 export default {
-  props: ["src", "lazySrc","index"],
+  props: ["src", "lazySrc","index","nolimit"],
   data(){
       return{
           dialog :false

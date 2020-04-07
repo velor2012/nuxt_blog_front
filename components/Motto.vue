@@ -1,6 +1,6 @@
 <template>
-<div data-trigger3 class="animated zoomIn" id="mot">
-    <span id="mot2">{{currentMotto.slice(0,charIndex+1)}}</span>
+<div data-trigger3 class="animated fadeInRight" id="mot" style="maxWidth:100%">
+    <span id="mot2" >{{currentMotto.slice(0,charIndex+1)}}</span>
 </div>
     <!-- <span class="motto">{{currentMotto}}</span> -->
 </template>
@@ -31,7 +31,7 @@ export default {
             trigger:{
                 toggle:{
                 class:{
-                    in:["zoomIn",'animated']
+                    in:["fadeInRight",'animated']
                 },
                 callback: {
                         in:(trigger)=>{
@@ -113,5 +113,14 @@ export default {
 		.motto {
 		    border-right:.1em solid;
 		    animation:blink-caret .5s step-end infinite alternate;
-		}
+        }
+        #mot2{
+            font-size: 5vh;
+        }
+        @media  screen and  (max-width: 600px){
+            #mot2{
+                font-size: 5vw;
+            }
+        }
+
 </style>

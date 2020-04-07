@@ -2,9 +2,9 @@
 <v-container>
     <msg v-bind:message="message" />
     <v-row>
-      <my-img class="align-center" style="maxHeight:80vh" :index="0" :src="article.cover" :lazy-src="lazy_src">
+      <my-img class="align-center article-img" :nolimit="true" :index="0" :src="article.cover" :lazy-src="lazy_src">
         <v-row justify="center">
-          <h1 style="color:white;fontSize:10vh">{{article.title}}</h1>
+          <h1 class="article-title">{{article.title}}</h1>
         </v-row>
       </my-img>
       <v-col cols="12">
@@ -147,4 +147,13 @@ export default {
   }
 };
 </script>
-<style lang="less"></style>
+<style lang="less">
+.article-title{
+  color: whitesmoke;
+  font-size:10vh;
+}
+.article-img{
+  max-width: 100%;
+  max-height: 90vh;
+}
+</style>
