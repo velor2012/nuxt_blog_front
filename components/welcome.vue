@@ -1,29 +1,34 @@
 <template>
-    <v-img
-      id="welcome"
-      :src="backgroundImg"
-      :lazy-src="backgroundImgThumb"
-    >
-    <v-row style="padding-top:5em" justify="center" align="center">
-        <h1 style="color:white;font-size:bold">欢迎来到CWY的博客</h1>
-    </v-row>
-      <v-row id="welcome" justify="center" align="center" align-content="center">
-            <v-avatar class="avatar" color="blue-grey lighten-3" light size="150">
-                <v-img :src="authorInfo.avatar" :lazy-src="_getThumb(authorInfo.avatar)"></v-img>
-            </v-avatar>
+<v-row class = "test" style="height:100vh" align-content="end">
+    <v-row align-content ='center'>
+        <v-col  cols="12" justify="center" align="center" class="animated jackInTheBox"  data-trigger1>
+            <h1 style="fontSize:10vh;font-size:bold">欢迎来到CWY的博客</h1>
+        </v-col>
+        <v-col data-trigger2 class="animated fadeInLeft" justify="center" align="center"  cols="12" >
 
-              <v-list-item>
-                <v-list-item-content style="top:0">
-                  <v-list-item-title style="color:white" class="title text-center">
-                      <Motto/>
-                    </v-list-item-title>
-                </v-list-item-content>
-              </v-list-item>
-              <v-btn id="welcome-btn" rounded large @click.native="enter">
-                  进入博客
-              </v-btn>
-      </v-row>
-    </v-img>
+                    <v-avatar color="blue-grey lighten-3" light size="150">
+                        <v-img :src="authorInfo.avatar" :lazy-src="_getThumb(authorInfo.avatar)"></v-img>
+                    </v-avatar>
+                    <!-- <v-btn id="welcome-btn" rounded large @click.native="enter">
+                        进入博客
+                    </v-btn> -->
+        </v-col>
+        <v-col justify="center" align="center"  cols="12" >
+                    <v-list-item>
+                        <v-list-item-content style="top:0">
+                        <v-list-item-title style="color:black" class="title text-center">
+                            <Motto/>
+                            </v-list-item-title>
+                        </v-list-item-content>
+                    </v-list-item>
+        </v-col>
+    </v-row>
+    <v-row style="padding-top:10vh"  >
+        <v-col cols="12" style="padding:0" justify="center" align="center">
+            <v-icon @click="$vuetify.goTo('#index-container', scroll_option)" size=100 class="chevron-down">mdi-chevron-down</v-icon>
+        </v-col>
+    </v-row>
+</v-row>
 </template>
 <script>
 import Bus,{getThumb} from "~/pages/util";
@@ -34,7 +39,12 @@ export default {
         return{
             hide:false,
             backgroundImg:"https://s1.ax1x.com/2020/04/02/GJ89ds.jpg",
-            backgroundImgThumb:"https://s1.ax1x.com/2020/04/02/GJ89ds.th.jpg"
+            backgroundImgThumb:"https://s1.ax1x.com/2020/04/02/GJ89ds.th.jpg",
+            scroll_option: {
+                duration: 300,
+                offset: 0,
+                easing: "easeInOutCubic"
+            }
         }
     },
     components:{
@@ -53,52 +63,68 @@ export default {
     computed:{
         authorInfo(){
           return this.$store.getters.getAuthorInfo
-        }
+        },
+    },
+    created(){
+
+    },  
+    mounted(){
+        let _this = this
+        this.$nextTick(()=>{
+        let trigger = new _this.$sr(
+            {
+            trigger:{
+                toggle:{
+                class:{
+                    in:["jackInTheBox",'animated']
+                }
+                }
+            }
+            }
+        )
+        trigger.add('[data-trigger1]')
+        let trigger2 = new _this.$sr(
+            {
+            trigger:{
+                toggle:{
+                class:{
+                    in:["fadeInLeft",'animated']
+                },
+             callback: {
+                    in:(trigger)=>{
+                        trigger.element.addEventListener('animationend',()=>{
+                            trigger.element.classList.add('avatar')
+                        })
+                    },
+                    out:(trigger)=>{
+                        trigger.element.classList.remove('avatar')
+                    }
+                }
+                },
+            }
+            }
+        )
+        trigger2.add('[data-trigger2]')
+        })
     }
 }
 </script>
 <style lang="less">
-//背景
-#welcome{
-  position: absolute!important;
-  top: 0!important;
-  left: 0!important;
-  width: 100%!important;
-  height:100%!important;
-  z-index: 100!important;
+.chevron-down{
+    animation: pointDown 2s 0s linear infinite alternate;
 }
-#welcome-btn{
-    background: linear-gradient(90deg,#03a9f4,#f441a5,#ffeb3b,#03a9f4)!important;
-    background-size: 400%!important;
-}
-#welcome-btn:hover{
-    animation: ani 8s linear infinite!important;
-}
-@keyframes ani {
-    0%{
-        background-position: 0%;
-    }
-    100%{
-        background-position: 400%;
-    }
-}
-.doneWelcome{
-    animation: doneWelcome 1s;
-    animation-fill-mode: both;
-}
-@keyframes doneWelcome {
-    0% {
-        opacity: 1;
-        transform: scale(1);
-    }
-    50% {
-        opacity: 0.8;
-        transform:translateY(100px) scale(0.5);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(-800px) scale(0) ;
-        display: none;
-    }
+@keyframes pointDown {
+        0% {
+            opacity: 1;
+            transform: scale(1) translateY(-20px);
+        }
+        50% {
+            opacity: 0.8;
+            transform: scale(1) translateY(0px);
+        }
+        100% {
+            opacity: 1;
+            transform: scale(1) translateY(-20px);
+        }
 }
 </style>

@@ -1,4 +1,5 @@
 <template>
+<v-container>
   <div>
     <v-row class="row">
       <v-col :cols="ismobile ? 12 : 10" class="markdown">
@@ -19,6 +20,7 @@
       <img v-show="false" v-for="src in images" :src="src" :key="src">
     </div>
   </div>
+  </v-container>
 </template>
 <script>
 import TOC from "~/components/toc.vue";
@@ -63,11 +65,13 @@ export default {
     md_render() {
       render(this, this.authorInfo.info);
     },
-      showImage(index){
-      const viewer = this.$el.querySelector('.images').$viewer
-      viewer.index = index
-      viewer.show()
-    } 
+    showImage(index){
+        const viewer = this.$el.querySelector('.images').$viewer
+        if(viewer){
+          viewer.index = index
+          viewer.show()
+        }
+    },
   },
   computed: {
     ismobile() {

@@ -1,17 +1,5 @@
 <template>
   <v-row justify="center" align="center">
-      <v-col cols="12" class="text-center">
-        <v-avatar class="avatar" light color="blue-grey lighten-3" size="150">
-            <v-img :src="authorInfo.avatar" :lazy-src="_getThumb(authorInfo.avatar)"></v-img>
-        </v-avatar>
-      </v-col>
-        <v-col class="py-0">
-          <v-list-item>
-            <v-list-item-content>
-              <v-list-item-title class="title text-center"><Motto/></v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-        </v-col>
       <v-col cols="12">
         <v-divider></v-divider>
       </v-col>

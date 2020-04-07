@@ -128,6 +128,6 @@ export default {
 <style lang="less">
     #sticky-nav {
     position: sticky;
-    top: 100px;
+    top: 10vh;
     }
 </style>

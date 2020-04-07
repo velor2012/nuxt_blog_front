@@ -1,4 +1,5 @@
 <template>
+<v-container>
   <v-row>
     <v-col cols="12">
       <v-card class="animated fadeInUp">
@@ -22,6 +23,7 @@
       <img v-show="false" v-for="src in emojis" :src="src" :key="src">
     </div>
   </v-row>
+  </v-container>
 </template>
 <script>
 const config = require("~/config.json");
@@ -55,10 +57,12 @@ export default {
   },
   methods: {
     showImage(index){
-      const viewer = this.$el.querySelector('.images').$viewer
-      viewer.index = index
-      viewer.show()
-    } 
+        const viewer = this.$el.querySelector('.images').$viewer
+        if(viewer){
+          viewer.index = index
+          viewer.show()
+        }
+    },
   },
   components:{
     MyImg

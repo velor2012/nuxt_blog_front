@@ -11,7 +11,7 @@
       class="v-navigation-drawer"
       :disable-resize-watcher="true"
     >
-    <template v-slot:prepend>
+    <!-- <template v-slot:prepend>
         <v-list-item two-line>
           <v-list-item-avatar color="blue lighten-4" light size=70>
             <img :src="authorInfo.avatar">
@@ -23,7 +23,7 @@
                     </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-    </template>
+    </template> -->
 
         <v-list>
           <v-list-item
@@ -62,7 +62,7 @@
         </v-list>
     </v-navigation-drawer>
     <!-- bar栏 -->
-    <v-app-bar :clipped-left="clipped" fixed app light color="blue lighten-4" id="header" v-show="doneWelcome">
+    <v-app-bar :style="currentPath!='/'||resetAppBar?'':'boxShadow:none'" :clipped-left="clipped" fixed app light color="blue lighten-4" id="header" >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" v-if="ismobile" />
       <v-toolbar-title v-text="title" class="v-toolbar-title" />
       <v-spacer />
@@ -161,11 +161,11 @@
     <!-- 搜索对话框 -->
     <searchDialog :keyword="keyword" />
 
-    <welcome/>
-    <v-content class="overall-style" id="content">
+    <!-- <welcome/> -->
+    <v-content :style="currentPath=='/'?'padding:0':''" class="overall-style" id="content" v-scroll="onScroll">
       <!-- 气泡渲染
       <Bubble/> -->
-      <v-container v-show="doneWelcome" v-scroll="onScroll">
+      
         <nuxt />
         <!-- 返回顶部按钮 -->
         <v-fab-transition>
@@ -181,7 +181,7 @@
             <v-icon>mdi-chevron-up</v-icon>
           </v-btn>
         </v-fab-transition>
-      </v-container>
+    
     </v-content>
   </v-app>
 </template>
@@ -205,6 +205,7 @@ export default {
       right_drawer: false,
       doneWelcome:false,
       keyword: "",
+      resetAppBar:false,
       user_base_info_url: "/api/user/base_info/id=5e81dd95f6811d12805644df",
       items: [
         {
@@ -267,6 +268,7 @@ export default {
   methods: {
     onScroll(e) {
       this.show = window.pageYOffset ? true : false;
+      this.resetAppBar = (document.documentElement.scrollTop||document.body.scrollTop)>(this.height/4);
     },
     open_right() {
       let r = this.$route.path;
@@ -349,6 +351,9 @@ export default {
   computed:{
       authorInfo(){
         return this.$store.getters.getAuthorInfo
+      },
+      currentPath(){
+        return this.$route.path
       }
   }
 };

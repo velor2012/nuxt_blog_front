@@ -1,4 +1,5 @@
 <template>
+<v-container>
 <div>
     <v-row class="row">
         
@@ -20,6 +21,7 @@
       <img v-show="false" v-for="src in images" :src="src" :key="src">
     </div>
   </div>
+  </v-container>
 </template>
 <script>
 import MarkDownTemp from "~/components/MarkDownTemp";
@@ -69,11 +71,13 @@ import {render} from '~/pages/util'
         xhr.send(null)
         return xhr.status === okStatus ? xhr.responseText : null
       },
-      showImage(index){
+    showImage(index){
         const viewer = this.$el.querySelector('.images').$viewer
-        viewer.index = index
-        viewer.show()
-      } 
+        if(viewer){
+          viewer.index = index
+          viewer.show()
+        }
+    },
     },
     computed:{
         ismobile(){

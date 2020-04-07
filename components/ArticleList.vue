@@ -120,8 +120,6 @@
 </template>
 
 <script>
-import ScrollOut from "scroll-out";
-
 import Bus,{getThumb} from '~/pages/util'
 import {resovleTag} from '~/pages/util'
 import TypeAndDate from '~/components/TypeAndDate.vue'

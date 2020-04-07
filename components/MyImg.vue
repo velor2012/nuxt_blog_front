@@ -6,7 +6,9 @@
     :max-height="height/2"
     @click="showImage"
     contain
+    data-trigger
   >
+  <slot></slot>
     <template v-slot:placeholder>
       <v-row class="fill-height ma-0" align="center" justify="center">
         <v-progress-circular indeterminate color="black"></v-progress-circular>
@@ -22,6 +24,24 @@ export default {
       return{
           dialog :false
       }
+  },
+  mounted(){
+    let _this = this
+    this.$nextTick(()=>{
+      let trigger = new _this.$sr(
+        {
+          trigger:{
+            toggle:{
+              class:{
+                in:["fadeIn",'animated']
+              }
+            }
+          }
+
+        }
+      )
+      trigger.add('[data-trigger]')
+    })
   },
   computed:{
     height(){

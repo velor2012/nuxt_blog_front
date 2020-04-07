@@ -6,6 +6,7 @@ const getTOC = (markdown_html)=>{
   let res = ''
   var patt = /<h(\d)?\s+id="(.*?)">/g;;
   while (res = patt.exec(markdown_html)) {
+    if(Number(res[1])<3)
       toc.push({layer:res[1],text:res[2]});
   }
   return toc
@@ -52,12 +53,13 @@ const render = (app, markdown) => {
                     </h${level}>`;
     };
     let width = app.emoji_width;
-    let index = -1
+    let index = 0
     renderer.image = function(href, title, text) {
       let token = href.split("/");
       let name = token[token.length - 1];
       let reg = /emoji-/;
       let thumb_href = getThumb(href)
+      //index0的元素为空或者封面图
       index++
       app.images.push(href)
       if (reg.test(name)) {

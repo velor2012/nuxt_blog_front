@@ -1,5 +1,7 @@
 <template>
-  <div>
+<div>
+  <welcome />
+  <v-container id="index-container">
     <msg v-bind:message="message" />
     <v-dialog eager v-model="DialogOption.show" max-width="290">
       <v-date-picker
@@ -23,12 +25,14 @@
         class="date_picker"
         style="padding-left:1em;padding-top:2em"
       >
-        <TypeAndDate :typeInfo="typeInfo" data-trigger class="animated fadeInRight" />
+        <TypeAndDate :typeInfo="typeInfo" data-trigger class="type-and-date animated fadeInRight" />
       </v-col>
     </v-row>
+</v-container>
   </div>
 </template>
 <script>
+import welcome from "~/components/welcome.vue";
 import ArticleList from "~/components/ArticleList.vue";
 import TypeAndDate from "~/components/TypeAndDate.vue";
 import ColorfulChip from "~/components/ColorfulChip.vue";
@@ -64,7 +68,8 @@ export default {
     ArticleList,
     TypeAndDate,
     msg,
-    ColorfulChip
+    ColorfulChip,
+    welcome
   },
   created() {
     //注册事件
@@ -213,7 +218,7 @@ export default {
     },
     ismobile() {
       return this.$store.getters.getIsMobile;
-    }
+    },
   },
   beforeRouteLeave(to, from, next) {
     this.date = null;
@@ -222,3 +227,15 @@ export default {
   }
 };
 </script>
+<style lang="less">
+.test{
+  background: linear-gradient(
+#BBDEFB, rgb(241,233,175));
+  padding: 0;
+}
+.type-and-date {
+  position: -webkit-sticky;
+  position:sticky;
+  top:10vh
+}
+</style>
