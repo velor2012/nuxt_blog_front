@@ -36,11 +36,11 @@ const options = {
 //     cert: fs.readFileSync('plugins/cert/3715899_www.velor2012.xyz.pem'),
 //     key: fs.readFileSync('plugins/cert/3715899_www.velor2012.xyz.key')
 //   }
-https
-.createServer(options, app)
-.listen(port,host)
+// https
+// .createServer(options, app)
+// .listen(port,host)
   // // Listen the server
-  // app.listen(port, host);
+  app.listen(port, host);
   consola.ready({
     message: `Server listening on https://${host}:${port}`,
     badge: true

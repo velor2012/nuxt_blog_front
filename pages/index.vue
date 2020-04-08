@@ -1,5 +1,5 @@
 <template>
-<div>
+<div >
   <welcome />
   <v-container id="index-container">
     <msg v-bind:message="message" />

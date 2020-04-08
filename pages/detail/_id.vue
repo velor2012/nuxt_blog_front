@@ -2,7 +2,7 @@
 <v-container>
     <msg v-bind:message="message" />
     <v-row>
-      <my-img class="align-center article-img" :nolimit="true" :index="0" :src="article.cover" :lazy-src="lazy_src">
+      <my-img :contain='false' class="align-center article-img" :nolimit="true" :index="0" :src="article.cover" :lazy-src="lazy_src">
         <v-row justify="center">
           <h1 class="article-title">{{article.title}}</h1>
         </v-row>
@@ -10,7 +10,7 @@
       <v-col cols="12">
         <v-divider/>
       </v-col>
-    <v-col style="paddingTop:0" :cols="ismobile ? 12 : 10" class="markdown">
+    <v-col style="paddingTop:0" class="sm-12 md-10 markdown">
         <v-card color="white" class="animated fadeInLeft" v-show="!loading">
           <v-card-subtitle class="font-weight-bold">
             <v-row
@@ -154,6 +154,11 @@ export default {
 }
 .article-img{
   max-width: 100%;
-  max-height: 90vh;
+  min-height: 50vh;
+}
+@media  screen and  (max-width: 600px){
+    .article-title{
+        font-size: 8vw;
+    }
 }
 </style>

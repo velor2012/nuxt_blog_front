@@ -4,8 +4,9 @@
               v-for="(item, i) in Data.items"
               :key="i"
               cols="12"
-              class=""
-              data-trigger
+              class="animated fadeIn"
+              data-trigger4
+              :id="`trigger4${i}`"
               v-if="!Data.reloading"
             > 
               <v-hover :disabled="ismobile" v-slot:default="{ hover }">
@@ -18,9 +19,9 @@
                       align="center"
                     >
                     
-                    <v-col :cols="ismobile?12:8" style="padding:0" class="outer-card">
+                    <v-col style="padding:0" class="sm-12 md-8 outer-card">
                       <v-card-title v-if="!ismobile" class="headline font-weight-bold">{{item.title}}</v-card-title>
-                        <v-img v-if="ismobile" class="white--text align-end" :src="item.cover" :lazy-src="_getThumb(item.cover)">
+                        <v-img min-height="20vh" v-if="ismobile" class="white--text align-end" :src="item.cover" :lazy-src="_getThumb(item.cover)">
                               <template v-slot:placeholder>
                                 <v-row
                                   class="fill-height ma-0"
@@ -50,7 +51,7 @@
                       <v-img :src="item.cover" :lazy-src="_getThumb(item.cover)">
                         <template v-slot:placeholder>
                           <v-row
-                            class="fill-height ma-0"
+                            class="fill-height"
                             align="center"
                             justify="center"
                           >
@@ -127,7 +128,7 @@ import TypeAndDate from '~/components/TypeAndDate.vue'
     name:'ArticleList',
     props:['Data'],
     data: () => ({
-      scroll:NaN
+      trigger:NaN
     }),
     components:{
       TypeAndDate
@@ -170,26 +171,59 @@ import TypeAndDate from '~/components/TypeAndDate.vue'
       },
       ismobile(){
         return this.$store.getters.getIsMobile
+      },
+      listlength(){
+        return this.Data.items.length
       }
     },
     watch:{
-      Data:{
+      listlength:{
         handler(newValue){
           let _this = this
           this.$nextTick(()=>{
-            let trigger = new _this.$sr(
+            if(this.trigger){
+              this.trigger.remove('[data-trigger4]')
+              this.trigger.add('[data-trigger4]')
+              return
+            }
+            _this.trigger = new _this.$sr(
               {
                 trigger:{
+                  offset:{
+                      viewport: {
+                          x: 0,
+                          y: (trigger, frame, direction) => {
+                              return trigger.visible ? 0 : 0.2
+                          }
+                      }
+                  },
                   toggle:{
                     class:{
-                      in:["zoomIn",'animated']
-                    }
+                      in:["fadeIn",'animated'],
+                    },
+                      callback: {
+                        in:(trigger)=>{
+                          console.log(trigger.element)
+                          // _this.trigger.remove(trigger)
+                          // // console.log(_this.trigger)
+                          // trigger.element.addEventListener('animationend',()=>{
+                          //   // console.log('doneAnimated ')
+                          //   _this.trigger.add(trigger)
+                          //   // console.log(_this.trigger)
+                          // })
+                        },
+                        out:(trigger)=>{
+                      
+                             console.log('out')
+                             return
+
+                        }
                   }
                 }
-
+                }
               }
             )
-            trigger.add('[data-trigger]')
+            _this.trigger.add('[data-trigger4]')
           })
         },
         deep:true
