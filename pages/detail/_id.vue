@@ -2,7 +2,7 @@
 <v-container>
     <msg v-bind:message="message" />
     <v-row>
-      <my-img :contain='false' class="align-center article-img" :nolimit="true" :index="0" :src="article.cover" :lazy-src="lazy_src">
+      <my-img :height="`30vh`" :contain="false" class="align-center article-img" :nolimit="true" :index="0" :src="article.cover" :lazy-src="lazy_src">
         <v-row justify="center">
           <h1 class="article-title">{{article.title}}</h1>
         </v-row>
@@ -151,10 +151,6 @@ export default {
 .article-title{
   color: whitesmoke;
   font-size:10vh;
-}
-.article-img{
-  max-width: 100%;
-  min-height: 50vh;
 }
 @media  screen and  (max-width: 600px){
     .article-title{

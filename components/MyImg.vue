@@ -2,7 +2,9 @@
   <v-img
     :src="src"
     :lazy-src="lazySrc"
-    :max-height="nolimit?'':height/2"
+    :width="width"
+    :height="height"
+    :max-height="nolimit?'':screen_height/2"
     @click="showImage"
     :contain="contain"
     data-trigger
@@ -23,7 +25,8 @@ export default {
         contain:{type:Boolean,default:true},
 
         lazySrc:{type:String},
-
+        width:{type:String},
+        height:{type:String},
         index:{type:Number},
 
         nolimit:{type:Boolean},
@@ -52,7 +55,7 @@ export default {
     })
   },
   computed:{
-    height(){
+    screen_height(){
         return this.$store.getters.getHeight
     }
   },
