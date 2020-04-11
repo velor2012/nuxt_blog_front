@@ -1,16 +1,9 @@
 # 前端博客介绍
 
-## 界面展示
+这是一个用nuxt以及vuetify开发的博客前端界面，
+pc端和手机端都能获得不错的体验  
 
-1. 电脑端
-![https://s2.ax1x.com/2020/03/10/8P2OV1.png](https://s2.ax1x.com/2020/03/10/8P2OV1.png)
-![https://s2.ax1x.com/2020/03/10/8P9PiV.png](https://s2.ax1x.com/2020/03/10/8P9PiV.png)
-2. 移动端
-![https://s2.ax1x.com/2020/03/10/8Pikz8.jpg](https://s2.ax1x.com/2020/03/10/8Pikz8.jpg)
-![https://s2.ax1x.com/2020/03/10/8PPJUI.jpg](https://s2.ax1x.com/2020/03/10/8PPJUI.jpg)
-![https://s2.ax1x.com/2020/03/10/8PPY5t.jpg](https://s2.ax1x.com/2020/03/10/8PPY5t.jpg)
-![https://s2.ax1x.com/2020/03/10/8PP1DH.jpg](https://s2.ax1x.com/2020/03/10/8PP1DH.jpg)
-![https://s2.ax1x.com/2020/03/10/8PP3bd.jpg](https://s2.ax1x.com/2020/03/10/8PP3bd.jpg)
+[预览](https://www.velor2012.xyz:3000)
 
 ## 功能介绍
 
@@ -38,16 +31,31 @@
   //nuxt.config.json
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel:"stylesheet",  href:"https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css"},
+      // { rel:"stylesheet",  href:"https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css"},
       { rel:"stylesheet",href:"https://cdnjs.cloudflare.com/ajax/libs/prism/1.19.0/themes/prism.min.css"}
     ],
       script:[
-        {src:"https://cdn.bootcss.com/marked/0.8.0/marked.js",type: 'text/javascript', charset: 'utf-8'},
-        {src:"https://cdnjs.cloudflare.com/ajax/libs/prism/1.19.0/prism.min.js",dataManual:true,type: 'text/javascript', charset: 'utf-8'} ,
+      {src:"https://cdn.bootcss.com/marked/0.8.0/marked.js",type: 'text/javascript', charset: 'utf-8'},
+      {src:"https://cdnjs.cloudflare.com/ajax/libs/prism/1.19.0/prism.min.js",dataManual:true,type: 'text/javascript', charset: 'utf-8'} ,
+      {src:"https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js",type: 'text/javascript', charset: 'utf-8'},
       ]
 ```
 
 ***
+
+## 使用
+
+1. 装好(写好)后台
+2. 下载代码,修改根目录config.json中的路径为你的后台api地址(也可以用我这个，但是不保证会一直开着)
+
+``` js
+npm install
+npm run build
+npm start //或者pm2部署
+
+```
+
+后台代码:&ensp;[https://github.com/velor2012/nuxt_blog](https://github.com/velor2012/nuxt_blog)
 
 ## bug
 
@@ -63,6 +71,20 @@
 
 ***
 
-## 感谢阅读
+## 界面展示
 
-![0baf4430-629b-11ea-91ad-59df5268af2b.jpg](http://www.velor2012.xyz:4001/blogimg/0baf4430-629b-11ea-91ad-59df5268af2b.jpg)
+1. 电脑端
+![main-7b128740-7bcf-11ea-9934-53615e574118.png](https://cdn.jsdelivr.net/gh/velor2012/imageHosting/blog/5e83efe462076003c3534e55/main-7b128740-7bcf-11ea-9934-53615e574118.png)
+![main-87efae20-7bcf-11ea-9934-53615e574118.png](https://cdn.jsdelivr.net/gh/velor2012/imageHosting/blog/5e83efe462076003c3534e55/main-87efae20-7bcf-11ea-9934-53615e574118.png)
+![main-940650b0-7bcf-11ea-9934-53615e574118.png](https://cdn.jsdelivr.net/gh/velor2012/imageHosting/blog/5e83efe462076003c3534e55/main-940650b0-7bcf-11ea-9934-53615e574118.png)
+![main-a4726ab0-7bcf-11ea-9934-53615e574118.png](https://cdn.jsdelivr.net/gh/velor2012/imageHosting/blog/5e83efe462076003c3534e55/main-a4726ab0-7bcf-11ea-9934-53615e574118.png)
+![main-be42d880-7bcf-11ea-9934-53615e574118.png](https://cdn.jsdelivr.net/gh/velor2012/imageHosting/blog/5e83efe462076003c3534e55/main-be42d880-7bcf-11ea-9934-53615e574118.png)
+![main-ed8c40e0-7bcf-11ea-9934-53615e574118.png](https://cdn.jsdelivr.net/gh/velor2012/imageHosting/blog/5e83efe462076003c3534e55/main-ed8c40e0-7bcf-11ea-9934-53615e574118.png)
+
+2. 移动端
+![main-3a3c5d30-7bd0-11ea-9934-53615e574118.png](https://cdn.jsdelivr.net/gh/velor2012/imageHosting/blog/5e83efe462076003c3534e55/main-3a3c5d30-7bd0-11ea-9934-53615e574118.png)
+![main-4b0a4640-7bd0-11ea-9934-53615e574118.png](https://cdn.jsdelivr.net/gh/velor2012/imageHosting/blog/5e83efe462076003c3534e55/main-4b0a4640-7bd0-11ea-9934-53615e574118.png)
+![main-56bd4500-7bd0-11ea-9934-53615e574118.png](https://cdn.jsdelivr.net/gh/velor2012/imageHosting/blog/5e83efe462076003c3534e55/main-56bd4500-7bd0-11ea-9934-53615e574118.png)
+![main-5f7a8360-7bd0-11ea-9934-53615e574118.png](https://cdn.jsdelivr.net/gh/velor2012/imageHosting/blog/5e83efe462076003c3534e55/main-5f7a8360-7bd0-11ea-9934-53615e574118.png)
+![main-69896f10-7bd0-11ea-9934-53615e574118.png](https://cdn.jsdelivr.net/gh/velor2012/imageHosting/blog/5e83efe462076003c3534e55/main-69896f10-7bd0-11ea-9934-53615e574118.png)
+## 感谢阅读

@@ -451,8 +451,4 @@ export default {
     box-shadow: none;
   }
 }
-.v-card{
-  border-radius: 1em!important;
-  overflow: hidden
-}
 </style>
