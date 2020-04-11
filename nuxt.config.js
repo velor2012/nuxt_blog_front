@@ -40,8 +40,8 @@ module.exports =  {
   */
   plugins: [
     {src:'@/plugins/axios', ssr: true },
+    // {src:'@/plugins/viewer', ssr: false },
     {src:'@/plugins/scroller', ssr: false },
-    {src:'@/plugins/viewer', ssr: false },
   ],
   /*
   ** Nuxt.js dev-modules
@@ -102,7 +102,7 @@ module.exports =  {
     // },
   },
   server:{
-    host:'127.0.0.1',
-    port:3000
+    host:'0.0.0.0',
+    port:8899
   },
 }

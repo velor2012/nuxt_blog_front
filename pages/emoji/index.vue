@@ -19,9 +19,9 @@
         </v-container>
       </v-card>
     </v-col>
-    <div class="images" v-show="showImage" v-viewer="{movable: true}">
+    <!-- <div class="images" v-show="showImage" v-viewer="{movable: true}">
       <img v-show="false" v-for="src in emojis" :src="src" :key="src">
-    </div>
+    </div> -->
   </v-row>
   </v-container>
 </template>
@@ -38,7 +38,7 @@ export default {
     };
   },
   created() {
-    Bus.$on('showImage',this.showImage)
+    // Bus.$on('showImage',this.showImage)
     this.$axios.get(this.emoji_url).then(res => {
       this.emojis = [];
       this.current_page_emojis = [];

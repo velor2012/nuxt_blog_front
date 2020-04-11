@@ -16,9 +16,9 @@
         </client-only>
       </v-col>
     </v-row>
-    <div class="images" v-show="showImage" v-viewer="{movable: true}">
+    <!-- <div class="images" v-show="showImage" v-viewer="{movable: true}">
       <img v-show="false" v-for="src in images" :src="src" :key="src">
-    </div>
+    </div> -->
   </div>
   </v-container>
 </template>
@@ -48,7 +48,7 @@ export default {
     MarkDownTemp
   },
   created(){
-     Bus.$on('showImage',this.showImage)
+    //  Bus.$on('showImage',this.showImage)
   },
   mounted() {
     if (this.authorInfo && this.authorInfo != "") this.md_render();

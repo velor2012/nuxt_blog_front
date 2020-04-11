@@ -17,9 +17,9 @@
             </client-only>
         </v-col>
     </v-row>
-    <div class="images" v-show="showImage" v-viewer="{movable: true}">
+    <!-- <div class="images" v-show="showImage" v-viewer="{movable: true}">
       <img v-show="false" v-for="src in images" :src="src" :key="src">
-    </div>
+    </div> -->
   </div>
   </v-container>
 </template>
@@ -49,7 +49,7 @@ import {render} from '~/pages/util'
       MarkDownTemp
     },
     created(){
-          Bus.$on('showImage',this.showImage)
+          // Bus.$on('showImage',this.showImage)
     },
     mounted(){
       let a = this.readFile('README.md')

@@ -17,12 +17,13 @@
     "@terwanerik/scrolltrigger": "^1.0.4",
     "animate.css": "^3.7.2",
     "cross-env": "^5.2.0",
-    "express": "^4.17.1",
     "github-markdown-css": "^4.0.0",
     "less": "^3.10.3",
     "less-loader": "^5.0.0",
     "nuxt": "^2.0.0",
     "scroll-out": "^2.2.8",
+    "vue-directive-image-previewer": "^2.2.2",
+    "express": "^4.17.1",
     "v-viewer": "^1.5.1"
   },
   "devDependencies": {

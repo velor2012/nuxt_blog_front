@@ -48,7 +48,7 @@
                     </v-card-text>
                     </v-col>
                     <v-col cols="4" class="pc-arcticle-cover" v-if="!ismobile">
-                      <v-img :src="item.cover" :lazy-src="_getThumb(item.cover)">
+                      <v-img :src="item.cover">
                         <template v-slot:placeholder>
                           <v-row
                             class="fill-height"
@@ -72,7 +72,7 @@
                               column
                               active-class="primary--text"
                             >
-                              <v-chip :small="ismobile" class="chips" color="amber lighten-2" light v-for="_tag in resovleTag(item.tag)" :key="_tag">
+                              <v-chip class="chips" color="amber lighten-2" light v-for="_tag in resovleTag(item.tag)" :key="_tag">
                                 {{ _tag }}
                               </v-chip>
                             </v-chip-group>
@@ -156,9 +156,6 @@ import TypeAndDate from '~/components/TypeAndDate.vue'
           let el = document.getElementById("circularLoading")
           io.observe(el);
       },
-      _getThumb(src){
-        return getThumb(src)
-      }
     },
     mounted(){
       this.$nextTick(()=>{
@@ -238,7 +235,7 @@ import TypeAndDate from '~/components/TypeAndDate.vue'
   .chips{
     font-weight: bold;
   }
-@media screen and (max-width: 930px) {
+  @media screen and (max-width: 930px) {
   .chips{
     margin-top: 0!important;
     margin-bottom: 0!important;

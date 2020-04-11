@@ -98,7 +98,7 @@ export default {
   },
   created() {
     this.loading = true;
-    Bus.$on('showImage',this.showImage)
+    // Bus.$on('showImage',this.showImage)
   },
   mounted() {
     if (this.$route.params.id) {

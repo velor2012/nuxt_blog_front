@@ -60,9 +60,9 @@ export default {
     }
   },
   methods:{
-    showImage(){
-      Bus.$emit('showImage',this.index)
-    }
+    // showImage(){
+    //   Bus.$emit('showImage',this.index)
+    // }
   }
 };
 </script>

@@ -5,7 +5,6 @@ import MyImg from "~/components/MyImg";
 // Vue.component('VBtn', VBtn)
 Vue.component('VImg', VImg)
 Vue.component('MyImg', MyImg)
-// Vue  
 Vue.component('VProgressCircular', VProgressCircular)
 Vue.component('VRow', VRow)
 export default {
@@ -13,7 +12,7 @@ export default {
     html: {
       type: String
     },
-    images:{type:Array}
+     images:{type:Array}
   },
   computed: {
     dynamicComponent() {
