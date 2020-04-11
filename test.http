@@ -1,0 +1,8 @@
+@json = Content-Type: application/json
+###
+PUT http://121.36.165.90:9090/proxies/GLOBAL
+{{json}}
+
+{
+    "name":"[专线|Silver][5.0] 深港专线13 - IPLC - SS协议"
+}

@@ -10,7 +10,7 @@
       <v-col cols="12">
         <v-divider/>
       </v-col>
-    <v-col style="paddingTop:0" class="sm-12 md-10 markdown">
+    <v-col style="paddingTop:0" :cols="ismobile?12:10">
         <v-card color="white" class="animated fadeInLeft" v-show="!loading">
           <v-card-subtitle class="font-weight-bold">
             <v-row
