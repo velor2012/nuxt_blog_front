@@ -14,16 +14,18 @@ module.exports =  {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel:"stylesheet",href:"/prism.css"},
+ 
       // { rel:"stylesheet",  href:"https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css"},
-      { rel:"stylesheet",href:"https://cdnjs.cloudflare.com/ajax/libs/prism/1.19.0/themes/prism.min.css"}
+      // { rel:"stylesheet",href:"https://cdnjs.cloudflare.com/ajax/libs/prism/1.19.0/themes/prism.min.css"}
     ],
     script:[
       {src:"https://cdn.bootcss.com/marked/0.8.0/marked.js",type: 'text/javascript', charset: 'utf-8'},
-      {src:"https://cdnjs.cloudflare.com/ajax/libs/prism/1.19.0/prism.min.js",dataManual:true,type: 'text/javascript', charset: 'utf-8'} ,
-      {src:"https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js",type: 'text/javascript', charset: 'utf-8'},
-      // {src:"https://unpkg.com/scrollreveal",dataManual:true,type: 'text/javascript', charset: 'utf-8'},
+      {src:"https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js",type: 'text/javascript', charset: 'utf-8'},
+      {src:"/prism.js",dataManual:true,type: 'text/javascript', charset: 'utf-8'} ,
       // {src:"//cdn.jsdelivr.net/npm/eruda",type: 'text/javascript', charset: 'utf-8'}
-      
+      // {src:"https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js",type: 'text/javascript', charset: 'utf-8'},
+     // {src:"https://cdnjs.cloudflare.com/ajax/libs/prism/1.20.0/prism.min.js",dataManual:true,type: 'text/javascript', charset: 'utf-8'},  
     ]
   },
   /*
