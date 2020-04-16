@@ -4,10 +4,10 @@
 const getTOC = (markdown_html)=>{
   let toc=[]
   let res = ''
-  var patt = /<h(\d)?\s+id="(.*?)">/g;;
+  var patt = /<h(\d)?\s+id="(.*?)">\s+(\S.*)?\s+<\/h\d?>/g;;
   while (res = patt.exec(markdown_html)) {
     if(Number(res[1])<3)
-      toc.push({layer:res[1],text:res[2]});
+      toc.push({layer:res[1],id:res[2],text:res[3]});
   }
   return toc
 }
@@ -44,7 +44,7 @@ const render = (app, markdown) => {
     //重写renderer,把id加上,注意id要换成anchor_开头,同时替换内部非法字符,防止因为非法字符引起的vuetify调用selector报错
     renderer.heading = function(text, level) {
       const escapedText = text.replace(
-        /[`~!@#$%^&*()_\-+=<>?:"{}|,.\/;'\\[\]·~！@#￥%……&*（）——\-+={}|《》？：“”【】、；‘'，。、]/g,
+        /[\s`~!@#$%^&*()_\-+=<>?:"{}|,.\/;'\\[\]·~！@#￥%……&*（）——\-+={}|《》？：“”【】、；‘'，。、]/g,
         "_"
       );
       return `

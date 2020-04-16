@@ -6,7 +6,7 @@
         <v-list-item
             v-for="(item, i) in toc"
             :key="i"
-            @click="$vuetify.goTo(`#${item.text}`, scroll_option)"
+            @click="$vuetify.goTo(`#${item.id}`, scroll_option)"
             router
             exact
             class="v-list-item"
@@ -63,12 +63,6 @@ export default {
             })
             return result + text
         },
-        getTOCList(){
-            this.toc.map(item=>{
-                this.TOC_list.push(item.text)
-                this.activate_list.push(false)
-            })
-        },
         /**
          * 拿到所有toc到顶部的距离
          * */
@@ -76,9 +70,9 @@ export default {
             // clearInterval(this.interval_id)
             this.anchor_offset=[]
             for(let i = 0 ; i < this.toc.length; i++){
-                let el = document.getElementById(this.toc[i].text)
+                let el = document.getElementById(this.toc[i].id)
                 if(!el) return
-                let offset = document.getElementById(this.toc[i].text).offsetTop;
+                let offset = document.getElementById(this.toc[i].id).offsetTop;
                 this.anchor_offset.push(offset)
             }
         },

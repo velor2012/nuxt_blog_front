@@ -422,7 +422,7 @@ export default {
 
 .v-application code {
   max-width: 100% !important;
-  color: black !important;
+  // color: black !important;
   // background-color:rgb(245, 242, 240)!important;
   box-shadow: 0 0 0 0 rgba(0, 0, 0, 0), 0 0 0 0 rgba(0, 0, 0, 0),
     0 0 0 0 rgba(0, 0, 0, 0) !important;
