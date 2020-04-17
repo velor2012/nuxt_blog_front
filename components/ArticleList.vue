@@ -180,12 +180,13 @@ import TypeAndDate from '~/components/TypeAndDate.vue'
       listlength:{
         handler(newValue){
           let _this = this
+          if(newValue==0) return
           this.$nextTick(()=>{
-            if(this.trigger){
-              this.trigger.remove('[data-trigger4]')
-              this.trigger.add('[data-trigger4]')
-              return
-            }
+            // if(this.trigger){
+            //   this.trigger.remove('[data-trigger4]')
+            //   this.trigger.add('[data-trigger4]')
+            //   return
+            // }
             _this.trigger = new _this.$sr(
               {
                 trigger:{
@@ -203,7 +204,7 @@ import TypeAndDate from '~/components/TypeAndDate.vue'
                     },
                       callback: {
                         in:(trigger)=>{
-                          console.log(trigger.element)
+                          // console.log(trigger.element)
                           // _this.trigger.remove(trigger)
                           // // console.log(_this.trigger)
                           // trigger.element.addEventListener('animationend',()=>{
@@ -214,7 +215,7 @@ import TypeAndDate from '~/components/TypeAndDate.vue'
                         },
                         out:(trigger)=>{
                       
-                             console.log('out')
+                            //  console.log('out')
                              return
 
                         }

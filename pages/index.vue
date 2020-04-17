@@ -62,7 +62,12 @@ export default {
       picker: "",
       message: { show: false, content: "成功", color: "success" },
       // userBaseInfo:'',
-      done_created: false
+      done_created: false,
+      scroll_option: {
+          duration: 300,
+          offset: 0,
+          easing: "easeInOutCubic"
+      }
     };
   },
   components: {
@@ -135,6 +140,7 @@ export default {
           this.ArticleListData.total = res.data.other.total;
           this.ArticleListData.items = res.data.other.article;
           this.ArticleListData.reloading = false;
+          this.$vuetify.goTo('#index-container', this.scroll_option);
         });
     },
     //获取文章分类信息{类别名称:总数}
@@ -159,6 +165,7 @@ export default {
           this.ArticleListData.page = 1
           this.ArticleListData.items = res.data.other.article;
           this.ArticleListData.reloading = false;
+          this.$vuetify.goTo('#index-container', this.scroll_option);
         });
     },
     showFilter(item) {
@@ -186,6 +193,7 @@ export default {
           this.ArticleListData.items = res.data.other.article;
           this.ArticleListData.total = res.data.other.total;
           this.ArticleListData.reloading = false;
+          this.$vuetify.goTo('#index-container', this.scroll_option);
         });
     }
   },

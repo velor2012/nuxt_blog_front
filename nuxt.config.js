@@ -22,7 +22,8 @@ module.exports =  {
     script:[
       {src:"https://cdn.bootcss.com/marked/0.8.0/marked.js",type: 'text/javascript', charset: 'utf-8'},
       {src:"https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js",type: 'text/javascript', charset: 'utf-8'},
-      {src:"/prism.js",dataManual:true,type: 'text/javascript', charset: 'utf-8'} ,
+      {src: "/prism.js", dataManual: true, type: 'text/javascript', charset: 'utf-8' },
+      {src:"/cnzz.js",dataManual:true,type: 'text/javascript', charset: 'utf-8'} ,
       // {src:"//cdn.jsdelivr.net/npm/eruda",type: 'text/javascript', charset: 'utf-8'}
       // {src:"https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js",type: 'text/javascript', charset: 'utf-8'},
      // {src:"https://cdnjs.cloudflare.com/ajax/libs/prism/1.20.0/prism.min.js",dataManual:true,type: 'text/javascript', charset: 'utf-8'},  
