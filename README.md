@@ -14,33 +14,6 @@ pc端和手机端都能获得不错的体验
 5. 适配手机端,不完美，但是能正常浏览
 6. 小功能:下滑无限加载，右下角返回键，目录固定并根据浏览位置改变状态
 
-## 用到的组件
-
-``` js
-   //package.json
-  "dependencies": {
-    "@nuxtjs/axios": "^5.3.6",
-    "@nuxtjs/vuetify": "^1.11.0",
-    "cross-env": "^5.2.0",
-    "github-markdown-css": "^4.0.0",
-    "less": "^3.10.3",
-    "less-loader": "^5.0.0",
-    "nuxt": "^2.0.0",
-    "vue-directive-image-previewer": "^2.2.2"
-  },
-  //nuxt.config.json
-    link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      // { rel:"stylesheet",  href:"https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css"},
-      { rel:"stylesheet",href:"https://cdnjs.cloudflare.com/ajax/libs/prism/1.19.0/themes/prism.min.css"}
-    ],
-      script:[
-      {src:"https://cdn.bootcss.com/marked/0.8.0/marked.js",type: 'text/javascript', charset: 'utf-8'},
-      {src:"https://cdnjs.cloudflare.com/ajax/libs/prism/1.19.0/prism.min.js",dataManual:true,type: 'text/javascript', charset: 'utf-8'} ,
-      {src:"https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js",type: 'text/javascript', charset: 'utf-8'},
-      ]
-```
-
 ***
 
 ## 使用
@@ -73,13 +46,20 @@ npm start //或者pm2部署
 
 ## 界面展示
 
-1. 电脑端
+1. 电脑端  
+欢迎页面
 ![main-7b128740-7bcf-11ea-9934-53615e574118.png](https://cdn.jsdelivr.net/gh/velor2012/imageHosting/blog/5e83efe462076003c3534e55/main-7b128740-7bcf-11ea-9934-53615e574118.png)
+文章列表页面
 ![main-87efae20-7bcf-11ea-9934-53615e574118.png](https://cdn.jsdelivr.net/gh/velor2012/imageHosting/blog/5e83efe462076003c3534e55/main-87efae20-7bcf-11ea-9934-53615e574118.png)
+文章详情页
 ![main-940650b0-7bcf-11ea-9934-53615e574118.png](https://cdn.jsdelivr.net/gh/velor2012/imageHosting/blog/5e83efe462076003c3534e55/main-940650b0-7bcf-11ea-9934-53615e574118.png)
 ![main-a4726ab0-7bcf-11ea-9934-53615e574118.png](https://cdn.jsdelivr.net/gh/velor2012/imageHosting/blog/5e83efe462076003c3534e55/main-a4726ab0-7bcf-11ea-9934-53615e574118.png)
+图片展示
 ![main-be42d880-7bcf-11ea-9934-53615e574118.png](https://cdn.jsdelivr.net/gh/velor2012/imageHosting/blog/5e83efe462076003c3534e55/main-be42d880-7bcf-11ea-9934-53615e574118.png)
+作者页面
 ![main-ed8c40e0-7bcf-11ea-9934-53615e574118.png](https://cdn.jsdelivr.net/gh/velor2012/imageHosting/blog/5e83efe462076003c3534e55/main-ed8c40e0-7bcf-11ea-9934-53615e574118.png)
+评论页面
+![main-fa12d060-80be-11ea-9445-f3d61b77e1c4.png](https://cdn.jsdelivr.net/gh/velor2012/imageHosting/blog/5e83efe462076003c3534e55/main-fa12d060-80be-11ea-9445-f3d61b77e1c4.png)
 
 2. 移动端
 ![main-3a3c5d30-7bd0-11ea-9934-53615e574118.png](https://cdn.jsdelivr.net/gh/velor2012/imageHosting/blog/5e83efe462076003c3534e55/main-3a3c5d30-7bd0-11ea-9934-53615e574118.png)
