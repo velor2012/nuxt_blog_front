@@ -59,17 +59,24 @@
       <img v-show="false" v-for="src in images" :src="src" :key="src">
     </div>
   </v-row>
+  <v-row>
+    <div id="gitalk-container">
+      
+    </div>
+  </v-row>
   </v-container>
   </div>
 </template>
 <script>
+import 'gitalk/dist/gitalk.css'
+import Gitalk from 'gitalk'
 import MarkDownTemp from "~/components/MarkDownTemp";
 import MyImg from "~/components/MyImg";
 import Vue from "vue";
 import Vuetify, { VImg,VResponsive } from 'vuetify/lib'
 import TOC from "~/components/toc.vue";
 import msg from "~/components/message.vue";
-import Bus,{render,getThumb} from "~/pages/util";
+import Bus,{render,getThumb,config} from "~/pages/util";
 export default {
   name: "detail",
   data() {
@@ -123,6 +130,27 @@ export default {
             color: "red accent-2"
           };
         }
+        console.log("config %o",{
+          clientID: config.clientID,
+          clientSecret: config.clientSecret,
+          repo: config.repo,
+          owner: config.owner,
+          admin: [config.owner],
+          id: location.pathname,   // Ensure uniqueness and length less than 50
+          distractionFreeMode: false  // Facebook-like distraction free mode
+        })
+        //加载评论
+        var gitalk = new Gitalk({
+          clientID: config.clientID,
+          clientSecret: config.clientSecret,
+          repo: config.repo,
+          owner: config.owner,
+          admin: [config.owner],
+          id: this.article._id,      // Ensure uniqueness and length less than 50
+          distractionFreeMode: false  // Facebook-like distraction free mode
+        })
+
+        gitalk.render('gitalk-container')
         this.loading = false;
       });
     } else {

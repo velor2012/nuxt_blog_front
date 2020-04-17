@@ -1,4 +1,5 @@
-(function(window,document,undefined){
+//这部分代码都是用来实现点击出现爱心的特效的
+(function (window, document, undefined) {
     var hearts = [];
     window.requestAnimationFrame = (function(){
             return window.requestAnimationFrame || 

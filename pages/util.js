@@ -1,6 +1,8 @@
 
 
 //获取目录,有markdown文章的地方调用
+const config = require("~/config.json")
+
 const getTOC = (markdown_html)=>{
   let toc=[]
   let res = ''
@@ -95,4 +97,4 @@ const render = (app, markdown) => {
 };
 import Vue from "vue";
 export default new Vue();
-export { randomColor, render, resovleTag,getThumb,getTOC };
+export { randomColor, render, resovleTag,getThumb,getTOC,config };
