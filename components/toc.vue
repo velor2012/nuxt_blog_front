@@ -1,5 +1,5 @@
 <template>
-  <div id="sticky-nav" v-scroll="onScroll">
+  <v-card id="sticky-nav" v-scroll="onScroll">
     <v-list light rounded dense>
         <v-subheader>目录</v-subheader>
         <v-list-item-group v-model="model" mandatory color="primary">
@@ -19,7 +19,7 @@
     </v-list>   
 
 
-</div>
+</v-card>
 
 </template>
 <script>

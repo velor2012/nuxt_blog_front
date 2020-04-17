@@ -39,14 +39,11 @@
             <h1>简介</h1>
               <span > {{article.resume}}</span>
           </div>
-
-          </v-card-text>
-          <v-divider/>
-          <v-card-text>
             <client-only>
               <mark-down-temp class="markdown-body" :html="markdown_html"/>
             </client-only>
-
+            <v-divider/>
+                  <div id="gitalk-container"/>
           </v-card-text>
         </v-card>
     </v-col>
@@ -57,11 +54,6 @@
     </v-col>
     <div class="images" v-show="showImage" v-viewer="{movable: true}">
       <img v-show="false" v-for="src in images" :src="src" :key="src">
-    </div>
-  </v-row>
-  <v-row>
-    <div id="gitalk-container">
-      
     </div>
   </v-row>
   </v-container>
@@ -130,15 +122,6 @@ export default {
             color: "red accent-2"
           };
         }
-        console.log("config %o",{
-          clientID: config.clientID,
-          clientSecret: config.clientSecret,
-          repo: config.repo,
-          owner: config.owner,
-          admin: [config.owner],
-          id: location.pathname,   // Ensure uniqueness and length less than 50
-          distractionFreeMode: false  // Facebook-like distraction free mode
-        })
         //加载评论
         var gitalk = new Gitalk({
           clientID: config.clientID,
