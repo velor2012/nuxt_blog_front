@@ -43,7 +43,7 @@
               <mark-down-temp class="markdown-body" :html="markdown_html"/>
             </client-only>
             <v-divider/>
-                  <div id="gitalk-container"/>
+                  <div id="gitalk-container" />
           </v-card-text>
         </v-card>
     </v-col>
