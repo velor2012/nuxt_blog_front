@@ -7,7 +7,7 @@
     :max-height="nolimit?'':screen_height/2"
     @click="showImage"
     :contain="contain"
-    data-trigger
+    data-trigger5
   >
   <slot></slot>
     <template v-slot:placeholder>
@@ -39,20 +39,27 @@ export default {
   mounted(){
     let _this = this
     this.$nextTick(()=>{
-      let trigger = new _this.$sr(
-        {
-          trigger:{
-            toggle:{
-              class:{
-                in:["fadeIn",'animated']
+            _this.trigger = new _this.$sr(
+              {
+                trigger:{
+                  offset:{
+                      viewport: {
+                          x: 0,
+                          y: (trigger, frame, direction) => {
+                              return trigger.visible ? 0 : 0.2
+                          }
+                      }
+                  },
+                  toggle:{
+                    class:{
+                      in:["fadeIn",'animated'],
+                    },
+                  }
+                }
               }
-            }
-          }
-
-        }
-      )
-      trigger.add('[data-trigger]')
-    })
+            )
+            _this.trigger.add('[data-trigger5]')
+          })
   },
   computed:{
     screen_height(){
