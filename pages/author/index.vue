@@ -6,6 +6,14 @@
         <v-card color="white" class="animated fadeInLeft">
           <v-card-text>
              <mark-down-temp class="markdown-body" :html="markdown_html"/>
+             <div class="author-other-link">
+                <v-divider/>
+                  <v-icon large style="padding-top:10px"
+                  v-for="(item, i) in link"
+                  :key="i"
+                  @click="goto(item.to)"
+                  >{{item.icon}}</v-icon>
+             </div>
           </v-card-text>
         </v-card>
       </v-col>
@@ -40,7 +48,15 @@ export default {
       images:[],
       transition: "scale-transition",
       selection: [],
-      emoji_width: "100em"
+      emoji_width: "100em",
+      link:[{
+        icon:"mdi-github",
+        to:"https://github.com/velor2012"
+      },{
+        icon:"mdi-sina-weibo",
+        to:"https://weibo.com/u/6044500110/home?leftnav=1"
+      }
+      ]
     };
   },
   components: {
@@ -72,6 +88,9 @@ export default {
           viewer.show()
         }
     },
+    goto(to){
+      window.location.href=to;
+    }
   },
   computed: {
     ismobile() {
@@ -90,3 +109,14 @@ export default {
   }
 };
 </script>
+<style lang="less">
+.author-other-link {
+  padding: 0 45px 0 45px;
+}
+
+@media (max-width: 930px) {
+  .author-other-link  {
+    padding: 0px 0 15px 0;
+  }
+}
+</style>

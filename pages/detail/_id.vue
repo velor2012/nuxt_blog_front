@@ -39,11 +39,15 @@
             <h1>简介</h1>
               <span > {{article.resume}}</span>
           </div>
+
+          </v-card-text>
+          <v-divider/>
+          <v-card-text>
             <client-only>
               <mark-down-temp class="markdown-body" :html="markdown_html"/>
             </client-only>
             <v-divider/>
-                  <div id="gitalk-container" />
+            <div id="gitalk-container"/>
           </v-card-text>
         </v-card>
     </v-col>
@@ -130,7 +134,8 @@ export default {
           owner: config.owner,
           admin: [config.owner],
           id: this.article._id,      // Ensure uniqueness and length less than 50
-          distractionFreeMode: false  // Facebook-like distraction free mode
+          distractionFreeMode: false, // Facebook-like distraction free mode
+          proxy:"http://127.0.0.1:7890"
         })
 
         gitalk.render('gitalk-container')

@@ -439,7 +439,7 @@ export default {
   min-width: 200px;
   max-width: 980px;
   margin: 0 auto;
-  padding: 45px;
+  padding: 45px 45px 15px 45px;
 }
 
 @media (max-width: 930px) {

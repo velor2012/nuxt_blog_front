@@ -15,6 +15,7 @@
     "@nuxtjs/axios": "^5.3.6",
     "@nuxtjs/vuetify": "^1.11.0",
     "@terwanerik/scrolltrigger": "^1.0.4",
+    "@vssue/api-github-v3": "^1.4.3",
     "animate.css": "^3.7.2",
     "cross-env": "^5.2.0",
     "express": "^4.17.1",
@@ -23,8 +24,8 @@
     "less": "^3.10.3",
     "less-loader": "^5.0.0",
     "nuxt": "^2.0.0",
-    "scroll-out": "^2.2.8",
-    "v-viewer": "^1.5.1"
+    "v-viewer": "^1.5.1",
+    "vssue": "^1.4.3"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^2.0.0",
