@@ -1,0 +1,35 @@
+{
+  "name": "nuxt_blog_front",
+  "version": "1.0.0",
+  "description": "My outstanding Nuxt.js project",
+  "author": "velor2012",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt-ts",
+    "build": "nuxt-ts build",
+    "generate": "nuxt-ts generate",
+    "start": "nuxt-ts start"
+  },
+  "dependencies": {
+    "@nuxt/typescript-runtime": "^0.4.9",
+    "@nuxtjs/axios": "^5.11.0",
+    "@nuxtjs/dotenv": "^1.4.1",
+    "@terwanerik/scrolltrigger": "^1.0.4",
+    "animate.css": "^3.7.2",
+    "dayjs": "^1.8.28",
+    "lodash": "^4.17.15",
+    "nuxt": "^2.12.2",
+    "nuxt-property-decorator": "^2.7.2",
+    "vditor": "^3.2.12",
+    "v-viewer": "^1.5.1",
+    "vue-waterfall-plugin": "^1.0.7"
+  },
+  "devDependencies": {
+    "@nuxt/typescript-build": "^1.0.2",
+    "@nuxtjs/vuetify": "^1.11.2",
+    "@types/lodash": "^4.14.155",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-plugin-prettier": "^3.1.2",
+    "prettier": "^1.19.1"
+  }
+}

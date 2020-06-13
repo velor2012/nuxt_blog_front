@@ -1,0 +1,74 @@
+@import './myvariables.scss';
+
+@each $var in (left, center, right) {
+  .text-#{$var} {
+    text-align: $var !important;
+  }
+}
+
+@each $colorKey,
+$color in $colors {
+  .text-#{$colorKey} {
+    color: $color;
+  }
+
+  .bg-#{$colorKey} {
+    background-color: $color;
+  }
+}
+
+@each $key,
+$size in $font-size {
+  .fs-#{$key} {
+    font-size: $size;
+  }
+}
+//border line
+@each $dir in (left,top,right,bottom) {
+    .border-#{$dir}{
+        border-#{$dir}: solid 1px $border-color;
+    }
+}
+
+.flex-column {
+  flex-direction: column
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.flex-grow-1 {
+  flex-grow: 1;
+}
+
+.flex-1 {
+  flex: 1 1 0;
+}
+
+
+.w-100{
+    width: 100%;
+}
+.h-100{
+    height: 100%;
+}
+
+//handle text overflow
+.text-ellipsis{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.text-bold{
+    font-weight: bold;
+}
+
+.max-width-100{
+    max-width: 100%;
+}
+.row {
+    width: 100%;
+    margin: 0;
+  }

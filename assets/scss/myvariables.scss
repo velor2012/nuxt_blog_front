@@ -1,0 +1,52 @@
+// Ref: https://github.com/nuxt-community/vuetify-module#customvariables
+//
+// The variables you want to modify
+// $font-size-root: 20px;
+//margin
+//0-5,6 ranks
+//.mt-1 => margin-top-1
+$spacing-types:(p:"padding", m:"margin");
+$spacing-direction:(t:"top", b:"bottom", l:"left", r:"right");
+$spacing-base-size:1rem;
+$spacing-size:(0:0, 1:0.5, 2:1, 3:1.75, 4:2.5, 5:3.5);
+
+$colors: ("primary": #db9e3f,
+  "white": white,
+  "blue":#1982C4,
+  "cadet":#222E50,
+  "green-light":#BBD0B5,
+  "green":#28965A,
+  "purple":#6A4C93,
+  "opal":#85B6BA,
+  "blue-light-2":#9FBBCC,
+  "blue-light-1":#8DACC9,
+  "violet":#8C6E91,
+  "red":#FF595E,
+  "grey-2":#d4d9de,
+  "main-amber":rgb(241,233,175)
+);
+
+$font-size: (
+    xxs:0.75rem,//12px
+  xs: 0.8125rem, //13px
+  sm-1:0.875rem,//14px
+  sm: 0.9375rem, //15px
+  md: 1.0625rem, //17px
+  lg:1.125rem, //18px
+  xl:1.25rem //20px
+);
+
+$flex-jc:(start:flex-start,
+  center:center,
+  end:flex-end,
+  between:space-between,
+  around:space-around,
+);
+
+
+$flex-ai:(start:flex-start,
+  center:center,
+  end:flex-end,
+  strech:strech,
+);
+$border-color:map-get($map: $colors, $key: "grey-2")
