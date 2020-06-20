@@ -20,10 +20,10 @@
       <v-btn fab dark small color="green" @click="$vuetify.goTo(0)">
         <v-icon>mdi-chevron-up</v-icon>
       </v-btn>
-      <v-btn fab dark small color="indigo" v-show="/\/(article|note)\/\w+/.test($route.path)||/\/(author|about)/.test($route.path)" @click="onClickShowOutline">
+      <v-btn fab dark small color="indigo" v-show="/\/(article|note)\/\w{8,}/.test($route.path)||/\/(author|about)/.test($route.path)" @click="onClickShowOutline">
         <v-icon>mdi-view-list</v-icon>
       </v-btn>
-      <v-btn fab dark small color="red" v-show="/\/note\/\w+/.test($route.path)" @click="onClickShowNoteSD">
+      <v-btn fab dark small color="red" v-show="/\/note\/\w{8,}/.test($route.path)" @click="onClickShowNoteSD">
         <v-icon>mdi-notebook-outline</v-icon>
       </v-btn>
     </v-speed-dial>
@@ -54,12 +54,10 @@ export default class MyFloatButton extends Vue {
         this.show = window.pageYOffset ? true : false
     }
     onClickShowOutline(){
-        this.showOutline = !this.showOutline 
-        Bus.$emit('changeShowOutLine',this.showOutline)
+        Bus.$emit('changeShowOutLine',true)
     }
     onClickShowNoteSD(){
-        this.showNoteSD = !this.showNoteSD 
-        Bus.$emit('changeShowNoteSD',this.showNoteSD)
+        Bus.$emit('changeShowNoteSD',true)
     }
 }
 </script>

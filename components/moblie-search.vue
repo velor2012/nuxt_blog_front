@@ -5,22 +5,15 @@
     <v-icon @click.native="dialog=true">mdi-magnify</v-icon>
   </v-btn>
 
-  <v-dialog v-model="dialog">
-    <v-card>
-      <v-card-title>
-        <v-icon large left>mdi-magnify</v-icon>
-        <span class="title font-weight-light">搜索</span>
-      </v-card-title>
-      <v-card-text>
-        <v-col>
-          <v-text-field v-model="keyword" label="Outlined" outlined clearable></v-text-field>
-        </v-col>
+  <v-dialog v-model="dialog" persistent>
+    <v-card color="#85B6BA">
+      <v-card-text class="pa-3">
+        <pc-search />
       </v-card-text>
-      <v-card-actions>
-        <v-spacer></v-spacer>
-        <!-- <v-btn color="green darken-1" text @click="dialog = false">Disagree</v-btn> -->
-        <v-btn color="blue" dark @click="search">查找</v-btn>
-      </v-card-actions>
+        <v-card-actions>
+            <v-spacer></v-spacer>
+          <v-btn color="black" text @click="dialog = false">关闭</v-btn>
+        </v-card-actions>
     </v-card>
   </v-dialog>
   </div>
@@ -28,8 +21,11 @@
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
 import { Bus } from '../utils/common';
+import PcSearch from '~/components/pc-search.vue'
 @Component({
-    components: {}
+    components: {
+        PcSearch
+    }
 })
 export default class MobileSearch extends Vue {
     keyword=''

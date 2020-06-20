@@ -54,14 +54,10 @@
       <v-toolbar-title v-text="title" class="v-toolbar-title" />
       <v-spacer />
       <!-- 搜索输入框 网页端 -->
-      <pc-search />
+      <pc-search     class="d-none d-sm-flex search_input"/>
       <v-spacer />
       <!-- 搜索按钮手机端 -->
-      <mobile-search />
-      <!-- 目录按钮手机端 -->
-      <v-btn icon class="d-flex d-sm-none" v-if="/\/detail\/\w+/.test($route.path)">
-        <v-icon @click.native="open_right">mdi-book</v-icon>
-      </v-btn>
+      <mobile-search class="d-none d-sm-flex d-md-none"/>
       <!-- 其他功能，关于博客，作者信息 网页端 -->
       <v-btn v-for="(item, i) in items" :key="i" :to="item.to" class="d-none d-sm-flex" text>
         <v-icon>{{ item.icon }}</v-icon>
@@ -222,15 +218,7 @@ export default class Layout extends Vue {
     background-attachment: fixed;
     background: map-get($map: $colors, $key: 'main-amber');
 }
-//点击搜索框改变宽度
-#header .v-input--is-focused {
-    max-width: 25em !important;
-}
-#header .v-input {
-    transition: 0.3s;
-    max-width: 15em;
-}
-//end
+
 .filter-dialog {
     background-color: black;
 }

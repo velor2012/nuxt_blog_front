@@ -20,9 +20,10 @@
     "lodash": "^4.17.15",
     "nuxt": "^2.12.2",
     "nuxt-property-decorator": "^2.7.2",
-    "vditor": "^3.2.12",
     "v-viewer": "^1.5.1",
-    "vue-waterfall-plugin": "^1.0.7"
+    "vditor": "^3.2.12",
+    "vue-waterfall-plugin": "^1.0.7",
+    "vuex-module-decorators": "^0.17.0"
   },
   "devDependencies": {
     "@nuxt/typescript-build": "^1.0.2",

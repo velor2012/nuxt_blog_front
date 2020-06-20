@@ -15,10 +15,8 @@
     item-value="title"
     item-text="empty"
     label="Search"
-    class="d-none d-sm-flex search_input"
     rounded
     @keyup.native.enter="search"
-    v-show="$route.path == '/'"
   >
   <template v-slot:item="{ item }">
       <div @click="onItemClick(item)" class="d-flex">
@@ -37,7 +35,6 @@ import MyNoteAPI from '../api/note';
     components: {}
 })
 export default class PcSearch extends Vue {
-    // TODO;把note搜索加入，点击跳转等
     keyword: string = ''
     model = null
     loading1 = false
@@ -128,10 +125,19 @@ export default class PcSearch extends Vue {
     }
 }
 </script>
-<style lang="scss">
+<style lang="scss" scope>
 .search-item{
     em{
         color:red
     }
 }
+//点击搜索框改变宽度
+#header .v-input--is-focused {
+    max-width: 25rem !important;
+}
+#header .v-input {
+    transition: 0.3s;
+    max-width: 15rem;
+}
+//end
 </style>

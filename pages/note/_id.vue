@@ -1,8 +1,16 @@
 <template>
   <div v-if="note" class="d-flex">
-    <v-navigation-drawer v-if="!ismobile || showNoteSD" 
-    :disable-resize-watcher="true"
-    color="#BBD0B5" class="note-nav" app clipped left permanent>
+    <!-- pc端使用抽屉显示 -->
+    <v-navigation-drawer
+      v-if="!ismobile"
+      :disable-resize-watcher="true"
+      color="#BBD0B5"
+      class="note-nav"
+      app
+      clipped
+      left
+      permanent
+    >
       <v-list dense nav>
         <v-list-item
           v-for="(item,idx) in note.subDoc"
@@ -19,7 +27,33 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-    <nuxt-child v-show="!(ismobile && showNoteSD)" :key="$route.path" :note.sync="note"></nuxt-child>
+
+    <!-- 手机采用对话框的形式 -->
+    <v-dialog v-model="showNoteSD" max-width="290">
+      <v-card>
+        <v-card-title class="headline">章节目录</v-card-title>
+
+        <v-card-text>
+          <v-list dense nav>
+            <v-list-item
+              v-for="(item,idx) in note.subDoc"
+              :key="item.title"
+              exact-active-class="active-aaa"
+              :to="`/note/${id}/${idx}`"
+              class="note-nav-item"
+              v-ripple="{ class: `primary--text` }"
+              @click="changeCurrentDoc(idx)"
+            >
+              <v-list-item-content>
+                <v-list-item-title>{{ item.title }}</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </v-list>
+        </v-card-text>
+      </v-card>
+    </v-dialog>
+
+    <nuxt-child :key="$route.path" :note.sync="note"></nuxt-child>
   </div>
 </template>
 <script lang="ts">
@@ -27,17 +61,16 @@ import { Component, Vue } from 'nuxt-property-decorator'
 import _ from 'lodash'
 import MyNoteAPI from '~/api/note'
 import Note from '~/types/Note'
-import { Bus } from '../../utils/common';
-import { mystore } from '~/store';
+import { Bus } from '../../utils/common'
+import { mystore } from '~/store'
 @Component({
-    components: {
-    }
+    components: {}
 })
 export default class extends Vue {
     id: string = null
     note: Note = null
     docIdx = 0
-    showNoteSD=false
+    showNoteSD = false
     mounted() {
         this.id = _.get(this, '$route.params.id')
         this.getData()
@@ -67,10 +100,10 @@ export default class extends Vue {
     //在vue对象的beforeDestroy钩子中调用以上函数
     beforeDestroy() {
         this.removeBusEvent()
-        this.showNoteSD=false
+        this.showNoteSD = false
     }
-    changeShowNoteSD(isShow:boolean){
-        this.showNoteSD=isShow
+    changeShowNoteSD(isShow: boolean) {
+        this.showNoteSD = isShow
     }
     //end处理事件
     get ismobile() {
