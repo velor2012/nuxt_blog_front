@@ -21,7 +21,7 @@
     "nuxt": "^2.12.2",
     "nuxt-property-decorator": "^2.7.2",
     "v-viewer": "^1.5.1",
-    "vditor": "^3.2.12",
+    "vditor": "^3.8.11",
     "vue-waterfall-plugin": "^1.0.7",
     "vuex-module-decorators": "^0.17.0"
   },
